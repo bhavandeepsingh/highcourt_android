@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/clr_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dim_subscriptionpaddings"
+        android:paddingTop="@dimen/dim_subscriptionpaddings"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dim_subscription_row_paddings"
+        android:paddingRight="@dimen/dim_subscription_row_paddings">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="19sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="Criminal case heading"
+                android:textColor="@color/clr_textcolor_dark" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end|center_vertical"
+                android:textSize="@dimen/dim_textsize"
+                android:text="10 jan, 2017"
+                android:textColor="@color/colorPrimary" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/str_dumytext"
+android:lineSpacingExtra="6dp"
+            android:textColor="@color/clr_textcolor_light"
+            android:textSize="13sp" />
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+    <View style="@style/stl_devider" />
+
+</LinearLayout>

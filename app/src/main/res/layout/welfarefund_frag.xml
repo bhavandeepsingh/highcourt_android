@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/dim_subscription_row_paddings"
+            android:paddingRight="@dimen/dim_subscription_row_paddings"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                android:paddingTop="@dimen/dim_subscription_row_paddings"
+                android:text="Employee Welfare Fund"
+                android:textSize="@dimen/dim_textsize"
+                android:textColor="@color/clr_textcolor_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                android:paddingTop="@dimen/dim_subscription_row_paddings"
+                android:text="2016"
+                android:textSize="@dimen/dim_textsize"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorPrimary" />
+
+
+        </RelativeLayout>
+
+        <View style="@style/stl_devider"
+            android:layout_marginTop="8dp"/>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/dim_subscription_row_paddings"
+            android:paddingRight="@dimen/dim_subscription_row_paddings"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                android:paddingTop="@dimen/dim_subscription_row_paddings"
+                android:text="From"
+                android:textSize="@dimen/dim_textsize"
+                android:textColor="@color/clr_textcolor_dark" />
+
+
+        </RelativeLayout>
+
+        <View style="@style/stl_devider"
+            android:layout_marginTop="0dp"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/dim_subscription_row_paddings"
+            android:paddingRight="@dimen/dim_subscription_row_paddings"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                android:paddingTop="@dimen/dim_subscription_row_paddings"
+                android:text="(Rs. 200 Per year x 1)"
+                android:textSize="@dimen/dim_textsize"
+                android:textColor="@color/clr_textcolor_dark" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                android:paddingTop="@dimen/dim_subscription_row_paddings"
+                android:text="Rs. 200"
+                android:textSize="@dimen/dim_textsize"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorPrimary" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/clr_textview_light_background"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dim_subscription_row_paddings"
+            android:paddingRight="@dimen/dim_subscription_row_paddings">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:text="TOTAL"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/clr_textcolor_dark" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textSize="17sp"
+                android:paddingBottom="1dp"
+                android:paddingLeft="10dp"
+
+                android:paddingTop="1dp"
+                android:textStyle="bold"
+                android:text="Rs. 200"
+                android:textColor="@color/clr_black"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/loginbtn"
+            style="@style/stl_login_button"
+            android:text="paynow"
+            android:textAllCaps="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="21dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:paddingBottom="13dp"
+            android:paddingLeft="11dp"
+            android:paddingTop="13dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/clr_textview_light_background"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                android:paddingRight="@dimen/dim_subscription_row_paddings">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                    android:paddingTop="@dimen/dim_subscription_row_paddings"
+                    android:text="Jan 01, 2017 - Feb 28, 2017"
+                    android:textColor="@color/clr_textcolor_dark" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/border_payment"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="1dp"
+                    android:text="DUE"
+                    android:textColor="@color/clr_white"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                android:paddingRight="@dimen/dim_subscription_row_paddings">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="VIEW PAYMENT HISTORY"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <ImageView
+                    android:id="@+id/iconarrow"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:rotation="90"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_right_arrow" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/stl_devider" />
+
+            <include layout="@layout/include_recyclerview" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
+

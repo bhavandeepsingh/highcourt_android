@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.high.court">
+
+    <application
+
+        android:name=".HighCourtApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activities.MainActivity"></activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activities.DashboardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.ForgotPasswordActivity" />
+        <activity android:name=".activities.HighCourtActivity" />
+        <activity
+            android:name=".activities.ExicutiveCommettieeActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.HonbleJudgesActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.MemberDirectoryActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.NoificationActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.DisplayBoardActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.MySubscriptionActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.RosterActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.CalenderActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activities.ExicutiveMemberDetail" />
+        <activity
+            android:name=".activities.ChangePassword"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activities.HonableMemberDetail" />
+        <activity android:name=".activities.ProfileActivity2" />
+        <activity android:name=".activities.DisplayBoardDetail"></activity>
+        <activity android:name=".activities.CaseLowActivity"></activity>
+    </application>
+
+</manifest>

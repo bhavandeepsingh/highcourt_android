@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/clr_white"
+    android:orientation="vertical"
+    tools:context="com.high.court.activities.HonbleJudgesActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="#eaeaea">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="9dp"
+            android:background="@drawable/border_search">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/searchicon"
+                android:background="@color/clr_blank"
+                android:gravity="center_vertical"
+                android:hint="Search"
+                android:padding="6dp"
+                android:singleLine="true"
+                android:textColor="@color/clr_textcolor_dark"
+                android:textColorHint="#c65f5f5f"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/searchicon"
+                android:layout_width="19dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_search" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="SR.NO"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View style="@style/stl_ver_devider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:paddingLeft="8dp"
+                android:textStyle="bold"
+                android:text="BENCH"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View style="@style/stl_ver_devider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:paddingLeft="8dp"
+                android:text="Hon;ble judges"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+    <include layout="@layout/include_recyclerview"
+
+        />
+
+
+</LinearLayout>

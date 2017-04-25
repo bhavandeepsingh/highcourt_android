@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dim_sidemargins">40dp</dimen>
+    <dimen name="dim_dashboard_text_marg_top">2dp</dimen>
+    <dimen name="dim_dashboard_iconsize">48dp</dimen>
+    <dimen name="dim_deviderwidth">0.8dp</dimen>
+    <dimen name="dim_toolbarheight">50dp</dimen>
+    <dimen name="dim_circulariconsize">72dp</dimen>
+    <dimen name="dim_subscriptionpaddings">10dp</dimen>
+    <dimen name="dim_subscription_row_paddings">14dp</dimen>
+    <dimen name="dim_subscription_title_paddings">6dp</dimen>
+    <dimen name="dim_paynow_martop">38dp</dimen>
+    <dimen name="dim_textsize">15sp</dimen>
+
+
+
+    <!-- dimensions -->
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="padding">10dp</dimen>
+
+
+
+</resources>

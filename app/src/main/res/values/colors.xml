@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d9a231</color>
+    <color name="colorPrimaryDark">#c48e19</color>
+    <color name="colorAccent">#b7b7b7</color>
+    <color name="clr_textcolor_dark">#000000</color>
+    <color name="clr_textcolor_light">#8b8b8b</color>
+    <color name="clr_white">#ffffff</color>
+    <color name="clr_blank">#00000000</color>
+    <color name="clr_black">#000000</color>
+    <color name="clr_bottomborder">#e3e0d3</color>
+    <color name="clr_devider">#a6a6a6</color>
+    <color name="clr_search_background">#007fb6</color>
+    <color name="clr_judgeslist_title_bar">#0f2229</color>
+    <color name="clr_textvolor_grey">#757575</color>
+    <color name="clr_textview_light_background">#e3e0d3</color>
+    <color name="clr_paynow">#0f2229</color>
+    <color name="clr_red">#ff0000</color>
+
+    <!-- colors -->
+    <color name="primary">#785447</color>
+    <color name="primaryDark">#5B3F36</color>
+
+</resources>

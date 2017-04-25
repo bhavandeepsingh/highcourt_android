@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
+
+    </style>
+
+    //toolbar style->>
+    <style name="myCustomToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">#ffff</item>
+        <item name="android:textColorSecondary">#ffffff</item>
+    </style>
+
+
+    //menu icons sizes->>
+    <style name="MyActionButtonStyle" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:minWidth">22dip</item>
+        <item name="android:padding">4dip</item>
+    </style>
+
+
+
+
+    <style name="Widget">
+        <item name="android:textAppearance">?android:attr/textAppearance</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+
+
+
+</resources>

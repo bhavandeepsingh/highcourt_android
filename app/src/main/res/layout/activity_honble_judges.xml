@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/clr_white"
+    android:orientation="vertical"
+    tools:context="com.high.court.activities.HonbleJudgesActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/colorPrimaryDark">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="9dp"
+            android:background="@drawable/border_search">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/searchicon"
+                android:background="@color/clr_blank"
+                android:gravity="center_vertical"
+                android:hint="@string/str_searchhint"
+                android:padding="6dp"
+                android:singleLine="true"
+                android:textColor="@color/clr_textcolor_dark"
+                android:textColorHint="#c65f5f5f"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/searchicon"
+                android:layout_width="19dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_search" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+       android:paddingLeft="@dimen/spacing_normal"
+        android:paddingRight="@dimen/spacing_normal"
+        android:background="#e3e0d3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="NAME"
+            android:textColor="@color/clr_textcolor_dark"
+            android:textSize="14sp" />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:text="COURT ROOM"
+            android:textColor="@color/clr_textcolor_dark"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/include_recyclerview" />
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/clr_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding"
+        android:paddingRight="@dimen/padding">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="1."
+                android:textAllCaps="true"
+                android:textColor="@color/clr_black"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View style="@style/stl_ver_devider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.7"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:buttonTint="@color/colorPrimary" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <View style="@style/stl_ver_devider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="8dp"
+                android:text="3"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <View style="@style/stl_ver_devider" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            android:paddingBottom="@dimen/padding"
+            android:paddingTop="@dimen/padding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="8dp"
+
+                android:text="223"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_black"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View style="@style/stl_devider" />
+
+</LinearLayout>

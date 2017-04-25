@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include
+        layout="@layout/main_act_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/clr_white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp" />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    startToolbarPosition="2dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="-65dp"
+                    android:src="@drawable/profilepic"
+                    app:finalHeight="@dimen/image_final_width"
+                    app:layout_behavior="com.high.court.activities.AvatarImageBehavior"
+                    app:startToolbarPosition="2dp"
+                    app:startXPosition="2dp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Rishab Jain"
+                    android:textColor="@color/clr_white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:id="@+id/myprofile_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="click_myprofile"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+                    <ImageView
+                        android:layout_width="@dimen/dim_dashboard_iconsize"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_calender" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="@dimen/dim_dashboard_text_marg_top"
+                        android:layout_toRightOf="@+id/icon"
+                        android:allowUndo="true"
+                        android:text="my profile"
+                        android:textAllCaps="true"
+                        android:textColor="@color/clr_textcolor_dark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <View style="@style/stl_devider" />
+
+
+                <LinearLayout
+                    android:id="@+id/paymudues_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:onClick="click_paymudues"
+                    android:padding="10dp">
+                    <ImageView
+
+                        android:layout_width="@dimen/dim_dashboard_iconsize"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_calender" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="@dimen/dim_dashboard_text_marg_top"
+                        android:layout_toRightOf="@+id/icon"
+                        android:allowUndo="true"
+                        android:text="Pay my dues"
+                        android:textAllCaps="true"
+                        android:textColor="@color/clr_textcolor_dark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <View style="@style/stl_devider" />
+
+
+                <LinearLayout
+                    android:id="@+id/changepassword_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:onClick="click_changepassword"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+                    <ImageView
+
+                        android:layout_width="@dimen/dim_dashboard_iconsize"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_calender" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="@dimen/dim_dashboard_text_marg_top"
+                        android:layout_toRightOf="@+id/icon"
+                        android:allowUndo="true"
+                        android:text="change password"
+                        android:textAllCaps="true"
+                        android:textColor="@color/clr_textcolor_dark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <View style="@style/stl_devider" />
+
+                <LinearLayout
+                    android:id="@+id/logout_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:onClick="clicklogout"
+                    android:padding="10dp">
+                    <ImageView
+
+                        android:layout_width="@dimen/dim_dashboard_iconsize"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_calender" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="@dimen/dim_dashboard_text_marg_top"
+                        android:layout_toRightOf="@+id/icon"
+                        android:allowUndo="true"
+                        android:text="Logout"
+                        android:textAllCaps="true"
+                        android:textColor="@color/clr_textcolor_dark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+                <View style="@style/stl_devider" />
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

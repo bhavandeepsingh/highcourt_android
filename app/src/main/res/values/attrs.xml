@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="stl_login_button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/border_loginbtn</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/clr_white</item>
+        <item name="android:textColorHint">@color/clr_textcolor_light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+
+    </style>
+
+
+
+    <style name="stl_devider">
+        <item name="android:layout_height">@dimen/dim_deviderwidth</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/clr_devider</item>
+
+    </style>
+    <style name="stl_ver_devider">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/dim_deviderwidth</item>
+        <item name="android:background">@color/clr_devider</item>
+
+    </style>
+
+
+
+
+    <declare-styleable name="AvatarImageBehavior">
+        <attr name="finalYPosition" format="dimension"/>
+        <attr name="startXPosition" format="dimension"/>
+        <attr name="startToolbarPosition" format="dimension"/>
+        <attr name="startHeight" format="dimension"/>
+        <attr name="finalHeight" format="dimension"/>
+    </declare-styleable>
+
+
+
+
+</resources>

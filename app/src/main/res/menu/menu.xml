@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="court.high.com.aaaa.ScrollingActivity">
+    <item
+        android:id="@+id/action_notif"
+        android:icon="@drawable/ic_notif_tb"
+        android:orderInCategory="10"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ic_profile_tb"
+        android:orderInCategory="10"
+        app:showAsAction="always" />
+</menu>

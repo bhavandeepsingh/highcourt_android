@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/clr_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/clr_textview_light_background"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingLeft="@dimen/dim_subscription_row_paddings"
+        android:paddingRight="@dimen/dim_subscription_row_paddings"
+        android:paddingTop="4dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dim_subscriptionpaddings"
+            android:paddingTop="@dimen/dim_subscriptionpaddings">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jan 01, 2017 - Feb 28, 2017"
+                android:textColor="@color/clr_textcolor_dark"
+                android:textSize="@dimen/dim_textsize" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            android:text="Rs. 200"
+            android:textColor="@color/clr_textcolor_dark"
+            android:textSize="@dimen/dim_textsize" />
+
+
+    </LinearLayout>
+
+    <View style="@style/stl_devider" />
+
+</LinearLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/clr_white"
+    android:orientation="vertical"
+    tools:context="com.high.court.activities.HonbleJudgesActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/judjelayer"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_judge"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="judge"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/clr_black"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="gagandeep singh"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="0dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+        <View
+            style="@style/stl_devider"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="60dp"
+           />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/caselawlayer"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_casenumber"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="case no"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/clr_black"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="420"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="0dp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
