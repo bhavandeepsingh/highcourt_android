@@ -2,6 +2,7 @@ package com.high.court.http;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.high.court.helpers.UserHelper;
 
 import java.io.IOException;
 
@@ -21,9 +22,7 @@ public class RestAdapter {
 
     private static HighCourtWebService REST_CLIENT = null;
 
-    private static String ROOT = "http://beta.incourt.in/index.php/api/v1/";
-    //private static String ROOT = "http://192.168.0.100/incourt/index.php/api/v1/";
-
+    private static String ROOT = "http://192.168.1.100/highcourt/api/web/v1/";
 
     static {
         setupRestClient();
@@ -42,8 +41,7 @@ public class RestAdapter {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         addHeaderToken(httpClient);
-        httpClient.addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).
-                build();
+        httpClient.addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build();
 
 
         if (REST_CLIENT == null) {
@@ -64,7 +62,7 @@ public class RestAdapter {
             public Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
                 Request.Builder requestBuilder = original.newBuilder()
-                        //.header("incourt-header-token", String.valueOf(UserHelper.getId()))
+                        .header("highcourt-header-token", String.valueOf(UserHelper.getId()))
                         .method(original.method(), original.body());
 
                 return chain.proceed(requestBuilder.build());

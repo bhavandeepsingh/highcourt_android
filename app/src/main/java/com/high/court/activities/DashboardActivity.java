@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterDashBoard;
+import com.high.court.helpers.UserHelper;
 
 public class DashboardActivity extends HighCourtActivity {
     Context context = DashboardActivity.this;
@@ -49,6 +50,16 @@ public class DashboardActivity extends HighCourtActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(UserHelper.getState()){ setupDashboard(); }
+        else{ setupLogin(); }
+
+    }
+
+    void setupLogin(){
+        setContentView(R.layout.activity_login);
+    }
+
+    void setupDashboard(){
         setContentView(R.layout.activity_dashboard);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -94,14 +105,6 @@ public class DashboardActivity extends HighCourtActivity {
         startActivity(intent);
     }
 
-
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

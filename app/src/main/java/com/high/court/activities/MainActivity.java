@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.high.court.R;
+import com.high.court.helpers.UserHelper;
 
 import org.w3c.dom.Text;
 
@@ -68,7 +69,8 @@ public class MainActivity extends HighCourtActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if(UserHelper.getState()) setContentView(R.layout.activity_main);
+        else setContentView(R.layout.activity_login);
     }
 
     @OnClick(R.id.loginscreen)

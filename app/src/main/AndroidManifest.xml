@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.high.court">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
 
         android:name=".HighCourtApplication"
@@ -10,7 +12,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity"></activity>
         <activity
             android:name=".activities.LoginActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -59,7 +60,6 @@
         <activity android:name=".activities.DisplayBoardDetail"></activity>
         <activity android:name=".activities.CaseLowActivity"></activity>
 
-        <uses-permission android:name="android.permission.INTERNET" />
 
     </application>
 

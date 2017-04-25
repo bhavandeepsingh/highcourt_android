@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.high.court.layouts.HighCourtLogin
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -116,5 +117,4 @@
         android:textColor="@color/clr_textcolor_dark"
         android:textSize="16sp" />
 
-
-</LinearLayout>
+</com.high.court.layouts.HighCourtLogin>
