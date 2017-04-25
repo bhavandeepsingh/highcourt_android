@@ -32,7 +32,6 @@ public class DashboardActivity extends HighCourtActivity {
             "Calendar",
             "Roster",
             "Case Law",
-
     };
 
     int[] iconlist = {
@@ -94,6 +93,8 @@ public class DashboardActivity extends HighCourtActivity {
         Intent intent = new Intent(getApplication(), LoginActivity.class);
         startActivity(intent);
     }
+
+
 
 
 //    @Override

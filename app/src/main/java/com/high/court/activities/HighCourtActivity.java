@@ -18,6 +18,7 @@ public class HighCourtActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        ButterKnife.bind(this);
     }
 
     @Override
