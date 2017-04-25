@@ -58,6 +58,9 @@
         <activity android:name=".activities.ProfileActivity2" />
         <activity android:name=".activities.DisplayBoardDetail"></activity>
         <activity android:name=".activities.CaseLowActivity"></activity>
+
+        <uses-permission android:name="android.permission.INTERNET" />
+
     </application>
 
 </manifest>
