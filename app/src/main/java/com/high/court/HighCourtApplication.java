@@ -15,10 +15,13 @@ import com.high.court.helpers.UILApplication;
 public class HighCourtApplication extends UILApplication {
 
 
+    static HighCourtApplication highCourtApplication;
+
     @Override
     public void onCreate() {
         super.onCreate();
         adjustFontScale(getApplicationContext(),getApplicationContext().getResources().getConfiguration());
+        highCourtApplication = this;
     }
 
     @Override
@@ -41,5 +44,15 @@ public class HighCourtApplication extends UILApplication {
             context.getResources().updateConfiguration(configuration, metrics);
         }
     }
+
+    public static HighCourtApplication getHighCourtApplication() {
+        return highCourtApplication;
+    }
+
+    public void setHighCourtApplication(HighCourtApplication highCourtApplication) {
+        this.highCourtApplication = highCourtApplication;
+    }
+
+    public static Context getHighCourtApplicationContext(){ return getHighCourtApplication().getApplicationContext(); }
 
 }

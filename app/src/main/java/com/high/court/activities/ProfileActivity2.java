@@ -19,8 +19,8 @@ public class ProfileActivity2 extends HighCourtActivity {
 
     Button logoutbtn;
 
-    @BindView(R.id.pickimage)
-    ImageView pickimage;
+//    @BindView(R.id.pickimage)
+//    ImageView pickimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,10 @@ public class ProfileActivity2 extends HighCourtActivity {
 
     }
 
-    @OnClick(R.id.pickimage)
-    void Click_pickimage() {
-        Toast.makeText(this, "dddd", Toast.LENGTH_SHORT).show();
-    }
+//    @OnClick(R.id.pickimage)
+//    void Click_pickimage() {
+//        Toast.makeText(this, "dddd", Toast.LENGTH_SHORT).show();
+//    }
 
 
 

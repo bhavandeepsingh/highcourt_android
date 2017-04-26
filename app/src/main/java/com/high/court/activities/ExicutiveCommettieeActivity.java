@@ -8,10 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterExicutiveComm;
 import com.high.court.adapters.AdapterHonbleHudges;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ExicutiveCommettieeActivity extends HighCourtActivity {
 
@@ -27,6 +33,9 @@ public class ExicutiveCommettieeActivity extends HighCourtActivity {
                 "75/-",
         };
 
+
+//    @BindView(R.id.designation_val)
+//    EditText designation_val;
 
 
     @Override
@@ -51,6 +60,11 @@ public class ExicutiveCommettieeActivity extends HighCourtActivity {
 
 
     }
+
+//    @OnClick(R.id.designation_val)
+//    void designation_val_CLick() {
+//        Toast.makeText(context, "ddfff", Toast.LENGTH_SHORT).show();
+//    }
 
 
 
