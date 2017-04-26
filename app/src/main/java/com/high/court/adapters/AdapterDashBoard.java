@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.high.court.R;
 import com.high.court.activities.CalenderActivity;
 import com.high.court.activities.CaseLowActivity;
+import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DisplayBoardActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
 import com.high.court.activities.HonbleJudgesActivity;
@@ -64,27 +65,33 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                     context.startActivity(intent);
                 }
                 if (i == 2) {
-                    Intent intent = new Intent(context, HonbleJudgesActivity.class);
+                 //   Intent intent = new Intent(context, HonbleJudgesActivity.class);
+                    Intent intent = new Intent(context, CommingSoonActivity.class);
                     context.startActivity(intent);
                 }
                 if (i == 3) {
-                    Intent intent = new Intent(context, NoificationActivity.class);
+//                    Intent intent = new Intent(context, NoificationActivity.class);
+                    Intent intent = new Intent(context, CommingSoonActivity.class);
                     context.startActivity(intent);
                 }
                 if (i == 4) {
-                    Intent intent = new Intent(context, DisplayBoardActivity.class);
+//                    Intent intent = new Intent(context, DisplayBoardActivity.class);
+                    Intent intent = new Intent(context, CommingSoonActivity.class);
                     context.startActivity(intent);
                 }
                 if (i == 5) {
-                    Intent intent = new Intent(context, CalenderActivity.class);
+//                    Intent intent = new Intent(context, CalenderActivity.class);
+                    Intent intent = new Intent(context, CommingSoonActivity.class);
                     context.startActivity(intent);
                 }
                 if (i == 6) {
-                    Intent intent = new Intent(context, RosterActivity.class);
+//                    Intent intent = new Intent(context, RosterActivity.class);
+                    Intent intent = new Intent(context, CommingSoonActivity.class);
                     context.startActivity(intent);
                 }
                 if (i == 7) {
-                    Intent intent = new Intent(context, CaseLowActivity.class);
+//                    Intent intent = new Intent(context, CaseLowActivity.class);
+                    Intent intent = new Intent(context, CommingSoonActivity.class);
                     context.startActivity(intent);
                 }
 

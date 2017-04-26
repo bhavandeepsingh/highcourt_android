@@ -19,6 +19,7 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/quick_start_cropped_image"
         startToolbarPosition="2dp"
         android:layout_width="130dp"
         android:layout_height="130dp"
@@ -30,6 +31,9 @@
         app:startToolbarPosition="2dp"
         app:startXPosition="2dp" />
 
+
+
+
     <ImageView
         android:layout_width="50dp"
         android:layout_height="wrap_content"
@@ -40,429 +44,432 @@
         android:src="@drawable/ic_camera" />
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/clr_white"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="20dp"
-                android:fillViewport="false"
-                android:orientation="vertical">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/padding"
-                    android:paddingRight="@dimen/padding">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:src="@drawable/ic_designetion" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Designation"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="Advocate"
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
 
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:src="@drawable/ic_mobile_yellow" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Mobile no"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="94177-59300, 94177-59300"
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
 
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
-
-                        </LinearLayout>
 
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_phone_yellow" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Landline No"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="2651417"
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/clr_white"-->
+            <!--android:orientation="vertical">-->
 
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
-
-                        </LinearLayout>
 
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_residential_address" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Residential Address 1"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="3018, Sector 28-D, Chd."
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
-
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_residential_address" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Residential Address 2"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="3018, Sector 28-D, Chd."
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
-
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_email" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Email ID"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="rishavjain@gmail.com"
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
-
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_court_addresss" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:text="Court Address"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="Room No. 16, New Bar
-Complex,High Court,Chandigarh."
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:fillViewport="false"-->
+                <!--android:orientation="vertical">-->
 
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
 
-                        </LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:paddingLeft="@dimen/padding"-->
+                    <!--android:paddingRight="@dimen/padding">-->
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="@dimen/padding">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal">-->
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_bloodgroup" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:src="@drawable/ic_designetion" />-->
 
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/padding"
-                            android:orientation="vertical">
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:text="Designation"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
 
-                                android:text="Blood Group"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorPrimary" />
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="Advocate"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="0dp"
-                                android:text="B+ve"
-                                android:textAllCaps="true"
-                                android:textColor="@color/clr_textcolor_dark" />
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
 
-                            <View
-                                style="@style/stl_devider"
-                                android:layout_marginTop="@dimen/padding" />
+                        <!--</LinearLayout>-->
 
-                        </LinearLayout>
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
 
-                </LinearLayout>
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
 
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:src="@drawable/ic_mobile_yellow" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginTop="30dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_map" />
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
 
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
 
-                    <Button
-                        android:id="@+id/logoutbtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#e3e0d3"
-                        android:text="Logout"
-                        android:textAllCaps="true"
-                        android:textColor="@color/clr_textcolor_dark"
-                        android:textSize="16sp"
-                        android:visibility="gone" />
+                                <!--android:text="Mobile no"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
 
-                </LinearLayout>
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="94177-59300, 94177-59300"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
 
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
 
-            </LinearLayout>
+                        <!--</LinearLayout>-->
 
+                    <!--</LinearLayout>-->
 
-        </LinearLayout>
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
 
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:src="@drawable/ic_phone_yellow" />-->
+
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+
+                                <!--android:text="Landline No"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="2651417"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
 
-    </ScrollView>
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:src="@drawable/ic_residential_address" />-->
+
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+
+                                <!--android:text="Residential Address 1"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="3018, Sector 28-D, Chd."-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
+
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:src="@drawable/ic_residential_address" />-->
+
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+
+                                <!--android:text="Residential Address 2"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="3018, Sector 28-D, Chd."-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
+
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:src="@drawable/ic_email" />-->
+
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+
+                                <!--android:text="Email ID"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="rishavjain@gmail.com"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
+
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:src="@drawable/ic_court_addresss" />-->
+
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+
+                                <!--android:text="Court Address"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="Room No. 16, New Bar-->
+<!--Complex,High Court,Chandigarh."-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
+
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:paddingTop="@dimen/padding">-->
+
+                        <!--<ImageView-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:adjustViewBounds="true"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:src="@drawable/ic_bloodgroup" />-->
+
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/padding"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+
+                                <!--android:text="Blood Group"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/colorPrimary" />-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginTop="0dp"-->
+                                <!--android:text="B+ve"-->
+                                <!--android:textAllCaps="true"-->
+                                <!--android:textColor="@color/clr_textcolor_dark" />-->
+
+                            <!--<View-->
+                                <!--style="@style/stl_devider"-->
+                                <!--android:layout_marginTop="@dimen/padding" />-->
+
+                        <!--</LinearLayout>-->
+
+                    <!--</LinearLayout>-->
+
+
+                <!--</LinearLayout>-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="150dp"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_marginTop="30dp"-->
+                        <!--android:adjustViewBounds="true"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--android:src="@drawable/img_map" />-->
+
+
+                    <!--<Button-->
+                        <!--android:id="@+id/logoutbtn"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:background="#e3e0d3"-->
+                        <!--android:text="Logout"-->
+                        <!--android:textAllCaps="true"-->
+                        <!--android:textColor="@color/clr_textcolor_dark"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:visibility="gone" />-->
+
+                <!--</LinearLayout>-->
+
+
+            <!--</LinearLayout>-->
+
+
+        <!--</LinearLayout>-->
+
+
+    <!--</ScrollView>-->
 
 
 </LinearLayout>

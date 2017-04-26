@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterDashBoard;
+import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
 
 public class DashboardActivity extends HighCourtActivity {
@@ -86,23 +87,30 @@ public class DashboardActivity extends HighCourtActivity {
     }
 
     public void click_myprofile(View view) {
-        Intent intent = new Intent(getApplication(), ProfileActivity2.class);
+//        Intent intent = new Intent(getApplication(), ProfileActivity2.class);
+        Intent intent = new Intent(context, CommingSoonActivity.class);
         startActivity(intent);
     }
 
     public void click_paymudues(View view) {
-        Intent intent = new Intent(getApplication(), MySubscriptionActivity.class);
+//        Intent intent = new Intent(getApplication(), MySubscriptionActivity.class);
+        Intent intent = new Intent(context, CommingSoonActivity.class);
         startActivity(intent);
     }
 
     public void click_changepassword(View view) {
-        Intent intent = new Intent(getApplication(), ChangePassword.class);
+//        Intent intent = new Intent(getApplication(), ChangePassword.class);
+        Intent intent = new Intent(context, CommingSoonActivity.class);
         startActivity(intent);
     }
 
     public void clicklogout(View view) {
-        Intent intent = new Intent(getApplication(), LoginActivity.class);
-        startActivity(intent);
+        if(UserHelper.logout()) {
+            Intent intent = new Intent(getApplication(), DashboardActivity.class);
+            startActivity(intent);
+        }else{
+            ToastHelper.showLogoutFailuer(getApplicationContext());
+        }
     }
 
 
@@ -125,6 +133,5 @@ public class DashboardActivity extends HighCourtActivity {
             super.onBackPressed();
         }
     }
-
 
 }
