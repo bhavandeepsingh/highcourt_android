@@ -20,10 +20,8 @@ import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
 
 public class DashboardActivity extends HighCourtActivity {
+
     Context context = DashboardActivity.this;
-
-    LinearLayout myprofile_row, paymudues_row, changepassword_row, logout_row;
-
 
     public static String[] judgesnamelist = {
             "Executive",
@@ -51,7 +49,7 @@ public class DashboardActivity extends HighCourtActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(UserHelper.getState()){ setupDashboard(); }
+        if(true || UserHelper.getState()){ setupDashboard(); }
         else{ setupLogin(); }
 
     }

@@ -19,7 +19,6 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.R.attr.bitmap;
@@ -54,7 +53,12 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
             }
         });
 
+
     }
+
+
+
+
 
 
     @Override

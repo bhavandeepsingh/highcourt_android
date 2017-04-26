@@ -18,9 +18,6 @@ import butterknife.OnClick;
 
 public class ProfileActivity2 extends HighCourtActivity {
 
-    Button logoutbtn;
-
-
 
 
     @Override
@@ -32,8 +29,6 @@ public class ProfileActivity2 extends HighCourtActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(UserHelper.getAppUserName());
     }
-
-
 
 
     @Override

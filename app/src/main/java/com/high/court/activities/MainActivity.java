@@ -75,7 +75,7 @@ public class MainActivity extends HighCourtActivity {
 
     @OnClick(R.id.loginscreen)
     void onLoginClick(){
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, CommingSoonActivity.class);
             startActivity(intent);
     }
 

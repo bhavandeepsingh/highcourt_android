@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
@@ -47,13 +48,15 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
 
     class ViewHolder extends RecyclerView.ViewHolder {
        // TextView title, title_val;
+        LinearLayout rowview;
 
         public ViewHolder(View itemView) {
             super(itemView);
 //            title = (TextView) itemView.findViewById(R.id.title);
 //            title_val = (TextView) itemView.findViewById(R.id.title_val);
+            rowview = (LinearLayout) itemView.findViewById(R.id.rowview);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            rowview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ExicutiveMemberDetail.class);

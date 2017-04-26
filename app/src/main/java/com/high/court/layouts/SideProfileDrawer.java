@@ -1,7 +1,6 @@
 package com.high.court.layouts;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.support.v4.widget.DrawerLayout;
@@ -14,13 +13,13 @@ import android.widget.TextView;
 import com.high.court.R;
 import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
+import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.activities.ProfileActivity2;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
 
-import org.w3c.dom.Text;
 
 /**
  * Created by admin on 4/26/2017.
@@ -126,7 +125,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     public void onClickMyProfile(){
-        getHighCourtActivity().startActivity(new Intent(getContext(), ProfileActivity2.class));
+        getHighCourtActivity().startActivity(new Intent(getContext(), ExicutiveMemberDetail.class));
     }
 
 
