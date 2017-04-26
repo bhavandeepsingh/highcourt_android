@@ -35,6 +35,7 @@ public class UserHelper {
     static String APP_USER_LAT_02 = "APP_USER_LAT_02";
     static String APP_USER_LONG_02 = "APP_USER_LONG_02";
     static String APP_USER_LOGIN_STATUS = "APP_USER_LOGIN_STATUS";
+    static String APP_USER_PROFILE_PIC = "APP_USER_PROFILE_PIC";
 
     public static boolean login(UserLoginModel userLoginModel){
         if(userLoginModel == null) return false;
@@ -243,6 +244,14 @@ public class UserHelper {
         APP_USER_LOGIN_STATUS = appUserLoginStatus;
     }
 
+    public static String getAppUserProfilePic() {
+        return getSharedPreferences().getString(APP_USER_PROFILE_PIC, "");
+    }
+
+    public static void setAppUserProfilePic(String appUserProfilePic) {
+        APP_USER_PROFILE_PIC = appUserProfilePic;
+    }
+
     static boolean setSharedPreferences(ProfileModel profileModel){
         if(!updateAppUser(APP_USER_LOGIN_ID, String.valueOf(profileModel.getUser_id()))) return false;
         if(!updateAppUser(APP_USER_NAME, profileModel.getName())) return false;
@@ -267,6 +276,7 @@ public class UserHelper {
         if(!updateAppUser(APP_USER_LAT_02, profileModel.getLat2())) return false;
         if(!updateAppUser(APP_USER_LONG_02, profileModel.getLong2())) return false;
         if(!updateAppUser(APP_USER_LOGIN_STATUS, "1")) return false;
+        if(!updateAppUser(APP_USER_PROFILE_PIC, profileModel.getProfile_pic())) return false;
         return true;
     }
 

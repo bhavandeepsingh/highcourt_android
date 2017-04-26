@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.high.court.R;
+import com.high.court.helpers.UserHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -19,28 +20,19 @@ public class ProfileActivity2 extends HighCourtActivity {
 
     Button logoutbtn;
 
-    @BindView(R.id.pickimage)
-    ImageView pickimage;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Rishab Jain");
-
-        logoutbtn = (Button) findViewById(R.id.logoutbtn);
-
-
+        setTitle(UserHelper.getAppUserName());
     }
 
-    @OnClick(R.id.pickimage)
-    void Click_pickimage() {
-        Toast.makeText(this, "dddd", Toast.LENGTH_SHORT).show();
-    }
 
 
 
@@ -57,9 +49,7 @@ public class ProfileActivity2 extends HighCourtActivity {
             onBackPressed();
         }
         if (id == R.id.action_edit_profile) {
-            logoutbtn.setVisibility(View.VISIBLE);
         }
-
         return super.onOptionsItemSelected(item);
     }
 

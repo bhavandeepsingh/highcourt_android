@@ -88,6 +88,10 @@ public class ProfileModel extends HighCourtModel {
     @Expose
     String long2;
 
+    @SerializedName("profile_pic")
+    @Expose
+    String profile_pic;
+
     public int getUser_id() {
         return user_id;
     }
@@ -246,5 +250,13 @@ public class ProfileModel extends HighCourtModel {
 
     public void setLong2(String long2) {
         this.long2 = long2;
+    }
+
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
     }
 }

@@ -53,7 +53,7 @@ public class UILApplication extends Application {
 		config.tasksProcessingOrder(QueueProcessingType.LIFO);
 		config.writeDebugLogs(); // Remove for release app
 
-		// Initialize ImageLoader with configuration.
+		// Initialize ImageHelper with configuration.
 		ImageLoader.getInstance().init(config.build());
 	}
 }
