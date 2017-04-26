@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.high.court.R;
+import com.high.court.helpers.UserHelper;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -40,12 +41,9 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Harpreet Singh Brar");
-
+        setTitle(UserHelper.getAppUserName());
         logoutbtn = (Button) findViewById(R.id.logoutbtn);
         pickimage = (ImageView) findViewById(R.id.pickimage);
-
-
         pickimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,17 +55,14 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
     }
 
 
-
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
-                quick_start_cropped_image.setImageURI(result.getUri());
+                quick_start_cropped_image.setImageResource(0);
+                quick_start_cropped_image.setImageURI(result.getOriginalUri());
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Failed: " + result.getError(), Toast.LENGTH_LONG).show();
             }
@@ -86,9 +81,6 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             onBackPressed();
-        }
-        if (id == R.id.action_edit_profile) {
-            logoutbtn.setVisibility(View.VISIBLE);
         }
         return super.onOptionsItemSelected(item);
     }
