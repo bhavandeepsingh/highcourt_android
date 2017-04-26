@@ -14,8 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.high.court.R;
+import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ForgotPasswordActivity;
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.helpers.HighCourtLoader;
+import com.high.court.helpers.NetworkHelper;
+import com.high.court.helpers.ToastHelper;
+import com.high.court.helpers.UserHelper;
+import com.high.court.high_court_interface.LayoutActivityInterface;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.HighCourtLoginInterface;
 
@@ -33,6 +39,8 @@ public class HighCourtLogin extends LinearLayout implements View.OnClickListener
     TextView sign_in;
 
     TextView forgot_password;
+
+    HighCourtLoader highCourtLoader;
 
     public HighCourtLogin(Context context) {
         super(context);
@@ -107,15 +115,23 @@ public class HighCourtLogin extends LinearLayout implements View.OnClickListener
     }
 
     void onSignInClick(View v){
+
+        if(!NetworkHelper.state()){
+            ToastHelper.showNoNetwork(getContext());
+            return;
+        }
+
         if(getLicence_tex().getText().length() <= 0){
-            Toast.makeText(getContext(), "Please fill licence no", Toast.LENGTH_SHORT).show();
+            ToastHelper.pleaseFillLicenece(getContext());
             return;
         }
 
         if(getPassword().getText().length() <= 0){
-            Toast.makeText(getContext(), "Please fill password", Toast.LENGTH_SHORT).show();
+            ToastHelper.pleaseFillPassword(getContext());
             return;
         }
+
+        getHighCourtLoader().start();
 
         UserLoginModel.login(getLicence_tex().getText().toString(), getPassword().getText().toString(), this);
     }
@@ -129,16 +145,29 @@ public class HighCourtLogin extends LinearLayout implements View.OnClickListener
 
     @Override
     public void onLoginSuccess(UserLoginModel userLoginModel) {
-        Toast.makeText(getContext(), "Username or password that enter you wrong!", Toast.LENGTH_SHORT).show();
+        getHighCourtLoader().stop();
+        if(userLoginModel.is_success()){
+            if(UserHelper.login(userLoginModel)){
+                ((HighCourtActivity) getContext()).startActivity(new Intent(getContext(), DashboardActivity.class));
+            }
+        }else {
+            Toast.makeText(getContext(), userLoginModel.getError(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
-    public void onLoginError(Throwable t) {
-        Toast.makeText(getContext(), "Username or password that enter you wrong!", Toast.LENGTH_SHORT).show();
+    public void onLoginError(Throwable t){
+        getHighCourtLoader().stop();
+        ToastHelper.loginCreditionalFailur(getContext());
     }
 
     @Override
     public void onLoginFailure(UserLoginModel userLoginModel) {
-        Toast.makeText(getContext(), "Username or password that enter you wrong!", Toast.LENGTH_SHORT).show();
+        getHighCourtLoader().stop();
+        ToastHelper.loginCreditionalFailur(getContext());
+    }
+
+    public HighCourtLoader getHighCourtLoader() {
+        return (highCourtLoader == null)? highCourtLoader = HighCourtLoader.init(getContext()): highCourtLoader;
     }
 }

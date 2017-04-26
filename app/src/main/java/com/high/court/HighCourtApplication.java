@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.UILApplication;
 
 /**
@@ -54,5 +55,9 @@ public class HighCourtApplication extends UILApplication {
     }
 
     public static Context getHighCourtApplicationContext(){ return getHighCourtApplication().getApplicationContext(); }
+
+    public static HighCourtActivity getHighCourtActivity(Context context){
+        return (HighCourtActivity) context;
+    }
 
 }
