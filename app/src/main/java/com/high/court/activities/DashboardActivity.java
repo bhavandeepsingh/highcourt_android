@@ -76,17 +76,20 @@ public class DashboardActivity extends HighCourtActivity {
     }
 
     public void click_myprofile(View view) {
-        Intent intent = new Intent(getApplication(), ProfileActivity2.class);
+//        Intent intent = new Intent(getApplication(), ProfileActivity2.class);
+        Intent intent = new Intent(context, CommingSoonActivity.class);
         startActivity(intent);
     }
 
     public void click_paymudues(View view) {
-        Intent intent = new Intent(getApplication(), MySubscriptionActivity.class);
+//        Intent intent = new Intent(getApplication(), MySubscriptionActivity.class);
+        Intent intent = new Intent(context, CommingSoonActivity.class);
         startActivity(intent);
     }
 
     public void click_changepassword(View view) {
-        Intent intent = new Intent(getApplication(), ChangePassword.class);
+//        Intent intent = new Intent(getApplication(), ChangePassword.class);
+        Intent intent = new Intent(context, CommingSoonActivity.class);
         startActivity(intent);
     }
 
