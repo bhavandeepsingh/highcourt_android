@@ -6,37 +6,54 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.high.court.R;
 import com.high.court.helpers.UserHelper;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.bitmap;
-import static java.security.AccessController.getContext;
-
-public class ExicutiveMemberDetail extends AppCompatActivity {
+public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapReadyCallback {
 
 
     Context context = ExicutiveMemberDetail.this;
     Button logoutbtn;
-    @BindView(R.id.pickimage)
     ImageView pickimage;
+
+    private GoogleMap mMap;
+    View maplayer;
+
+    Double latval = 30.7573008;
+    Double longval = 76.8043739;
+
+    Double lcurrent_atval = 30.873194;
+    Double lcurrent_longval = 75.8534603;
+
+    String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exicutive_member_detail);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,10 +61,23 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
         setTitle(UserHelper.getAppUserName());
 
         pickimage = (ImageView) findViewById(R.id.pickimage);
+
+        maplayer = (View) findViewById(R.id.maplayer);
+
         pickimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imagePicker();
+            }
+        });
+
+        maplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(currentlocation_url));
+                startActivity(intent);
+
             }
         });
 
@@ -64,6 +94,7 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
                 quick_start_cropped_image.setImageResource(0);
                 quick_start_cropped_image.setImageURI(result.getUri());
                 quick_start_cropped_image.invalidate();
+
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Failed: " + result.getError(), Toast.LENGTH_LONG).show();
             }
@@ -87,14 +118,22 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
     }
 
 
-
-    void imagePicker(){
+    void imagePicker() {
         CropImage.activity(null)
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .setRequestedSize(1000,1000)
+                .setRequestedSize(1000, 1000)
                 .setFixAspectRatio(true)
                 .start(ExicutiveMemberDetail.this);
     }
 
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+        LatLng sydney = new LatLng(latval, longval);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Punjab and Haryana High Court"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.animateCamera(zoom);
+    }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.high.court.R;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
+import android.widget.LinearLayout;
 import com.high.court.helpers.UserHelper;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -20,6 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener{
+
 
 
     CircleImageView profilePicShow;
@@ -51,7 +53,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         super.init();
         setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
     }
-
 
     public CircleImageView getProfilePicShow() {
         return profilePicShow;

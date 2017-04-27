@@ -7,13 +7,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.high.court.R;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.HighCourtActivity;
-import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.NetworkHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.http.models.http_interface.ResetMyPasswordInterface;
@@ -23,7 +21,9 @@ import com.high.court.http.models.http_request.ResetMyPassword;
  * Created by admin on 4/26/2017.
  */
 
+
 public class ResetMyPasswordLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ResetMyPasswordInterface{
+
 
     EditText licence_no;
     TextView reset_my_number;
@@ -50,7 +50,7 @@ public class ResetMyPasswordLayout extends HighCourtMainLinearLayout implements 
     public void init() {
         super.init();
         setLicence_no((EditText) findViewById(R.id.licencenum_edit))
-        .setReset_my_number((TextView) findViewById(R.id.loginbtn));
+                .setReset_my_number((TextView) findViewById(R.id.loginbtn));
     }
 
     public EditText getLicence_no() {
@@ -97,9 +97,7 @@ public class ResetMyPasswordLayout extends HighCourtMainLinearLayout implements 
     }
 
     @Override
-    public void onResetPasswordError(Throwable t)
-    {
-        getHighCourtLoader().stop();
+    public void onResetPasswordError(Throwable t) {
         ToastHelper.showLogoutFailuer(getContext());
     }
 
@@ -109,4 +107,7 @@ public class ResetMyPasswordLayout extends HighCourtMainLinearLayout implements 
         ToastHelper.showLogoutFailuer(getContext());
     }
 
+    HighCourtActivity getHighCourtActivity(){
+        return (HighCourtActivity) getContext();
+    }
 }
