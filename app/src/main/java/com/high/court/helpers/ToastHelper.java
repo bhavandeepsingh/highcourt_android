@@ -63,4 +63,8 @@ public class ToastHelper {
     public static void showLogoutFailuer(Context applicationContext) {
         showToast("Unable to logout please try again!", applicationContext);
     }
+
+    public static void passwordResetSuccessfully(Context context) {
+        showToast("Password reset successfully", context);
+    }
 }

@@ -20,31 +20,6 @@ public class ImageHelper {
         ImageLoader.getInstance().displayImage(imgurl, imageView, getDisplayImage(), null, null);
     }
 
-    public static void postImageLoad(String imgurl, ImageView imageView) {
-
-        ImageLoader.getInstance().displayImage(imgurl, imageView, getDisplayImage(), new ImageLoadingListener() {
-
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
-
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-
-            }
-        });
-    }
-
     public static DisplayImageOptions getDisplayImage() {
         return new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.logo_background)

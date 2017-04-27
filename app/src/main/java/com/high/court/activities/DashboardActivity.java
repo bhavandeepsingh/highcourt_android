@@ -49,7 +49,7 @@ public class DashboardActivity extends HighCourtActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(true || UserHelper.getState()){ setupDashboard(); }
+        if(UserHelper.getState()){ setupDashboard(); }
         else{ setupLogin(); }
 
     }
