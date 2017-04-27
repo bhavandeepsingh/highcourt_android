@@ -8,6 +8,9 @@ import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.UILApplication;
+import com.high.court.http.models.ProfileModel;
+
+import java.util.List;
 
 /**
  * Created by gurpreetsingh on 24/04/17.
@@ -17,6 +20,8 @@ public class HighCourtApplication extends UILApplication {
 
 
     static HighCourtApplication highCourtApplication;
+
+    static List<ProfileModel> profileModels;
 
     @Override
     public void onCreate() {
@@ -60,4 +65,11 @@ public class HighCourtApplication extends UILApplication {
         return (HighCourtActivity) context;
     }
 
+    public static List<ProfileModel> getProfileModels() {
+        return profileModels;
+    }
+
+    public static void setProfileModels(List<ProfileModel> profileModels) {
+        HighCourtApplication.profileModels = profileModels;
+    }
 }

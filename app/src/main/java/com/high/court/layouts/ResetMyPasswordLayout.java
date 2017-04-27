@@ -43,10 +43,12 @@ public class ResetMyPasswordLayout extends HighCourtMainLinearLayout implements 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        init();
+        if(!isInitiate()) init();
     }
 
-    private void init() {
+    @Override
+    public void init() {
+        super.init();
         setLicence_no((EditText) findViewById(R.id.licencenum_edit))
         .setReset_my_number((TextView) findViewById(R.id.loginbtn));
     }

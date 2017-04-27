@@ -33,6 +33,8 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     TextView profileNameText, myProfile_text, payMyDuesText, chnagePassword;
     LinearLayout logoutRow;
 
+    boolean initiate = false;
+
     public SideProfileDrawer(Context context) {
         super(context);
     }
@@ -46,6 +48,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void init(){
+        setInitiate(true);
         setProfileNameText((TextView) findViewById(R.id.side_profile_name))
         .setProfileImageView((ImageView) findViewById(R.id.side_profile_pic))
         .setMyProfile_text((TextView) findViewById(R.id.side_my_profile))
@@ -57,7 +60,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     @Override
     public void onDraw(Canvas c) {
         super.onDraw(c);
-        init();
+        if(!isInitiate()) init();
     }
 
     public ImageView getProfileImageView() {
@@ -160,5 +163,13 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         }else if(getLogoutText().getId() == v.getId()){
             onClickLogout();
         }
+    }
+
+    public boolean isInitiate() {
+        return initiate;
+    }
+
+    public void setInitiate(boolean initiate) {
+        this.initiate = initiate;
     }
 }

@@ -6,16 +6,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
+import com.high.court.helpers.ImageHelper;
+import com.high.court.http.models.ProfileModel;
+
+import java.util.List;
 
 
 public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveComm.ViewHolder> {
     Context context;
     String[] get_judgesnamelist;
     String[] get_courtroomlist;
+
+    List<ProfileModel> profileModelList;
 
     public AdapterExicutiveComm(Context ctx, String[] judgesnamelist, String[] courtroomlist) {
         super();
@@ -30,42 +39,53 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.adapter_exicutive_comm, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ExicutiveMemberDetail.class);
+                context.startActivity(intent);
+            }
+        });
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-
-
-
+        if(viewHolder.exicutive_name != null) viewHolder.exicutive_name.setText(getProfileModelList().get(i).getName());
+        if(viewHolder.visrpresident!= null) viewHolder.visrpresident.setText(getProfileModelList().get(i).getProfile());
+        if(viewHolder.ponenumber_val!= null) viewHolder.ponenumber_val.setText(getProfileModelList().get(i).getMobile());
+        if(viewHolder.profile_image!= null) ImageHelper.loadImage(getProfileModelList().get(i).getProfile_pic(), viewHolder.profile_image);
     }
 
     @Override
     public int getItemCount() {
-       // return get_ratelist_title.length;
-        return 22;
+        return getProfileModelList().size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-       // TextView title, title_val;
         LinearLayout rowview;
+
+        TextView exicutive_name, visrpresident, ponenumber_val;
+        ImageView profile_image;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            title = (TextView) itemView.findViewById(R.id.title);
-//            title_val = (TextView) itemView.findViewById(R.id.title_val);
             rowview = (LinearLayout) itemView.findViewById(R.id.rowview);
-
-            rowview.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, ExicutiveMemberDetail.class);
-                    context.startActivity(intent);
-                }
-            });
-
+            exicutive_name = (TextView) rowview.findViewById(R.id.exicutive_name);
+            visrpresident = (TextView) rowview.findViewById(R.id.visrpresident);
+            ponenumber_val = (TextView) rowview.findViewById(R.id.ponenumber_val);
+            profile_image = (ImageView) rowview.findViewById(R.id.profile_image);
         }
     }
 
+    public List<ProfileModel> getProfileModelList() {
+        return (profileModelList == null)? HighCourtApplication.getProfileModels(): profileModelList;
+    }
+
+    public void setProfileModelList(List<ProfileModel> profileModelList) {
+        this.profileModelList = profileModelList;
+    }
 }
 

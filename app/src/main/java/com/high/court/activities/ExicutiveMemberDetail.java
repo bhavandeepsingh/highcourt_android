@@ -42,7 +42,7 @@ public class ExicutiveMemberDetail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(UserHelper.getAppUserName());
-        logoutbtn = (Button) findViewById(R.id.logoutbtn);
+
         pickimage = (ImageView) findViewById(R.id.pickimage);
         pickimage.setOnClickListener(new View.OnClickListener() {
             @Override

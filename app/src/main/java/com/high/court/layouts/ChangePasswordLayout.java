@@ -41,10 +41,12 @@ public class ChangePasswordLayout extends HighCourtMainLinearLayout implements V
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        init();
+        if(!isInitiate()) init();
     }
 
-    void init(){
+    @Override
+    public void init(){
+        super.init();
         setChange_password((TextView) findViewById(R.id.loginbtn));
         setOld_password((EditText) findViewById(R.id.old_licencenum_edit));
         setNew_password((EditText) findViewById(R.id.new_password_edit));

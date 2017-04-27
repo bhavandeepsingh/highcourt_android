@@ -6,18 +6,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterExicutiveComm;
-import com.high.court.adapters.AdapterHonbleHudges;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class ExicutiveCommettieeActivity extends HighCourtActivity {
 
@@ -46,7 +40,7 @@ public class ExicutiveCommettieeActivity extends HighCourtActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Exicutive");
+        setTitle("Executive");
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -57,22 +51,7 @@ public class ExicutiveCommettieeActivity extends HighCourtActivity {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 
-
-
     }
-
-//    @OnClick(R.id.designation_val)
-//    void designation_val_CLick() {
-//        Toast.makeText(context, "ddfff", Toast.LENGTH_SHORT).show();
-//    }
-
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

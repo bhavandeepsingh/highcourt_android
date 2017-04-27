@@ -20,6 +20,8 @@ public class HighCourtMainLinearLayout extends LinearLayout {
 
     HighCourtLoader highCourtLoader;
 
+    boolean initiate = false;
+
     public HighCourtMainLinearLayout(@NonNull Context context) {
         super(context);
     }
@@ -40,5 +42,16 @@ public class HighCourtMainLinearLayout extends LinearLayout {
         return (highCourtLoader == null) ? highCourtLoader = HighCourtLoader.init(getContext()): highCourtLoader;
     }
 
+    public boolean isInitiate() {
+        return initiate;
+    }
+
+    public void setInitiate(boolean initiate) {
+        this.initiate = initiate;
+    }
+
+    public void init() {
+        setInitiate(true);
+    }
 
 }

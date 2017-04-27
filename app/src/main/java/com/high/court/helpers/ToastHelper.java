@@ -91,4 +91,28 @@ public class ToastHelper {
     public static void showPasswordChnageFailur(Context context) {
         showToast("Password not change please try again!", context);
     }
+
+    public static void showEmailNotFill(Context context) {
+        showToast("Email cannot be blank!", context);
+    }
+
+    public static void showLanlineNotFill(Context context) {
+        showToast("Landline cannot be blank!", context);
+    }
+
+    public static void showMoblieNotFill(Context context) {
+        showToast("Mobile cannot be blank!", context);
+    }
+
+    public static void showResidentialNotFill(Context context) {
+        showToast("Residential cannot be blank!", context);
+    }
+
+    public static void showCourtAddressNotFill(Context context) {
+        showToast("Court Address cannot be blank!", context);
+    }
+
+    public static void showBloodgroupNotFill(Context context) {
+        showToast("Blood group cannot be blank!", context);
+    }
 }

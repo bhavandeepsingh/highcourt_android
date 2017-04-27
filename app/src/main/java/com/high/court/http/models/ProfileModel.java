@@ -1,5 +1,7 @@
 package com.high.court.http.models;
 
+import android.view.View;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -259,4 +261,5 @@ public class ProfileModel extends HighCourtModel {
     public void setProfile_pic(String profile_pic) {
         this.profile_pic = profile_pic;
     }
+
 }

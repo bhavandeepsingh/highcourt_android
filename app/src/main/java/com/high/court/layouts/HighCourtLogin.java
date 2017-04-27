@@ -54,7 +54,9 @@ public class HighCourtLogin extends HighCourtMainLinearLayout implements View.On
 
 
 
-    void init(){
+    @Override
+    public void init(){
+        super.init();
         setLicence_tex((EditText) findViewById(R.id.licencenum_edit))
         .setPassword((EditText) findViewById(R.id.password_edit))
         .setSign_in((TextView) findViewById(R.id.loginbtn))
@@ -64,7 +66,7 @@ public class HighCourtLogin extends HighCourtMainLinearLayout implements View.On
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        init();
+        if(!isInitiate()) init();
     }
 
     public EditText getLicence_tex() {

@@ -2,6 +2,7 @@ package com.high.court.http;
 
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
+import com.high.court.http.models.http_request.ExcecutiveMemberModel;
 import com.high.court.http.models.http_request.ResetMyPassword;
 import com.high.court.http.models.http_request.UserLoginRequest;
 
@@ -38,5 +39,8 @@ public interface HighCourtWebService {
     @FormUrlEncoded
     @POST("user/reset-password")
     Call<ChangePasswordModel> changePassword(@FieldMap Map<String, String> maps);
+
+    @GET("user/executive")
+    Call<ExcecutiveMemberModel> getExcutiveMembers();
 
 }
