@@ -48,5 +48,4 @@ public class ProfileActivity2 extends HighCourtActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
 }

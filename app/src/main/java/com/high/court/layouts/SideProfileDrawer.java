@@ -52,8 +52,6 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         .setPayMyDuesText((TextView) findViewById(R.id.side_my_pay_dues))
         .setChnagePassword((TextView) findViewById(R.id.side_change_password))
         .setLogoutText((LinearLayout) findViewById(R.id.logout_row));
-
-
     }
 
     @Override
@@ -162,6 +160,5 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         }else if(getLogoutText().getId() == v.getId()){
             onClickLogout();
         }
-
     }
 }

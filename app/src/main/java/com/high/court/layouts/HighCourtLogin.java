@@ -30,7 +30,7 @@ import com.high.court.http.models.http_interface.HighCourtLoginInterface;
  * Created by admin on 4/25/2017.
  */
 
-public class HighCourtLogin extends LinearLayout implements View.OnClickListener, HighCourtLoginInterface {
+public class HighCourtLogin extends HighCourtMainLinearLayout implements View.OnClickListener, HighCourtLoginInterface {
 
     EditText licence_tex;
 
@@ -39,8 +39,6 @@ public class HighCourtLogin extends LinearLayout implements View.OnClickListener
     TextView sign_in;
 
     TextView forgot_password;
-
-    HighCourtLoader highCourtLoader;
 
     public HighCourtLogin(Context context) {
         super(context);
@@ -165,9 +163,5 @@ public class HighCourtLogin extends LinearLayout implements View.OnClickListener
     public void onLoginFailure(UserLoginModel userLoginModel) {
         getHighCourtLoader().stop();
         ToastHelper.loginCreditionalFailur(getContext());
-    }
-
-    public HighCourtLoader getHighCourtLoader() {
-        return (highCourtLoader == null)? highCourtLoader = HighCourtLoader.init(getContext()): highCourtLoader;
     }
 }

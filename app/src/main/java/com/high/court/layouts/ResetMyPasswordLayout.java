@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.high.court.R;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.NetworkHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.http.models.http_interface.ResetMyPasswordInterface;
@@ -22,7 +23,7 @@ import com.high.court.http.models.http_request.ResetMyPassword;
  * Created by admin on 4/26/2017.
  */
 
-public class ResetMyPasswordLayout extends LinearLayout implements View.OnClickListener, ResetMyPasswordInterface{
+public class ResetMyPasswordLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ResetMyPasswordInterface{
 
     EditText licence_no;
     TextView reset_my_number;
@@ -77,6 +78,7 @@ public class ResetMyPasswordLayout extends LinearLayout implements View.OnClickL
     public void onClickMyResetPassword(View v) {
         if(!NetworkHelper.state()) ToastHelper.showNoNetwork(getContext());
         if(getLicence_no().getText().length() <= 0) ToastHelper.pleaseFillLicenece(getContext());
+        getHighCourtLoader().start();
         ResetMyPassword.resetPassword(getLicence_no().getText().toString(), this);
     }
 
@@ -85,23 +87,24 @@ public class ResetMyPasswordLayout extends LinearLayout implements View.OnClickL
         if(resetMyPassword.is_success()){
             ToastHelper.passwordResetSuccessfully(getContext());
             getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
+            getHighCourtActivity().finish();
         }else{
             ToastHelper.showToast(resetMyPassword.getLicense_no(), getContext());
         }
+        getHighCourtLoader().stop();
     }
 
     @Override
-    public void onResetPasswordError(Throwable t) {
+    public void onResetPasswordError(Throwable t)
+    {
+        getHighCourtLoader().stop();
         ToastHelper.showLogoutFailuer(getContext());
     }
 
     @Override
     public void onResetPasswordFailure(ResetMyPassword resetMyPassword) {
+        getHighCourtLoader().stop();
         ToastHelper.showLogoutFailuer(getContext());
-    }
-
-    HighCourtActivity getHighCourtActivity(){
-        return (HighCourtActivity) getContext();
     }
 
 }

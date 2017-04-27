@@ -67,4 +67,28 @@ public class ToastHelper {
     public static void passwordResetSuccessfully(Context context) {
         showToast("Password reset successfully", context);
     }
+
+    public static void showPleaseFillOldPassword(Context context) {
+        showToast("Please fill old password!", context);
+    }
+
+    public static void showPleaseFillNewPassword(Context context) {
+        showToast("Please fill new password!", context);
+    }
+
+    public static void showPleaseFillConfirmPassword(Context context) {
+        showToast("Please fill confirm password!", context);
+    }
+
+    public static void showNewPasswordAreNotSame(Context context) {
+        showToast("New password and confirm are not same!", context);
+    }
+
+    public static void showPasswordChnageSuccess(Context context) {
+        showToast("Password change successfully", context);
+    }
+
+    public static void showPasswordChnageFailur(Context context) {
+        showToast("Password not change please try again!", context);
+    }
 }

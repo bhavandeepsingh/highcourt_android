@@ -16,7 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by admin on 4/26/2017.
  */
 
-public class ExicutiveMemberDetailLayout extends LinearLayout {
+public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout {
 
 
     CircleImageView profilePicShow;
@@ -52,4 +52,5 @@ public class ExicutiveMemberDetailLayout extends LinearLayout {
         this.profilePicShow = profilePicShow;
         return this;
     }
+
 }
