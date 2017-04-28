@@ -262,4 +262,7 @@ public class ProfileModel extends HighCourtModel {
         this.profile_pic = profile_pic;
     }
 
+    public static ProfileModel getLoginUserProfile() {
+        return new ProfileModel();
+    }
 }

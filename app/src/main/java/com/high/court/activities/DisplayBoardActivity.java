@@ -41,7 +41,6 @@ public class DisplayBoardActivity extends HighCourtActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Display Board");
 
-
         caselawlayer = (LinearLayout)findViewById(R.id.caselawlayer);
         judjelayer = (LinearLayout)findViewById(R.id.judjelayer);
 
@@ -59,11 +58,6 @@ public class DisplayBoardActivity extends HighCourtActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
-
 
     }
 

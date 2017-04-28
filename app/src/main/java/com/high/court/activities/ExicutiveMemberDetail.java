@@ -21,8 +21,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.models.ProfileModel;
+import com.high.court.layouts.ExicutiveMemberDetailLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -30,10 +33,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapReadyCallback {
 
-
     Context context = ExicutiveMemberDetail.this;
     Button logoutbtn;
     ImageView pickimage;
+
+    public static String PROFILE_INDEX_KEY = "PROFILE_INDEX_KEY";
 
     private GoogleMap mMap;
     View maplayer;
@@ -51,14 +55,25 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exicutive_member_detail);
 
+        ProfileModel profileModel = null;
+
+        if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
+            profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
+            ExicutiveMemberDetailLayout exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
+            exicutiveMemberDetailLayout.setProfile(profileModel);
+        }else{
+            profileModel = ProfileModel.getLoginUserProfile();
+        }
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(UserHelper.getAppUserName());
+        setTitle(profileModel.getName());
 
         pickimage = (ImageView) findViewById(R.id.pickimage);
 
@@ -74,14 +89,11 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
         maplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(currentlocation_url));
                 startActivity(intent);
 
             }
         });
-
-
     }
 
 

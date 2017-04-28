@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/rowview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                     android:src="@drawable/ic_right_arrow" />
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <View style="@style/stl_devider" />
 

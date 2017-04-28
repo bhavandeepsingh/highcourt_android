@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import android.widget.LinearLayout;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.models.ProfileModel;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,6 +31,12 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     EditText email_id, landline_no, mobile_no, residential_adress, court_address, blood_group;
 
     TextView save_text_view;
+
+    ProfileModel profileModel;
+
+    static int TYPE = 0;
+
+    static int TYPE_MY_PRIFILE = 1;
 
     public ExicutiveMemberDetailLayout(Context context) {
         super(context);
@@ -59,7 +67,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public ExicutiveMemberDetailLayout setProfilePicShow(CircleImageView profilePicShow) {
-        if(profilePicShow != null) ImageHelper.loadImage(UserHelper.getAppUserProfilePic(), profilePicShow);
+        if(profilePicShow != null) ImageHelper.loadImage(getProfileModel().getProfile_pic(), profilePicShow);
         this.profilePicShow = profilePicShow;
         return this;
     }
@@ -70,6 +78,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setEmail_id(EditText email_id) {
+        if(email_id != null) email_id.setText(getProfileModel().getEmail());
         this.email_id = email_id;
     }
 
@@ -88,6 +97,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setMobile_no(EditText mobile_no) {
+        if(mobile_no != null) mobile_no.setText(getProfileModel().getMobile());
         this.mobile_no = mobile_no;
     }
 
@@ -97,6 +107,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setResidential_adress(EditText residential_adress) {
+        if(residential_adress != null) residential_adress.setText(getProfileModel().getResidential_address());
         this.residential_adress = residential_adress;
     }
 
@@ -106,6 +117,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setCourt_address(EditText court_address) {
+        if(court_address != null) court_address.setText(getProfileModel().getCourt_address());
         this.court_address = court_address;
     }
 
@@ -115,6 +127,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setBlood_group(EditText blood_group) {
+        if(blood_group != null) blood_group.setText(getProfileModel().getBlood_group());
         this.blood_group = blood_group;
     }
 
@@ -130,11 +143,9 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     @Override
     public void onClick(View v) {
-
         if(v.getId() == getSave_text_view().getId()){
             onSaveButtonClick(v);
         }
-
     }
 
     private void onSaveButtonClick(View v) {
@@ -144,12 +155,44 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         else if(!editTextValidate(getResidential_adress())) ToastHelper.showResidentialNotFill(getContext());
         else if(!editTextValidate(getCourt_address())) ToastHelper.showCourtAddressNotFill(getContext());
         else if(!editTextValidate(getBlood_group())) ToastHelper.showBloodgroupNotFill(getContext());
-
     }
-
 
     boolean editTextValidate(EditText editText){
         if(editText.getText().length() <= 0)return false;
         return true;
+    }
+
+    public static int getTYPE() {
+        return TYPE;
+    }
+
+    public static void setTYPE(int TYPE) {
+        ExicutiveMemberDetailLayout.TYPE = TYPE;
+    }
+
+    public static int getTypeMyPrifile() {
+        return TYPE_MY_PRIFILE;
+    }
+
+    public static void setTypeMyPrifile(int typeMyPrifile) {
+        TYPE_MY_PRIFILE = typeMyPrifile;
+    }
+
+    public ProfileModel getProfileModel() {
+        return profileModel;
+    }
+
+    public void setProfileModel(ProfileModel profileModel) {
+        this.profileModel = profileModel;
+    }
+
+    public void setProfile(ProfileModel profileModel) {
+        if(profileModel != null){
+            if(profileModel.getUser_id() == UserHelper.getId()) {
+                setTYPE(TYPE_MY_PRIFILE);
+            }
+            setProfileModel(profileModel);
+            init();
+        }
     }
 }

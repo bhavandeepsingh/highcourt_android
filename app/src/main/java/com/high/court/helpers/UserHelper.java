@@ -294,4 +294,5 @@ public class UserHelper {
     static SharedPreferences getSharedPreferences(){
         return PreferenceManager.getDefaultSharedPreferences(HighCourtApplication.getHighCourtApplicationContext());
     }
+
 }
