@@ -48,6 +48,14 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         super(context, attrs, defStyle);
     }
 
+    public TextView getSide_logouttext() {
+        return side_logouttext;
+    }
+
+    public void setSide_logouttext(TextView side_logouttext) {
+        this.side_logouttext = side_logouttext;
+    }
+
     void init(){
         setInitiate(true);
         setProfileNameText((TextView) findViewById(R.id.side_profile_name))
@@ -55,7 +63,8 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         .setMyProfile_text((TextView) findViewById(R.id.side_my_profile))
         .setPayMyDuesText((TextView) findViewById(R.id.side_my_pay_dues))
         .setChnagePassword((TextView) findViewById(R.id.side_change_password))
-        .setLogoutText((LinearLayout) findViewById(R.id.logout_row));
+        .setSide_logouttext((TextView) findViewById(R.id.side_logouttext));
+    //    .setLogoutText((LinearLayout) findViewById(R.id.logout_row));
 
 
         setIcon_profile((ImageView) findViewById(R.id.icon_profile));
@@ -113,13 +122,13 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         return this;
     }
 
-    public TextView getSide_logouttext() {
-        return side_logouttext;
-    }
+//    public TextView getSide_logouttext() {
+//        return side_logouttext;
+//    }
 
-    public void setSide_logouttext(TextView side_logouttext) {
-        this.side_logouttext = side_logouttext;
-    }
+//    public void setSide_logouttext(TextView side_logouttext) {
+//        this.side_logouttext = side_logouttext;
+//    }
 
     public TextView getPayMyDuesText() {
         return payMyDuesText;
@@ -239,14 +248,15 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
 
     void onClickChangePassword(){
         getHighCourtActivity().startActivity(new Intent(getContext(), ChangePassword.class));
+        select_ChangePass();
     }
 
     void onClickLogout() {
-        if (UserHelper.logout()) {
-            getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
-        } else {
-            ToastHelper.showLogoutFailuer(getContext());
-        }
+//        if (UserHelper.logout()) {
+//            getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
+//        } else {
+//            ToastHelper.showLogoutFailuer(getContext());
+//        }
         select_Logout();
 
     }
