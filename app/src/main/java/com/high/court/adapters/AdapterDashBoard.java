@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -140,14 +141,14 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView titles;
         ImageView icon;
-        RelativeLayout rowview;
+        LinearLayout rowview;
 
         public ViewHolder(View itemView) {
             super(itemView);
             //  selectcheckbox = (CheckBox) itemView.findViewById(R.id.selectcheckbox);
             titles = (TextView) itemView.findViewById(R.id.titles);
             icon = (ImageView) itemView.findViewById(R.id.icon);
-            rowview = (RelativeLayout) itemView.findViewById(R.id.rowview);
+            rowview = (LinearLayout) itemView.findViewById(R.id.rowview);
 //            title_val = (TextView) itemView.findViewById(R.id.title_val);
 
 

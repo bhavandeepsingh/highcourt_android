@@ -20,6 +20,7 @@ import java.util.List;
 
 
 public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveComm.ViewHolder> {
+
     Context context;
     String[] get_judgesnamelist;
     String[] get_courtroomlist;
@@ -35,7 +36,7 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.adapter_exicutive_comm, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
@@ -44,6 +45,7 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ExicutiveMemberDetail.class);
+                intent.putExtra(ExicutiveMemberDetail.PROFILE_INDEX_KEY, String.valueOf(i));
                 context.startActivity(intent);
             }
         });
@@ -87,5 +89,6 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
     public void setProfileModelList(List<ProfileModel> profileModelList) {
         this.profileModelList = profileModelList;
     }
+
 }
 
