@@ -49,7 +49,7 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
     Double lcurrent_longval = 75.8534603;
 
     String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
-
+    ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +59,15 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
 
         if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
-        }else{
+        }
+        else{
             profileModel = ProfileModel.getLoginUserProfile();
         }
 
-        ExicutiveMemberDetailLayout exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
+         exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
         exicutiveMemberDetailLayout.setProfile(profileModel);
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -116,7 +119,9 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profilee, menu);
+       if (UserHelper.getLoginId()==exicutiveMemberDetailLayout.getProfileModel().getUser_id()){
+           getMenuInflater().inflate(R.menu.menu_profilee, menu);
+       }
         return true;
     }
 
@@ -126,6 +131,8 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
         int id = item.getItemId();
         if (id == android.R.id.home) {
             onBackPressed();
+        }if (id == R.id.action_edit_profile) {
+            exicutiveMemberDetailLayout.fieldsEnabled();
         }
         return super.onOptionsItemSelected(item);
     }

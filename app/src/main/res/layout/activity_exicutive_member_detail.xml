@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.high.court.layouts.ExicutiveMemberDetailLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/exicutive_member_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/clr_white"
-    android:id="@+id/exicutive_member_layout"
     android:orientation="vertical">
 
     <include
@@ -78,21 +78,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Designation"
-
                             android:textColor="@color/colorPrimary" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/designation_val"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
+                            android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:text="Advocate"
-                            android:textAllCaps="true"
+                            android:textAllCaps="false"
                             android:textColor="@color/clr_textcolor_dark" />
 
                         <View
@@ -131,18 +131,19 @@
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/profile_val"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
+                            android:enabled="false"
                             android:paddingBottom="2dp"
-                            android:textAllCaps="true"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:text="Additional Advocate General, Haryana"
+                            android:textAllCaps="false"
                             android:textColor="@color/clr_textcolor_dark" />
 
                         <View
@@ -183,18 +184,19 @@
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/barcouncil_val"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
+                            android:enabled="false"
                             android:paddingBottom="2dp"
-                            android:textAllCaps="true"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:text="P/345/1989"
+                            android:textAllCaps="false"
                             android:textColor="@color/clr_textcolor_dark" />
 
                         <View
@@ -234,18 +236,20 @@
                             android:textAllCaps="true"
                             android:textColor="@color/colorPrimary" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/barassociaation_val"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
+                            android:enabled="false"
+                            android:singleLine="true"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:text="P/345/1989"
-                            android:textAllCaps="true"
+                            android:textAllCaps="false"
                             android:textColor="@color/clr_textcolor_dark" />
 
                         <View
@@ -340,6 +344,9 @@
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="2dp"
+                            android:singleLine="true"
+
+                            android:inputType="phone"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
@@ -389,6 +396,8 @@
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="2dp"
+                          android:singleLine="true"
+                            android:inputType="phone"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
@@ -535,6 +544,7 @@
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="4dp"
                             android:paddingLeft="6dp"
+                            android:singleLine="true"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:textColor="@color/clr_textcolor_dark" />
@@ -547,17 +557,25 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
                     android:paddingTop="@dimen/padding">
                     <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
                         android:id="@+id/save_text_button"
-                        android:text="Save"/>
-                </LinearLayout>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginLeft="40dp"
+                        android:textColor="@color/clr_white"
+                        android:padding="6dp"
+                        android:textSize="16sp"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:text="Save" />
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -567,7 +585,6 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_gravity="bottom"
@@ -579,14 +596,12 @@
                         android:id="@+id/map"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        />
+                        android:layout_height="match_parent" />
+
                     <View
                         android:id="@+id/maplayer"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
-
+                        android:layout_height="match_parent" />
                 </RelativeLayout>
 
                 <Button

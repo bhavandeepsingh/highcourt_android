@@ -297,4 +297,6 @@ public class ProfileModel extends HighCourtModel {
         .setLong2(UserHelper.getAppUserLong02())
         .setLocation(UserHelper.getAppUserLocation());
     }
+
+
 }

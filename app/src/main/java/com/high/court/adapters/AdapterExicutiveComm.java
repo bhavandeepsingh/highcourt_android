@@ -41,7 +41,6 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.adapter_exicutive_comm, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
-
         return viewHolder;
     }
 
