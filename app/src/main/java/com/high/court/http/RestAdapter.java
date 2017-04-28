@@ -22,7 +22,7 @@ public class RestAdapter {
 
     private static HighCourtWebService REST_CLIENT = null;
 
-    private static String ROOT = "http://squareloops.com/highcourt/api/web/v1/";
+    private static String ROOT = "http://uniquecoders.in/highcourt/api/web/v1/";
 
     static {
         setupRestClient();

@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.high.court.R;
-import com.high.court.activities.ExicutiveMemberDetail;
-import com.high.court.activities.MemberDirectoryActivity;
-import com.high.court.activities.ProfileActivity;
 import com.high.court.activities.ProfileActivity2;
 
 

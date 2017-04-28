@@ -66,7 +66,7 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
         viewHolder.phonelayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               DialerHelper.dial(context,"1234567890");
+               DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
             }
         });
 

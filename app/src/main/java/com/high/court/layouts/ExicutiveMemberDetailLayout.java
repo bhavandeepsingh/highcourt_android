@@ -55,8 +55,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (!isInitiate()) init();
-
-
     }
 
     @Override
@@ -64,7 +62,10 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         super.init();
         setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
         fieldsDisabled();
-        // fieldsEnabled();
+        getDesignation_val();
+        getProfile_val();
+        getBarassociaation_val();
+        getBarcouncil_val();
     }
 
     public CircleImageView getProfilePicShow() {
@@ -72,19 +73,14 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public ExicutiveMemberDetailLayout setProfilePicShow(CircleImageView profilePicShow) {
-        if (profilePicShow != null)
-            ImageHelper.loadImage(getProfileModel().getProfile_pic(), profilePicShow);
+        if (profilePicShow != null) ImageHelper.loadImage(getProfileModel().getProfile_pic(), profilePicShow);
         this.profilePicShow = profilePicShow;
-        //UserHelper.getLoginId() == getProfileModel().getUser_id()
-
-        Log.d("abc"," "+ UserHelper.getLoginId()+" "+getProfileModel().getUser_id());
         return this;
     }
 
 
     public EditText getDesignation_val() {
-        if (designation_val == null)
-            setDesignation_val((EditText) findViewById(R.id.designation_val));
+        if (designation_val == null) setDesignation_val((EditText) findViewById(R.id.designation_val));
         return designation_val;
     }
 
@@ -120,6 +116,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setBarassociaation_val(EditText barassociaation_val) {
+        if(barassociaation_val != null) barassociaation_val.setText(getProfileModel().getMembership_number());
         this.barassociaation_val = barassociaation_val;
     }
 

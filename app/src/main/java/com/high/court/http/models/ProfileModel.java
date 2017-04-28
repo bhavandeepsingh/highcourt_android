@@ -91,7 +91,7 @@ public class ProfileModel extends HighCourtModel {
     @Expose
     String long2;
 
-    @SerializedName("profile_pic")
+    @SerializedName("profilePic")
     @Expose
     String profile_pic;
 
