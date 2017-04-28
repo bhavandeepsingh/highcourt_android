@@ -2,6 +2,7 @@ package com.high.court.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
+import com.high.court.helpers.DialerHelper;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.http.models.ProfileModel;
 
@@ -59,6 +62,14 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
                 context.startActivity(intent);
             }
         });
+
+        viewHolder.phonelayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               DialerHelper.dial(context,"1234567890");
+            }
+        });
+
     }
 
     @Override
@@ -71,6 +82,7 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
 
         TextView exicutive_name, visrpresident, ponenumber_val;
         ImageView profile_image;
+        LinearLayout phonelayer;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +91,7 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
             visrpresident = (TextView) rowview.findViewById(R.id.visrpresident);
             ponenumber_val = (TextView) rowview.findViewById(R.id.ponenumber_val);
             profile_image = (ImageView) rowview.findViewById(R.id.profile_image);
+            phonelayer = (LinearLayout) rowview.findViewById(R.id.phonelayer);
         }
     }
 
