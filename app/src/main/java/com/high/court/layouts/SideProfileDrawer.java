@@ -252,13 +252,11 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickLogout() {
-//        if (UserHelper.logout()) {
-//            getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
-//        } else {
-//            ToastHelper.showLogoutFailuer(getContext());
-//        }
-        select_Logout();
-
+        if (UserHelper.logout()) {
+            getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
+        } else {
+            ToastHelper.showLogoutFailuer(getContext());
+        }
     }
 
 

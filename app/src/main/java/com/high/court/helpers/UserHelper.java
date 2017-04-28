@@ -76,6 +76,10 @@ public class UserHelper {
         return getSharedPreferences().getString(APP_USER_LOGIN_ID, "");
     }
 
+    public static int getLoginId() {
+        return Integer.parseInt(getSharedPreferences().getString(APP_USER_LOGIN_ID, ""));
+    }
+
     public static void setAppUserLoginId(String appUserLoginId) {
         APP_USER_LOGIN_ID = appUserLoginId;
     }

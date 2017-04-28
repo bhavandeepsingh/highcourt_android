@@ -187,12 +187,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setProfile(ProfileModel profileModel) {
-        if(profileModel != null){
-            if(profileModel.getUser_id() == UserHelper.getId()) {
-                setTYPE(TYPE_MY_PRIFILE);
-            }
-            setProfileModel(profileModel);
-            init();
-        }
+        setProfileModel(profileModel);
+        init();
     }
+
 }

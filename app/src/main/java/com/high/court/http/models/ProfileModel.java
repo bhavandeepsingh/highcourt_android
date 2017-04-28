@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.high.court.helpers.UserHelper;
 
 /**
  * Created by admin on 4/25/2017.
@@ -98,32 +99,36 @@ public class ProfileModel extends HighCourtModel {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public ProfileModel setUser_id(int user_id) {
         this.user_id = user_id;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public ProfileModel setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public ProfileModel setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public ProfileModel setLocation(String location) {
         this.location = location;
+        return this;
     }
 
     public String getWebsite() {
@@ -138,8 +143,9 @@ public class ProfileModel extends HighCourtModel {
         return bio;
     }
 
-    public void setBio(String bio) {
+    public ProfileModel setBio(String bio) {
         this.bio = bio;
+        return this;
     }
 
     public String getTimezone() {
@@ -154,8 +160,9 @@ public class ProfileModel extends HighCourtModel {
         return designation;
     }
 
-    public void setDesignation(String designation) {
+    public ProfileModel setDesignation(String designation) {
         this.designation = designation;
+        return this;
     }
 
     public String getProfile() {
@@ -170,24 +177,27 @@ public class ProfileModel extends HighCourtModel {
         return enrollment_number;
     }
 
-    public void setEnrollment_number(String enrollment_number) {
+    public ProfileModel setEnrollment_number(String enrollment_number) {
         this.enrollment_number = enrollment_number;
+        return this;
     }
 
     public String getMembership_number() {
         return membership_number;
     }
 
-    public void setMembership_number(String membership_number) {
+    public ProfileModel setMembership_number(String membership_number) {
         this.membership_number = membership_number;
+        return this;
     }
 
     public String getLandline() {
         return landline;
     }
 
-    public void setLandline(String landline) {
+    public ProfileModel setLandline(String landline) {
         this.landline = landline;
+        return this;
     }
 
     public String getMobile() {
@@ -210,48 +220,54 @@ public class ProfileModel extends HighCourtModel {
         return court_address;
     }
 
-    public void setCourt_address(String court_address) {
+    public ProfileModel setCourt_address(String court_address) {
         this.court_address = court_address;
+        return this;
     }
 
     public String getBlood_group() {
         return blood_group;
     }
 
-    public void setBlood_group(String blood_group) {
+    public ProfileModel setBlood_group(String blood_group) {
         this.blood_group = blood_group;
+        return this;
     }
 
     public String getLat1() {
         return lat1;
     }
 
-    public void setLat1(String lat1) {
+    public ProfileModel setLat1(String lat1) {
         this.lat1 = lat1;
+        return this;
     }
 
     public String getLong1() {
         return long1;
     }
 
-    public void setLong1(String long1) {
+    public ProfileModel setLong1(String long1) {
         this.long1 = long1;
+        return this;
     }
 
     public String getLat2() {
         return lat2;
     }
 
-    public void setLat2(String lat2) {
+    public ProfileModel setLat2(String lat2) {
         this.lat2 = lat2;
+        return this;
     }
 
     public String getLong2() {
         return long2;
     }
 
-    public void setLong2(String long2) {
+    public ProfileModel setLong2(String long2) {
         this.long2 = long2;
+        return this;
     }
 
     public String getProfile_pic() {
@@ -263,6 +279,22 @@ public class ProfileModel extends HighCourtModel {
     }
 
     public static ProfileModel getLoginUserProfile() {
-        return new ProfileModel();
+        return new ProfileModel()
+        .setUser_id(UserHelper.getLoginId())
+        .setName(UserHelper.getName())
+        .setBio(UserHelper.getAppUserBio())
+        .setCourt_address(UserHelper.getAppUserCourtAddress())
+        .setDesignation(UserHelper.getAppUserDesignation())
+        .setEmail(UserHelper.getEmail())
+        .setDesignation(UserHelper.getAppUserDesignation())
+        .setBlood_group(UserHelper.getAppUserBloodGroup())
+        .setEnrollment_number(UserHelper.getAppUserEnrollmentNumber())
+        .setLandline(UserHelper.getAppUserLandline())
+        .setMembership_number(UserHelper.getAppUserMemberShipNo())
+        .setLat1(UserHelper.getAppUserLat01())
+        .setLat2(UserHelper.getAppUserLat02())
+        .setLong1(UserHelper.getAppUserLong01())
+        .setLong2(UserHelper.getAppUserLong02())
+        .setLocation(UserHelper.getAppUserLocation());
     }
 }
