@@ -141,14 +141,14 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView titles;
         ImageView icon;
-        LinearLayout rowview;
+        RelativeLayout rowview;
 
         public ViewHolder(View itemView) {
             super(itemView);
             //  selectcheckbox = (CheckBox) itemView.findViewById(R.id.selectcheckbox);
             titles = (TextView) itemView.findViewById(R.id.titles);
             icon = (ImageView) itemView.findViewById(R.id.icon);
-            rowview = (LinearLayout) itemView.findViewById(R.id.rowview);
+            rowview = (RelativeLayout) itemView.findViewById(R.id.rowview);
 //            title_val = (TextView) itemView.findViewById(R.id.title_val);
 
 

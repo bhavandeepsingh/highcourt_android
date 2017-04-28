@@ -10,14 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/rowview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:orientation="horizontal"
             android:padding="10dp">
-
 
             <ImageView
                 android:id="@+id/icon"
@@ -53,7 +52,7 @@
                     android:src="@drawable/ic_right_arrow" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <View style="@style/stl_devider" />
 
