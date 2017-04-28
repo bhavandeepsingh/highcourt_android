@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
+import android.provider.SyncStateContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
@@ -21,6 +22,13 @@ import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -242,8 +250,8 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
-        select_PayMyDues();
+        //getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
+        //select_PayMyDues();
     }
 
     void onClickChangePassword(){
