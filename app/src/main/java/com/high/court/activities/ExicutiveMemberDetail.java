@@ -59,11 +59,12 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
 
         if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
-            ExicutiveMemberDetailLayout exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
-            exicutiveMemberDetailLayout.setProfile(profileModel);
         }else{
             profileModel = ProfileModel.getLoginUserProfile();
         }
+
+        ExicutiveMemberDetailLayout exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
+        exicutiveMemberDetailLayout.setProfile(profileModel);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);

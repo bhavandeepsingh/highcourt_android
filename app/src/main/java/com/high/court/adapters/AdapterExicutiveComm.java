@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
@@ -40,8 +41,17 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.adapter_exicutive_comm, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
+        return viewHolder;
+    }
 
-        v.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
+        if(viewHolder.exicutive_name != null) viewHolder.exicutive_name.setText(getProfileModelList().get(i).getName());
+        if(viewHolder.visrpresident != null) viewHolder.visrpresident.setText(getProfileModelList().get(i).getProfile());
+        if(viewHolder.ponenumber_val != null) viewHolder.ponenumber_val.setText(getProfileModelList().get(i).getMobile());
+        if(viewHolder.profile_image != null) ImageHelper.loadImage(getProfileModelList().get(i).getProfile_pic(), viewHolder.profile_image);
+
+        if(viewHolder.rowview != null) viewHolder.rowview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ExicutiveMemberDetail.class);
@@ -49,16 +59,6 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
                 context.startActivity(intent);
             }
         });
-
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        if(viewHolder.exicutive_name != null) viewHolder.exicutive_name.setText(getProfileModelList().get(i).getName());
-        if(viewHolder.visrpresident!= null) viewHolder.visrpresident.setText(getProfileModelList().get(i).getProfile());
-        if(viewHolder.ponenumber_val!= null) viewHolder.ponenumber_val.setText(getProfileModelList().get(i).getMobile());
-        if(viewHolder.profile_image!= null) ImageHelper.loadImage(getProfileModelList().get(i).getProfile_pic(), viewHolder.profile_image);
     }
 
     @Override
