@@ -1,6 +1,7 @@
 package com.high.court.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.high.court.R;
+import com.high.court.activities.WebViewActivity;
 
 
 public class AdapterNotification extends RecyclerView.Adapter<AdapterNotification.ViewHolder> {
@@ -33,27 +35,35 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-viewHolder.notif_layer.setVisibility(View.VISIBLE);
-viewHolder.download_layer.setVisibility(View.GONE);
+        viewHolder.notif_layer.setVisibility(View.GONE);
+        viewHolder.download_layer.setVisibility(View.VISIBLE);
+        viewHolder.download_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebViewActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
 
     }
 
     @Override
     public int getItemCount() {
-       // return get_ratelist_title.length;
+        // return get_ratelist_title.length;
         return 22;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-       // TextView title, title_val;
-        LinearLayout notif_layer,download_layer;
+        // TextView title, title_val;
+        LinearLayout notif_layer, download_layer, download_button;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            notif_layer = (LinearLayout)itemView.findViewById(R.id.notif_layer);
-            download_layer = (LinearLayout)itemView.findViewById(R.id.download_layer);
+            notif_layer = (LinearLayout) itemView.findViewById(R.id.notif_layer);
+            download_layer = (LinearLayout) itemView.findViewById(R.id.download_layer);
+            download_button = (LinearLayout) itemView.findViewById(R.id.download_button);
 
 //            title = (TextView) itemView.findViewById(R.id.title);
 //            title_val = (TextView) itemView.findViewById(R.id.title_val);
