@@ -265,7 +265,7 @@ public class UserHelper {
         if(!updateAppUser(APP_USER_WEB_SITE, profileModel.getWebsite())) return false;
         if(!updateAppUser(APP_USER_BIO, profileModel.getBio())) return false;
         if(!updateAppUser(APP_USER_TIME_ZONE, profileModel.getTimezone())) return false;
-        if(!updateAppUser(APP_USER_DESIGNATION, profileModel.getDesignation())) return false;
+        if(!updateAppUser(APP_USER_DESIGNATION, profileModel.getDesignation().getName())) return false;
         if(!updateAppUser(APP_USER_PROFILE, profileModel.getProfile())) return false;
         if(!updateAppUser(APP_USER_ENROLLMENT_NUMBER, profileModel.getEnrollment_number())) return false;
         if(!updateAppUser(APP_USER_MEMBER_SHIP_NO, profileModel.getMembership_number())) return false;

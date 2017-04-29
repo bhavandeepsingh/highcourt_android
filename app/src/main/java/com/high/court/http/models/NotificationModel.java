@@ -17,6 +17,8 @@ import retrofit2.Response;
 
 public class NotificationModel extends HighCourtModel {
 
+    public static int NOTIFAICATION_HAS_ATTACHMENT = 1;
+
     @SerializedName("list")
     @Expose
     List<Notifications> notificationses;
@@ -152,6 +154,8 @@ public class NotificationModel extends HighCourtModel {
         public void setNotification_src(String notification_src) {
             this.notification_src = notification_src;
         }
+
+
     }
 
 }

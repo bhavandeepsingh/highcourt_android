@@ -41,7 +41,7 @@ public class ProfileModel extends HighCourtModel {
 
     @SerializedName("designation")
     @Expose
-    String designation;
+    DesignationModel designation;
 
     @SerializedName("profile")
     @Expose
@@ -94,6 +94,8 @@ public class ProfileModel extends HighCourtModel {
     @SerializedName("profilePic")
     @Expose
     String profile_pic;
+
+    String designation_name;
 
     public int getUser_id() {
         return user_id;
@@ -156,11 +158,11 @@ public class ProfileModel extends HighCourtModel {
         this.timezone = timezone;
     }
 
-    public String getDesignation() {
+    public DesignationModel getDesignation() {
         return designation;
     }
 
-    public ProfileModel setDesignation(String designation) {
+    public ProfileModel setDesignation(DesignationModel designation) {
         this.designation = designation;
         return this;
     }
@@ -274,8 +276,18 @@ public class ProfileModel extends HighCourtModel {
         return profile_pic;
     }
 
-    public void setProfile_pic(String profile_pic) {
+    public ProfileModel setProfile_pic(String profile_pic) {
         this.profile_pic = profile_pic;
+        return this;
+    }
+
+    public String getDesignation_name() {
+        return getDesignation().getName();
+    }
+
+    public ProfileModel setDesignation_name(String designation_name) {
+        this.designation_name = designation_name;
+        return this;
     }
 
     public static ProfileModel getLoginUserProfile() {
@@ -284,9 +296,9 @@ public class ProfileModel extends HighCourtModel {
         .setName(UserHelper.getName())
         .setBio(UserHelper.getAppUserBio())
         .setCourt_address(UserHelper.getAppUserCourtAddress())
-        .setDesignation(UserHelper.getAppUserDesignation())
+        .setDesignation_name(UserHelper.getAppUserDesignation())
         .setEmail(UserHelper.getEmail())
-        .setDesignation(UserHelper.getAppUserDesignation())
+        .setDesignation_name(UserHelper.getAppUserDesignation())
         .setBlood_group(UserHelper.getAppUserBloodGroup())
         .setEnrollment_number(UserHelper.getAppUserEnrollmentNumber())
         .setLandline(UserHelper.getAppUserLandline())

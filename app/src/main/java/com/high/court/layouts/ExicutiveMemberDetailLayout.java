@@ -85,7 +85,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setDesignation_val(EditText designation_val) {
-        if (designation_val != null) designation_val.setText(getProfileModel().getDesignation());
+        if (designation_val != null) designation_val.setText(getProfileModel().getDesignation_name());
         this.designation_val = designation_val;
     }
 

@@ -18,25 +18,67 @@
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="@dimen/spacing_normal"
-
             android:layout_marginRight="@dimen/spacing_normal"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:background="@color/clr_white"
+
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/notif_layer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:id="@+id/notification_description"
-                android:background="@drawable/border_subscription"
                 android:padding="10dp"
-                 android:textColor="@color/clr_textcolor_dark"
+                android:textColor="@color/clr_textcolor_dark"
                 android:textIsSelectable="true"
                 android:textSize="@dimen/dim_textsize"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:background="@drawable/border_subscription"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notification_description"
+                    android:text="dslg gfkljd glkjdf hklgjhkl gjlkhj"
+                    android:padding="10dp"
+                    android:textColor="@color/clr_textcolor_dark"
+                    android:textIsSelectable="true"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:id="@+id/download_file"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="-6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="downlding file"
+                        android:textAllCaps="true"
+                        android:textSize="13sp"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_download" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
 
 
         <RelativeLayout
@@ -59,6 +101,7 @@
 
         </RelativeLayout>
 
+        </LinearLayout>
 
     </LinearLayout>
 
