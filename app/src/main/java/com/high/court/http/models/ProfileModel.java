@@ -282,7 +282,8 @@ public class ProfileModel extends HighCourtModel {
     }
 
     public String getDesignation_name() {
-        return getDesignation().getName();
+        if(designation_name == null && getDesignation() != null) return getDesignation().getName();
+        else return designation_name;
     }
 
     public ProfileModel setDesignation_name(String designation_name) {
