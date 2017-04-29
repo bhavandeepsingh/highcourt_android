@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.high.court.R;
 
@@ -32,7 +33,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-
+viewHolder.notif_layer.setVisibility(View.VISIBLE);
+viewHolder.download_layer.setVisibility(View.GONE);
 
 
     }
@@ -45,9 +47,14 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
 
     class ViewHolder extends RecyclerView.ViewHolder {
        // TextView title, title_val;
+        LinearLayout notif_layer,download_layer;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            notif_layer = (LinearLayout)itemView.findViewById(R.id.notif_layer);
+            download_layer = (LinearLayout)itemView.findViewById(R.id.download_layer);
+
 //            title = (TextView) itemView.findViewById(R.id.title);
 //            title_val = (TextView) itemView.findViewById(R.id.title_val);
         }
