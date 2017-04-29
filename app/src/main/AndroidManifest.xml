@@ -88,6 +88,7 @@
         <activity android:name=".activities.DisplayBoardDetail" />
         <activity android:name=".activities.CaseLowActivity" />
         <activity android:name=".activities.CommingSoonActivity"></activity>
+        <activity android:name=".activities.WebViewActivity"/>
 
 
     </application>

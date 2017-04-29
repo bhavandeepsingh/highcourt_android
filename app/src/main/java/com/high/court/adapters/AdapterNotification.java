@@ -10,8 +10,9 @@ import android.widget.TextView;
 import android.widget.LinearLayout;
 
 import com.high.court.HighCourtApplication;
+
 import com.high.court.R;
-import com.high.court.activities.HonbleJudgesActivity;
+import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.DateHelper;
 import com.high.court.http.models.NotificationModel;
 
@@ -47,7 +48,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 viewHolder.download_file.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, HonbleJudgesActivity.class).putExtra("file_url_for_web_view", getNotificationsList().get(i).getNotification_src()));
+                        context.startActivity(new Intent(context, WebViewActivity.class).putExtra("file_url_for_web_view", getNotificationsList().get(i).getNotification_src()));
                     }
                 });
             }else{
