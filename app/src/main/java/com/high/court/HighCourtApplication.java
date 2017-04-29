@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.UILApplication;
+import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class HighCourtApplication extends UILApplication {
     static HighCourtApplication highCourtApplication;
 
     static List<ProfileModel> profileModels;
+    static List<NotificationModel.Notifications> notificationsList;
 
     @Override
     public void onCreate() {
@@ -72,4 +74,14 @@ public class HighCourtApplication extends UILApplication {
     public static void setProfileModels(List<ProfileModel> profileModels) {
         HighCourtApplication.profileModels = profileModels;
     }
+
+    public static void setNotifcationList(List<NotificationModel.Notifications> notificationses) {
+        HighCourtApplication.notificationsList = notificationses;
+    }
+
+    public static List<NotificationModel.Notifications> getNotificationsList() {
+        return notificationsList;
+    }
+
 }
+

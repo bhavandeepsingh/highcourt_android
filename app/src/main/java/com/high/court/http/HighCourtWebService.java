@@ -1,5 +1,6 @@
 package com.high.court.http;
 
+import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
@@ -35,6 +36,10 @@ public interface HighCourtWebService {
 
     @GET("user/executive")
     Call<ExcecutiveMemberModel> getExcutiveMembers();
+
+
+    @GET("notification/list")
+    Call<NotificationModel> getNotificationList();
 
 
 }

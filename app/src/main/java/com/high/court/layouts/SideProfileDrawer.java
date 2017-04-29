@@ -250,8 +250,8 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        //getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
-        //select_PayMyDues();
+        getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
+        select_PayMyDues();
     }
 
     void onClickChangePassword(){

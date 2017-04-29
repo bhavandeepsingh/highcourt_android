@@ -2,38 +2,33 @@ package com.high.court.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
-import com.high.court.activities.CalenderActivity;
-import com.high.court.activities.CaseLowActivity;
 import com.high.court.activities.CommingSoonActivity;
-import com.high.court.activities.DisplayBoardActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
 import com.high.court.activities.HighCourtActivity;
-import com.high.court.activities.HonbleJudgesActivity;
 import com.high.court.activities.MemberDirectoryActivity;
 import com.high.court.activities.NoificationActivity;
-import com.high.court.activities.RosterActivity;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
+import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
+import com.high.court.http.models.http_interface.NotificationInterface;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
 
 import java.util.List;
 
 
-public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface {
+public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, NotificationInterface {
 
     Context context;
 
@@ -84,9 +79,8 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                     context.startActivity(intent);
                 }
                 if (i == 3) {
-//                    Intent intent = new Intent(context, NoificationActivity.class);
-                    Intent intent = new Intent(context, CommingSoonActivity.class);
-                    context.startActivity(intent);
+                    getHighCourtLoader().start();
+                    NotificationModel.getNotificationList(AdapterDashBoard.this);
                 }
                 if (i == 4) {
 //                    Intent intent = new Intent(context, DisplayBoardActivity.class);
@@ -138,6 +132,23 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
         getHighCourtLoader().stop();
     }
 
+    @Override
+    public void onNotificationSuccess(NotificationModel notificationModel) {
+        HighCourtApplication.setNotifcationList(notificationModel.getNotificationses());
+        getHighCourtLoader().stop();
+        context.startActivity(new Intent(context, NoificationActivity.class));
+    }
+
+    @Override
+    public void onNotificationFailur(Throwable t) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onNotificationError(NotificationModel notificationModel) {
+        getHighCourtLoader().stop();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView titles;
         ImageView icon;
@@ -174,5 +185,6 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     HighCourtActivity getHighCourtActivity(){
         return (HighCourtActivity) getContext();
     }
+
 }
 
