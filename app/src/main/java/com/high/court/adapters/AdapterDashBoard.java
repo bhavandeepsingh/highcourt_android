@@ -21,14 +21,19 @@ import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
+import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
+import com.high.court.http.models.http_interface.MemberInterface;
 import com.high.court.http.models.http_interface.NotificationInterface;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
 
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.RequestBody;
 
-public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, NotificationInterface {
+
+public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface {
 
     Context context;
 
@@ -65,45 +70,43 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
         viewHolder.rowview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (i == 0) {
-                    getHighCourtLoader().start();
-                    ExcecutiveMemberModel.getExecutiveMembers(AdapterDashBoard.this);
-                }
-                if (i == 1) {
-                    Intent intent = new Intent(context, MemberDirectoryActivity.class);
-                    context.startActivity(intent);
-                }
-                if (i == 2) {
-                 //   Intent intent = new Intent(context, HonbleJudgesActivity.class);
-                    Intent intent = new Intent(context, CommingSoonActivity.class);
-                    context.startActivity(intent);
-                }
-                if (i == 3) {
-                    getHighCourtLoader().start();
-                    NotificationModel.getNotificationList(AdapterDashBoard.this);
-                }
-                if (i == 4) {
+            if (i == 0) {
+                getHighCourtLoader().start();
+                ExcecutiveMemberModel.getExecutiveMembers(AdapterDashBoard.this);
+            }
+            if (i == 1) {
+                getHighCourtLoader().start();
+                ExcecutiveMemberModel.getMembersList(AdapterDashBoard.this, new HashMap<String, RequestBody>(), 0, false);
+            }
+            if (i == 2) {
+             //   Intent intent = new Intent(context, HonbleJudgesActivity.class);
+                Intent intent = new Intent(context, CommingSoonActivity.class);
+                context.startActivity(intent);
+            }
+            if (i == 3) {
+                getHighCourtLoader().start();
+                NotificationModel.getNotificationList(AdapterDashBoard.this);
+            }
+            if (i == 4) {
 //                    Intent intent = new Intent(context, DisplayBoardActivity.class);
-                    Intent intent = new Intent(context, CommingSoonActivity.class);
-                    context.startActivity(intent);
-                }
-                if (i == 5) {
+                Intent intent = new Intent(context, CommingSoonActivity.class);
+                context.startActivity(intent);
+            }
+            if (i == 5) {
 //                    Intent intent = new Intent(context, CalenderActivity.class);
-                    Intent intent = new Intent(context, CommingSoonActivity.class);
-                    context.startActivity(intent);
-                }
-                if (i == 6) {
+                Intent intent = new Intent(context, CommingSoonActivity.class);
+                context.startActivity(intent);
+            }
+            if (i == 6) {
 //                    Intent intent = new Intent(context, RosterActivity.class);
-                    Intent intent = new Intent(context, CommingSoonActivity.class);
-                    context.startActivity(intent);
-                }
-                if (i == 7) {
+                Intent intent = new Intent(context, CommingSoonActivity.class);
+                context.startActivity(intent);
+            }
+            if (i == 7) {
 //                    Intent intent = new Intent(context, CaseLowActivity.class);
-                    Intent intent = new Intent(context, CommingSoonActivity.class);
-                    context.startActivity(intent);
-                }
-
-
+                Intent intent = new Intent(context, CommingSoonActivity.class);
+                context.startActivity(intent);
+            }
             }
         });
 
@@ -146,6 +149,30 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     @Override
     public void onNotificationError(NotificationModel notificationModel) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onProfileMembers(ExcecutiveMemberModel excecutiveMemberModel) {
+        getHighCourtLoader().stop();
+        if(excecutiveMemberModel != null) {
+            HighCourtApplication.setProfileModels(excecutiveMemberModel.getProfileModels());
+            getHighCourtActivity().startActivity(new Intent(getContext(), MemberDirectoryActivity.class));
+        }
+    }
+
+    @Override
+    public void onProfileMemberSearch(ExcecutiveMemberModel excecutiveMemberModel) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onProfileMemberFailur(ExcecutiveMemberModel excecutiveMemberModel) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onProfileMemberFailur(Throwable t) {
         getHighCourtLoader().stop();
     }
 

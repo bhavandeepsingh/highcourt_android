@@ -274,7 +274,10 @@ public class UserHelper {
         if(!updateAppUser(APP_USER_WEB_SITE, profileModel.getWebsite())) return false;
         if(!updateAppUser(APP_USER_BIO, profileModel.getBio())) return false;
         if(!updateAppUser(APP_USER_TIME_ZONE, profileModel.getTimezone())) return false;
-        if(!updateAppUser(APP_USER_DESIGNATION, profileModel.getDesignation().getName())) return false;
+        if(profileModel.getDesignation() != null) {
+            if (!updateAppUser(APP_USER_DESIGNATION, profileModel.getDesignation().getName()))
+                return false;
+        }
         if(!updateAppUser(APP_USER_PROFILE, profileModel.getProfile())) return false;
         if(!updateAppUser(APP_USER_ENROLLMENT_NUMBER, profileModel.getEnrollment_number())) return false;
         if(!updateAppUser(APP_USER_MEMBER_SHIP_NO, profileModel.getMembership_number())) return false;
@@ -284,7 +287,10 @@ public class UserHelper {
         if(!updateAppUser(APP_USER_RESIDENTIAL, profileModel.getResidential_address())) return false;
         if(!updateAppUser(APP_USER_COURT_ADDRESS, profileModel.getCourt_address())) return false;
         if(!updateAppUser(APP_USER_BLOOD_GROUP, profileModel.getBlood_group())) return false;
-        if(!updateAppUser(APP_USER_BLOOD_GROUP_ID, String.valueOf(profileModel.getBlood_group_model().getId()))) return false;
+        if(profileModel.getBlood_group_model() != null) {
+            if (!updateAppUser(APP_USER_BLOOD_GROUP_ID, String.valueOf(profileModel.getBlood_group_model().getId())))
+                return false;
+        }
         if(!updateAppUser(APP_USER_LAT_01, profileModel.getLat1())) return false;
         if(!updateAppUser(APP_USER_LONG_01, profileModel.getLong1())) return false;
         if(!updateAppUser(APP_USER_LAT_02, profileModel.getLat2())) return false;

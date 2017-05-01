@@ -19,6 +19,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 
 /**
@@ -41,6 +43,10 @@ public interface HighCourtWebService {
 
     @GET("user/executive")
     Call<ExcecutiveMemberModel> getExcutiveMembers();
+
+    @FormUrlEncoded
+    @POST("user/members")
+    Call<ExcecutiveMemberModel> getMembers(@FieldMap Map<String, RequestBody> request, @Query("page") int page_no);
 
 
     @GET("user/blood-group-list")

@@ -109,8 +109,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
                 CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
                 quick_start_cropped_image.setImageResource(0);
                 quick_start_cropped_image.setImageURI(cropImage.getUri());
-                quick_start_cropped_image.invalidate();
-
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Failed: " + cropImage.getError(), Toast.LENGTH_LONG).show();
             }

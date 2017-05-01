@@ -37,4 +37,8 @@ public class CommingSoonActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

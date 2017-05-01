@@ -58,6 +58,8 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
 
     String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
     ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
+
+    boolean edit_status = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,7 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
         }
         else{
+            edit_status = true;
             profileModel = ProfileModel.getLoginUserProfile();
         }
 
@@ -127,7 +130,7 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       if (UserHelper.getLoginId()==exicutiveMemberDetailLayout.getProfileModel().getUser_id()){
+       if (UserHelper.getLoginId()==exicutiveMemberDetailLayout.getProfileModel().getUser_id() && edit_status){
            getMenuInflater().inflate(R.menu.menu_profilee, menu);
        }
         return true;

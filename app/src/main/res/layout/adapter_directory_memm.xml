@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Varinder Mann "
+                    android:id="@+id/profile_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="+91 98140-12345"
+                        android:id="@+id/mobile_phone"
                         android:textColor="@color/clr_textcolor_dark"
                         android:textSize="15sp"
                         android:textStyle="normal" />
@@ -88,7 +88,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="017212343"
+                        android:id="@+id/landline_no"
                         android:textColor="@color/clr_textcolor_dark"
                         android:textSize="15sp"
                         android:textStyle="normal" />
