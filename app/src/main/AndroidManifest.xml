@@ -78,6 +78,9 @@
         <activity android:name=".activities.ExicutiveMemberDetail"
                   android:windowSoftInputMode="stateHidden"/>
 
+        <activity android:name=".activities.ExicutiveMemberDetailsEdit"
+            android:windowSoftInputMode="stateHidden"/>
+
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.HighCourtActivity" />
 

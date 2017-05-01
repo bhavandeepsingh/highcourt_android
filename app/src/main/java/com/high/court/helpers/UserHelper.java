@@ -25,13 +25,14 @@ public class UserHelper {
     static String APP_USER_PROFILE = "APP_USER_TIME_PROFILE";
     static String APP_USER_ENROLLMENT_NUMBER = "APP_USER_TIME_ENROLLMENT_NUMBER";
     static String APP_USER_MEMBER_SHIP_NO = "APP_USER_TIME_MEMBER_SHIP_NO";
-    static String APP_USER_LANDLINE= "APP_USER_LANDLINE";
-    static String APP_USER_MOBILE= "APP_USER_MOBILE";
-    static String APP_USER_RESIDENTIAL= "APP_USER_RESIDENTIAL";
-    static String APP_USER_COURT_ADDRESS= "APP_USER_COURT_ADDRESS";
-    static String APP_USER_BLOOD_GROUP= "APP_USER_BLOOD_GROUP";
-    static String APP_USER_LAT_01= "APP_USER_LAT_01";
-    static String APP_USER_LONG_01= "APP_USER_LONG_01";
+    static String APP_USER_LANDLINE = "APP_USER_LANDLINE";
+    static String APP_USER_MOBILE = "APP_USER_MOBILE";
+    static String APP_USER_RESIDENTIAL = "APP_USER_RESIDENTIAL";
+    static String APP_USER_COURT_ADDRESS = "APP_USER_COURT_ADDRESS";
+    static String APP_USER_BLOOD_GROUP = "APP_USER_BLOOD_GROUP";
+    static String APP_USER_BLOOD_GROUP_ID = "APP_USER_BLOOD_GROUP_ID";
+    static String APP_USER_LAT_01 = "APP_USER_LAT_01";
+    static String APP_USER_LONG_01 = "APP_USER_LONG_01";
     static String APP_USER_LAT_02 = "APP_USER_LAT_02";
     static String APP_USER_LONG_02 = "APP_USER_LONG_02";
     static String APP_USER_LOGIN_STATUS = "APP_USER_LOGIN_STATUS";
@@ -256,6 +257,14 @@ public class UserHelper {
         APP_USER_PROFILE_PIC = appUserProfilePic;
     }
 
+    public static String getAppUserBloodGroupId() {
+        return getSharedPreferences().getString(APP_USER_BLOOD_GROUP_ID, "0");
+    }
+
+    public static void setAppUserBloodGroupId(String appUserBloodGroupId) {
+        APP_USER_BLOOD_GROUP_ID = appUserBloodGroupId;
+    }
+
     static boolean setSharedPreferences(ProfileModel profileModel){
         if(!updateAppUser(APP_USER_LOGIN_ID, String.valueOf(profileModel.getUser_id()))) return false;
         if(!updateAppUser(APP_USER_NAME, profileModel.getName())) return false;
@@ -275,6 +284,7 @@ public class UserHelper {
         if(!updateAppUser(APP_USER_RESIDENTIAL, profileModel.getResidential_address())) return false;
         if(!updateAppUser(APP_USER_COURT_ADDRESS, profileModel.getCourt_address())) return false;
         if(!updateAppUser(APP_USER_BLOOD_GROUP, profileModel.getBlood_group())) return false;
+        if(!updateAppUser(APP_USER_BLOOD_GROUP_ID, String.valueOf(profileModel.getBlood_group_model().getId()))) return false;
         if(!updateAppUser(APP_USER_LAT_01, profileModel.getLat1())) return false;
         if(!updateAppUser(APP_USER_LONG_01, profileModel.getLong1())) return false;
         if(!updateAppUser(APP_USER_LAT_02, profileModel.getLat2())) return false;

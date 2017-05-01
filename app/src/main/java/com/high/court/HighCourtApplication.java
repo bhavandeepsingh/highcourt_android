@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.UILApplication;
+import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 
@@ -19,11 +20,11 @@ import java.util.List;
 
 public class HighCourtApplication extends UILApplication {
 
-
     static HighCourtApplication highCourtApplication;
 
     static List<ProfileModel> profileModels;
     static List<NotificationModel.Notifications> notificationsList;
+    static BloodGroupsModel bloodGroupsModel;
 
     @Override
     public void onCreate() {
@@ -83,5 +84,12 @@ public class HighCourtApplication extends UILApplication {
         return notificationsList;
     }
 
+    public static BloodGroupsModel getBloodGroupsModel() {
+        return bloodGroupsModel;
+    }
+
+    public static void setBloodGroupsModel(BloodGroupsModel bloodGroupsModel) {
+        HighCourtApplication.bloodGroupsModel = bloodGroupsModel;
+    }
 }
 

@@ -2,6 +2,7 @@ package com.high.court.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.DateHelper;
 import com.high.court.http.models.NotificationModel;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -48,7 +50,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 viewHolder.download_file.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, WebViewActivity.class).putExtra("file_url_for_web_view", getNotificationsList().get(i).getNotification_src()));
+                        context.startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getNotificationsList().get(i).getNotification_src())));
                     }
                 });
             }else{

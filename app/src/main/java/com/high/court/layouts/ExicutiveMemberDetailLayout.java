@@ -1,28 +1,48 @@
 package com.high.court.layouts;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.ExicutiveMemberDetail;
+import com.high.court.activities.ExicutiveMemberDetailsEdit;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.ProfileModel;
+import com.high.court.http.models.UserLoginModel;
+import com.high.court.http.models.http_interface.ProfileUpdateInterface;
+
+import java.io.File;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * Created by admin on 4/26/2017.
  */
 
-public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener {
+public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ProfileUpdateInterface {
 
 
     CircleImageView profilePicShow;
@@ -34,6 +54,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     ProfileModel profileModel;
 
+    Spinner blood_group_spinner;
 
     static int TYPE = 0;
 
@@ -61,11 +82,20 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     public void init() {
         super.init();
         setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
-        fieldsDisabled();
         getDesignation_val();
         getProfile_val();
         getBarassociaation_val();
+        getBlood_group();
         getBarcouncil_val();
+        getBlood_group_spinner();
+        getSave_text_view();
+        getEmail_id();
+        getLandline_no();
+        getMobile_no();
+        getResidential_adress();
+        getCourt_address();
+
+
     }
 
     public CircleImageView getProfilePicShow() {
@@ -185,6 +215,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setLandline_no(EditText landline_no) {
+        if(landline_no != null) landline_no.setText(getProfileModel().getLandline());
         this.landline_no = landline_no;
     }
 
@@ -256,10 +287,31 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
             ToastHelper.showResidentialNotFill(getContext());
         else if (!editTextValidate(getCourt_address()))
             ToastHelper.showCourtAddressNotFill(getContext());
-        else if (!editTextValidate(getBlood_group()))
+        else if (blood_group_spinner.getSelectedItemPosition() <= 0){
             ToastHelper.showBloodgroupNotFill(getContext());
-        fieldsDisabled();
+        }else{
+            updateProfileStart();
+        }
+    }
 
+    private void updateProfileStart() {
+        getHighCourtLoader().start();
+        ProfileModel.profileUpdate(makeRequest(), this);
+    }
+
+    private Map<String, RequestBody> makeRequest() {
+        Map<String, RequestBody> stringStringMap = new HashMap<>();
+        stringStringMap.put("Profile[email]", RequestBody.create(MediaType.parse("text/plain"), getEmail_id().getText().toString()));
+        stringStringMap.put("Profile[landline]", RequestBody.create(MediaType.parse("text/plain"), getLandline_no().getText().toString()));
+        stringStringMap.put("Profile[mobile]", RequestBody.create(MediaType.parse("text/plain"), getMobile_no().getText().toString()));
+        stringStringMap.put("Profile[residential_address]", RequestBody.create(MediaType.parse("text/plain"), getResidential_adress().getText().toString()));
+        stringStringMap.put("Profile[court_address]", RequestBody.create(MediaType.parse("text/plain"), getCourt_address().getText().toString()));
+        if(HighCourtApplication.getBloodGroupsModel() != null) {
+            stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
+        }
+        if(getExicutiveMemberDetailsEdit().getCropImage() != null)
+            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), (getExicutiveMemberDetailsEdit().getCropImage().getUri().toString())));
+        return stringStringMap;
     }
 
     boolean editTextValidate(EditText editText) {
@@ -296,25 +348,58 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         init();
     }
 
-    public void fieldsEnabled() {
-
-        getEmail_id().setEnabled(true);
-        getLandline_val().setEnabled(true);
-        getMobilenumber_val().setEnabled(true);
-        getResidential_val().setEnabled(true);
-        getCourtaddress_val().setEnabled(true);
-        getBloodgroup_val().setEnabled(true);
+    public Spinner getBlood_group_spinner() {
+        if(blood_group_spinner == null) setBlood_group_spinner((Spinner) findViewById(R.id.blood_group_spinner));
+        return blood_group_spinner;
     }
 
-    public void fieldsDisabled() {
+    public void setBlood_group_spinner(Spinner blood_group_spinner) {
+        if(blood_group_spinner != null) {
+            int selected_index = 0;
+            List<String> categories = new ArrayList<>();
+            if(HighCourtApplication.getBloodGroupsModel() != null){
+                List<BloodGroupsModel.BloodGroup> bloodGroups = HighCourtApplication.getBloodGroupsModel().getBloodGroups();
+                if(bloodGroups != null && bloodGroups.size() > 0) {
+                    categories.add("Please Select Blood Group");
+                    for (int i = 0; i < bloodGroups.size(); i++) {
+                        categories.add(bloodGroups.get(i).getName());
+                        if(getProfileModel().getBlood_group_model() != null && getProfileModel().getBlood_group_model().getId() == bloodGroups.get(i).getId()){
+                            selected_index = (i + 1);
+                        }else if (getProfileModel().getBlood_group_id() == bloodGroups.get(i).getId()) {
+                            selected_index = (i + 1);
+                        }
+                    }
+                }
+            }
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getHighCourtActivity(), android.R.layout.simple_spinner_item, categories);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            blood_group_spinner.setAdapter(dataAdapter);
+            blood_group_spinner.setSelection(selected_index);
+        }
+        this.blood_group_spinner = blood_group_spinner;
+    }
 
-        getEmail_id().setEnabled(false);
-        getLandline_val().setEnabled(false);
-        getMobilenumber_val().setEnabled(false);
-        getResidential_val().setEnabled(false);
-        getCourtaddress_val().setEnabled(false);
-        getBloodgroup_val().setEnabled(false);
+    @Override
+    public void onProfileSuccess(UserLoginModel userLoginModel) {
+        getHighCourtLoader().stop();
+        UserHelper.login(userLoginModel);
+        ToastHelper.profileUpdateSuccess(getContext());
+    }
+
+    @Override
+    public void onProfileError(Throwable t) {
+        getHighCourtLoader().stop();
+        ToastHelper.showToast(t.getMessage(), getContext());
+    }
+
+    @Override
+    public void onProfileFailure(UserLoginModel userLoginModel) {
+        getHighCourtLoader().stop();
+        ToastHelper.profileUpdateFail(getContext());
     }
 
 
+    public ExicutiveMemberDetailsEdit getExicutiveMemberDetailsEdit(){
+        return (ExicutiveMemberDetailsEdit) getContext();
+    }
 }
