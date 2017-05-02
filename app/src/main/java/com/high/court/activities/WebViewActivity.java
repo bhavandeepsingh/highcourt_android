@@ -17,9 +17,9 @@ public class WebViewActivity extends HighCourtActivity {
 
         String geturl = getIntent().getStringExtra("url");
         WebView mywebview = (WebView) findViewById(R.id.webView1);
+        mywebview.getSettings().setSupportZoom(true);
+        mywebview.getSettings().setBuiltInZoomControls(true);
         mywebview.loadUrl(geturl);
-
-
     }
 
     @Override
