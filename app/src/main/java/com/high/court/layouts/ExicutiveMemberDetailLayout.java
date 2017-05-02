@@ -317,6 +317,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     private MultipartBody.Part makeImageRequest() {
         if(getExicutiveMemberDetailsEdit().getImagedirectry() != null) {
             File file = new File(getExicutiveMemberDetailsEdit().getImagedirectry());
+            Log.d("imagedirectry"," "+getExicutiveMemberDetailsEdit().getImagedirectry());
             return  MultipartBody.Part.createFormData("UploadForm[imageFile]", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
         return null;
@@ -332,11 +333,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         stringStringMap.put("Profile[profile]", RequestBody.create(MediaType.parse("text/plain"), getProfile_val().getText().toString()));
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
-        }
-        if(getExicutiveMemberDetailsEdit().getProfile_pic_image_view() != null) {
-            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getmCropImageUri().toString())));
-           // stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), (getHighCourtActivity().getCacheDir().getAbsoluteFile()).listFiles()[2]));
-            //BitmapFactory.decodeResource(getHighCourtActivity().getResources(), R.id.main_appbar);
         }
         return stringStringMap;
     }
