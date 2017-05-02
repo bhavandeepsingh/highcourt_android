@@ -242,7 +242,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         OutputStream fOut = null;
         File file = new File(dirPath, fileName);
         imagedirectry = dirPath + fileName;
-        Log.d("imagedirectry"," "+imagedirectry);
+
         try {
             fOut = new FileOutputStream(file);
             b.compress(Bitmap.CompressFormat.JPEG, 100, fOut);

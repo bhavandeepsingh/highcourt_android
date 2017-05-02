@@ -317,6 +317,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     private MultipartBody.Part makeImageRequest() {
         if(getExicutiveMemberDetailsEdit().getImagedirectry() != null) {
             File file = new File(getExicutiveMemberDetailsEdit().getImagedirectry());
+            Log.d("imagedirectry"," "+getExicutiveMemberDetailsEdit().getImagedirectry());
 
             return  MultipartBody.Part.createFormData("UploadForm[imageFile]", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
