@@ -467,7 +467,7 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:padding="3dp"
-                        android:src="@drawable/ic_bloodgroup" />
+                        android:src="@drawable/ic_court_addresss" />
 
 
                     <LinearLayout
@@ -515,7 +515,7 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:padding="3dp"
-                        android:src="@drawable/ic_court_addresss" />
+                        android:src="@drawable/ic_bloodgroup" />
 
 
                     <LinearLayout

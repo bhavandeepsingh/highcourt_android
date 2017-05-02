@@ -45,6 +45,8 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
 
     HighCourtLoader highCourtLoader;
 
+    CropImage.ActivityResult result;
+
     public static String PROFILE_INDEX_KEY = "PROFILE_INDEX_KEY";
 
     private GoogleMap mMap;
@@ -115,12 +117,11 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
                 quick_start_cropped_image.setImageResource(0);
                 quick_start_cropped_image.setImageURI(result.getUri());
-                quick_start_cropped_image.invalidate();
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Failed: " + result.getError(), Toast.LENGTH_LONG).show();
@@ -195,4 +196,6 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
         getHighCourtLoader().stop();
         ToastHelper.showToast(t.getMessage(), context);
     }
+
+
 }

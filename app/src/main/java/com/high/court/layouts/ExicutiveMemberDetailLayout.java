@@ -320,8 +320,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
         }
-        if(getExicutiveMemberDetailsEdit().getCropImage() != null) {
-            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getCropImage().getUri().toString())));
+        if(getExicutiveMemberDetailsEdit().getProfile_image_path() != null) {
+            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getProfile_image_path())));
             //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), createFile()));
         }
         return stringStringMap;
@@ -414,31 +414,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     public ExicutiveMemberDetailsEdit getExicutiveMemberDetailsEdit(){
         return (ExicutiveMemberDetailsEdit) getContext();
-    }
-
-    public File createFile(){
-        File f;
-        /*try
-        {
-            f = new File(getHighCourtActivity().getCacheDir() + File.separator + "high_court_profile_pic.jpg");
-            InputStream is = getHighCourtActivity().getResources().openRawResource(R.drawable.profilepic);
-            OutputStream out = new FileOutputStream(f);
-
-            int bytesRead;
-            byte[] buffer = new byte[1024];
-            while((bytesRead = is.read(buffer)) > 0)
-            {
-                out.write(buffer, 0, bytesRead);
-            }
-
-            out.close();
-            is.close();
-        }
-        catch (IOException ex)
-        {
-            f = null;
-        }*/
-        return null;
     }
 
 }

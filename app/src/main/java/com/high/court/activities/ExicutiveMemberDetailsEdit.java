@@ -1,7 +1,10 @@
 package com.high.court.activities;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +32,10 @@ import com.high.court.layouts.ExicutiveMemberDetailLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnMapReadyCallback {
@@ -37,7 +44,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     Button logoutbtn;
     ImageView pickimage;
 
-    CropImage.ActivityResult cropImage;
+    String profile_image_path;
 
     public static String PROFILE_INDEX_KEY = "PROFILE_INDEX_KEY";
 
@@ -103,14 +110,17 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        CropImage.ActivityResult activityResult = CropImage.getActivityResult(data);
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            cropImage = CropImage.getActivityResult(data);
+            profile_image_path = saveToInternalStorage(CropImage.getActivityResult(data).getBitmap());
             if (resultCode == RESULT_OK) {
                 CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
                 quick_start_cropped_image.setImageResource(0);
-                quick_start_cropped_image.setImageURI(cropImage.getUri());
+                quick_start_cropped_image.setImageDrawable(Drawable.createFromPath(profile_image_path));
+
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Toast.makeText(this, "Failed: " + cropImage.getError(), Toast.LENGTH_LONG).show();
+
             }
         }
     }
@@ -150,11 +160,31 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         mMap.animateCamera(zoom);
     }
 
-    public CropImage.ActivityResult getCropImage() {
-        return cropImage;
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("highcourt_profile_pic", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"highcourt_profile_pic.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return mypath.getAbsolutePath();
     }
 
-    public void setCropImage(CropImage.ActivityResult cropImage) {
-        this.cropImage = cropImage;
+    public String getProfile_image_path() {
+        return profile_image_path;
     }
 }
