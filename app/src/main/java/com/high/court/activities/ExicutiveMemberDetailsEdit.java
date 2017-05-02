@@ -4,22 +4,19 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Environment;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,28 +28,28 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
-import com.high.court.helpers.UserHelper;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.layouts.ExicutiveMemberDetailLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnMapReadyCallback {
 
     Context context = ExicutiveMemberDetailsEdit.this;
-    Button logoutbtn;
     ImageView pickimage;
-
-
     private Uri mCropImageUri;
-
-
     public static String PROFILE_INDEX_KEY = "PROFILE_INDEX_KEY";
 
     private GoogleMap mMap;
@@ -64,10 +61,13 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     Double lcurrent_atval = 30.873194;
     Double lcurrent_longval = 75.8534603;
 
-    String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
+    String currentlocation_url = "http://maps.google.com/maps?saddr=" + lcurrent_atval + "," + lcurrent_longval + "&daddr=" + latval + "," + longval;
     ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
 
     ImageView profile_pic_image_view;
+    public static String dirPath;
+    static String imagedirectry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,10 +75,9 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
         ProfileModel profileModel = null;
 
-        if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
+        if (getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
-        }
-        else{
+        } else {
             profileModel = ProfileModel.getLoginUserProfile();
         }
 
@@ -147,11 +146,9 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     @Override
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         // handle result of pick image chooser
         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri imageUri = CropImage.getPickImageResultUri(this, data);
-
             // For API >= 23 we need to check specifically that we have permissions to read external storage.
             if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
                 // request permissions and handle the result in onRequestPermissionsResult()
@@ -160,15 +157,15 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
             } else {
                 // no permissions required or already grunted, can start crop image activity
                 startCropImageActivity(imageUri);
+                loadBitmap(String.valueOf(imageUri));
             }
         }
-
         // handle result of CropImageActivity
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 mCropImageUri = result.getUri();
-                profile_pic_image_view = ((ImageView ) findViewById(R.id.quick_start_cropped_image));
+                profile_pic_image_view = ((ImageView) findViewById(R.id.quick_start_cropped_image));
                 profile_pic_image_view.setImageURI(result.getUri());
                 //Toast.makeText(this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -204,4 +201,91 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     public Uri getmCropImageUri() {
         return mCropImageUri;
     }
+
+
+    public Bitmap loadBitmap(String url)
+    {
+        Bitmap bm = null;
+        InputStream is = null;
+        BufferedInputStream bis = null;
+        try
+        {
+            URLConnection conn = new URL(url).openConnection();
+            conn.connect();
+            is = conn.getInputStream();
+            bis = new BufferedInputStream(is, 8192);
+            bm = BitmapFactory.decodeStream(bis);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            if (bis != null)
+            {
+                try
+                {
+                    bis.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            if (is != null)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        saveBitmapToSD(context,bm);
+        return bm;
+    }
+
+
+    public static String saveBitmapToSD(Context ctx, Bitmap b) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", ctx.getResources().getConfiguration().locale);
+        String fileName = sdf.format(new Date()) + ".jpg";
+        dirPath = Environment.getExternalStorageDirectory() + File.separator + "HighCourt" + File.separator;
+        File dirFile = new File(dirPath);
+        if (!dirFile.exists()) {
+            dirFile.mkdirs();
+        }
+        OutputStream fOut = null;
+        File file = new File(dirPath, fileName);
+        imagedirectry = dirPath + fileName;
+        Log.d("imagedirectry"," "+imagedirectry);
+        try {
+            fOut = new FileOutputStream(file);
+            b.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            galleryAddPic(ctx, file.getAbsolutePath());
+            return file + "";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static void galleryAddPic(Context ctx, String filePath) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(filePath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        ctx.sendBroadcast(mediaScanIntent);
+    }
+
+
+
 }

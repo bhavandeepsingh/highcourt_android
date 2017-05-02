@@ -21,6 +21,8 @@
         android:id="@+id/quick_start_cropped_image"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        app:civ_border_width="0dp"
+        app:civ_border_color="@color/clr_white"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="-65dp"
         app:layout_behavior="com.high.court.activities.AvatarImageBehavior" />
@@ -85,7 +87,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-                            android:background="@drawable/border_edittext"
+
                             android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
@@ -186,7 +188,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-                            android:background="@drawable/border_edittext"
+
                             android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
@@ -237,7 +239,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-                            android:background="@drawable/border_edittext"
+
                             android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
