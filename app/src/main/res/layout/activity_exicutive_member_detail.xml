@@ -189,7 +189,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:enabled="false"
-                            android:editable="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"

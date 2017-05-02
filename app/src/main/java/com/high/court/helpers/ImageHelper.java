@@ -16,15 +16,20 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 public class ImageHelper {
 
+
+    static int onLoading = R.drawable.logo_background;
+    static int forEmptyUri = R.drawable.logo_background;
+    static int onFailImage = R.drawable.logo_background;
+
     public static void loadImage(String imgurl, ImageView imageView) {
         ImageLoader.getInstance().displayImage(imgurl, imageView, getDisplayImage(), null, null);
     }
 
     public static DisplayImageOptions getDisplayImage() {
         return new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.logo_background)
-                .showImageForEmptyUri(R.drawable.logo_background)
-                .showImageOnFail(R.drawable.logo_background)
+                .showImageOnLoading(getOnLoading())
+                .showImageForEmptyUri(getForEmptyUri())
+                .showImageOnFail(getOnFailImage())
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .considerExifParams(true)
@@ -32,4 +37,27 @@ public class ImageHelper {
                 .build();
     }
 
+    public static int getOnLoading() {
+        return onLoading;
+    }
+
+    public static void setOnLoading(int onLoading) {
+        ImageHelper.onLoading = onLoading;
+    }
+
+    public static int getForEmptyUri() {
+        return forEmptyUri;
+    }
+
+    public static void setForEmptyUri(int forEmptyUri) {
+        ImageHelper.forEmptyUri = forEmptyUri;
+    }
+
+    public static int getOnFailImage() {
+        return onFailImage;
+    }
+
+    public static void setOnFailImage(int onFailImage) {
+        ImageHelper.onFailImage = onFailImage;
+    }
 }

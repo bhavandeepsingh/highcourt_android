@@ -94,6 +94,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         getDesignation_val();
         getProfile_val();
         getBarassociaation_val();
+
         getBlood_group();
         getBarcouncil_val();
         getBlood_group_spinner();
@@ -144,7 +145,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setBarcouncil_val(EditText barcouncil_val) {
-        if (barcouncil_val != null) barcouncil_val.setText(getProfileModel().getBio());
+        if (barcouncil_val != null) barcouncil_val.setText(getProfileModel().getEnrollment_number());
         this.barcouncil_val = barcouncil_val;
     }
 
@@ -315,11 +316,12 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         stringStringMap.put("Profile[mobile]", RequestBody.create(MediaType.parse("text/plain"), getMobile_no().getText().toString()));
         stringStringMap.put("Profile[residential_address]", RequestBody.create(MediaType.parse("text/plain"), getResidential_adress().getText().toString()));
         stringStringMap.put("Profile[court_address]", RequestBody.create(MediaType.parse("text/plain"), getCourt_address().getText().toString()));
+        stringStringMap.put("Profile[profile]", RequestBody.create(MediaType.parse("text/plain"), getProfile_val().getText().toString()));
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
         }
         if(getExicutiveMemberDetailsEdit().getCropImage() != null) {
-            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getCropImage().getUri().toString())));
+            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getCropImage().getUri().toString())));
             //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), createFile()));
         }
         return stringStringMap;
