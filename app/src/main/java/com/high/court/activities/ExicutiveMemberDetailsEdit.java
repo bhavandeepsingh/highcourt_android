@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -183,7 +185,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
             // required permissions granted, start crop image activity
             startCropImageActivity(mCropImageUri);
         } else {
-            Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -204,4 +206,5 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     public Uri getmCropImageUri() {
         return mCropImageUri;
     }
+
 }

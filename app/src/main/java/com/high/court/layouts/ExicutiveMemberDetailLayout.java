@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -14,10 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.high.court.BuildConfig;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
@@ -30,6 +33,7 @@ import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ProfileUpdateInterface;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,6 +47,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static android.R.attr.id;
@@ -306,7 +311,15 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     private void updateProfileStart() {
         getHighCourtLoader().start();
-        ProfileModel.profileUpdate(makeRequest(), this);
+        ProfileModel.profileUpdate(makeRequest(), makeImageRequest(), this);
+    }
+
+    private MultipartBody.Part makeImageRequest() {
+       /* if(getExicutiveMemberDetailsEdit().getmCropImageUri() != null) {
+            File file = saveFile();
+            return  MultipartBody.Part.createFormData("UploadForm[imageFile]", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }*/
+        return null;
     }
 
     private Map<String, RequestBody> makeRequest() {
@@ -321,8 +334,9 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
         }
         if(getExicutiveMemberDetailsEdit().getProfile_pic_image_view() != null) {
-            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getmCropImageUri().toString())));
-            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), createFile()));
+            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getmCropImageUri().toString())));
+           // stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), (getHighCourtActivity().getCacheDir().getAbsoluteFile()).listFiles()[2]));
+            //BitmapFactory.decodeResource(getHighCourtActivity().getResources(), R.id.main_appbar);
         }
         return stringStringMap;
     }

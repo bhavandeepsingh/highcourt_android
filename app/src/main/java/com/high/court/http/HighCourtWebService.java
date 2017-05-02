@@ -10,6 +10,7 @@ import com.high.court.http.models.http_request.ResetMyPassword;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
@@ -58,7 +59,7 @@ public interface HighCourtWebService {
 
     @Multipart
     @POST("profile/update")
-    Call<UserLoginModel> profileUpdate(@PartMap Map<String, RequestBody> stringStringMap);
+    Call<UserLoginModel> profileUpdate(@PartMap Map<String, RequestBody> stringStringMap, @Part MultipartBody.Part part);
 
 
 }
