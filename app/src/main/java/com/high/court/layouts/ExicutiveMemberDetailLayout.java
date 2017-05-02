@@ -315,10 +315,10 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     private MultipartBody.Part makeImageRequest() {
-       /* if(getExicutiveMemberDetailsEdit().getmCropImageUri() != null) {
-            File file = saveFile();
+        if(getExicutiveMemberDetailsEdit().getProfile_file_uri() != null) {
+            File file = new File(getExicutiveMemberDetailsEdit().getProfile_file_uri());
             return  MultipartBody.Part.createFormData("UploadForm[imageFile]", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
-        }*/
+        }
         return null;
     }
 

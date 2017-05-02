@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.CalenderActivity;
 import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DisplayBoardActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
@@ -98,7 +99,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                 context.startActivity(intent);
             }
             if (i == 5) {
-                Intent intent = new Intent(context, CommingSoonActivity.class);
+                Intent intent = new Intent(context, CalenderActivity.class);
                 context.startActivity(intent);
             }
             if (i == 6) {

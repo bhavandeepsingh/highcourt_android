@@ -13,6 +13,7 @@ import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.ProfileActivity2;
+import com.high.court.helpers.DialerHelper;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.http.models.ProfileModel;
 
@@ -46,8 +47,24 @@ public class AdapterDirectoryMember extends RecyclerView.Adapter<AdapterDirector
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         if(viewHolder.profile_image!= null) ImageHelper.loadImage(getProfileModelList().get(i).getProfile_pic(), viewHolder.profile_image );
         if(viewHolder.profile_name!= null) viewHolder.profile_name.setText(getProfileModelList().get(i).getName());
-        if(viewHolder.mobile_phone!= null) viewHolder.mobile_phone.setText(getProfileModelList().get(i).getMobile());
-        if(viewHolder.landline_no!= null) viewHolder.landline_no.setText(getProfileModelList().get(i).getLandline());
+        if(viewHolder.mobile_phone!= null){
+            viewHolder.mobile_phone.setText(getProfileModelList().get(i).getMobile());
+            viewHolder.mobile_phone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
+                }
+            });
+        }
+        if(viewHolder.landline_no!= null){
+            viewHolder.landline_no.setText(getProfileModelList().get(i).getLandline());
+            viewHolder.landline_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialerHelper.dial(context, getProfileModelList().get(i).getLandline());
+                }
+            });
+        }
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
