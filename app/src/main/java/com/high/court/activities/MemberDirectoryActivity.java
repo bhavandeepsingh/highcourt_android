@@ -153,7 +153,7 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
 
     @Override
     public void onProfileMemberSearch(ExcecutiveMemberModel excecutiveMemberModel) {
-        getHighCourtLoader().stop();
+        //getHighCourtLoader().stop();
         if(excecutiveMemberModel != null) {
             getAdapterDirectoryMember().setProfileModelList(excecutiveMemberModel.getProfileModels());
             getAdapterDirectoryMember().notifyDataSetChanged();

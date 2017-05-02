@@ -72,7 +72,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     public static String dirPath;
    public static String imagedirectry;
 
-
+    CropImageView cropImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
             }
         });
+
     }
 
 
@@ -163,13 +164,14 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
             } else {
                 // no permissions required or already grunted, can start crop image activity
                 startCropImageActivity(imageUri);
-                loadBitmap(String.valueOf(imageUri));
             }
         }
         // handle result of CropImageActivity
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
+                cropImageView = (CropImageView) findViewById(R.id.cropImageView);
+                cropImageView.setImageUriAsync(result.getUri());
                 //loadBitmap(String.valueOf(result.getUri()));
                 mCropImageUri = result.getUri();
                 profile_pic_image_view = ((ImageView) findViewById(R.id.quick_start_cropped_image));
@@ -180,94 +182,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
             }
         }
     }
-
-    public Bitmap loadBitmap(String url)
-    {
-        Bitmap bm = null;
-        InputStream is = null;
-        BufferedInputStream bis = null;
-        try
-        {
-            URLConnection conn = new URL(url).openConnection();
-            conn.connect();
-            is = conn.getInputStream();
-            bis = new BufferedInputStream(is, 8192);
-            bm = BitmapFactory.decodeStream(bis);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally {
-            if (bis != null)
-            {
-                try
-                {
-                    bis.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            if (is != null)
-            {
-                try
-                {
-                    is.close();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        saveBitmapToSD(context,bm);
-        return bm;
-    }
-
-    public String getImagedirectry() {
-        return imagedirectry;
-    }
-
-    public static String saveBitmapToSD(Context ctx, Bitmap b) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", ctx.getResources().getConfiguration().locale);
-        String fileName = sdf.format(new Date()) + ".jpg";
-        dirPath = Environment.getExternalStorageDirectory() + File.separator + "HighCourt" + File.separator;
-        File dirFile = new File(dirPath);
-        if (!dirFile.exists()) {
-            dirFile.mkdirs();
-        }
-        OutputStream fOut = null;
-        File file = new File(dirPath, fileName);
-        imagedirectry = dirPath + fileName;
-
-        try {
-            fOut = new FileOutputStream(file);
-            b.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-            fOut.flush();
-            fOut.close();
-            galleryAddPic(ctx, file.getAbsolutePath());
-            return file + "";
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private static void galleryAddPic(Context ctx, String filePath) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(filePath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        ctx.sendBroadcast(mediaScanIntent);
-    }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -289,15 +203,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
                 .start(this);
     }
 
-    public ImageView getProfile_pic_image_view() {
-        return profile_pic_image_view;
-    }
-
-    public Uri getmCropImageUri() {
-        return mCropImageUri;
-    }
-
-    public String getProfile_file_uri() {
-        return profile_file_uri;
+    public CropImageView getCropImageView() {
+        return cropImageView;
     }
 }

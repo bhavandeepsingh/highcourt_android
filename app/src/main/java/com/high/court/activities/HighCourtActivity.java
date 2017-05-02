@@ -35,7 +35,10 @@ public class HighCourtActivity extends AppCompatActivity{
         Runtime.getRuntime().gc();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }
 
 

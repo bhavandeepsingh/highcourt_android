@@ -16,8 +16,10 @@ import android.widget.LinearLayout;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterDashBoard;
+import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
+import com.high.court.layouts.SideProfileDrawer;
 
 public class DashboardActivity extends HighCourtActivity {
 
@@ -105,4 +107,15 @@ public class DashboardActivity extends HighCourtActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SideProfileDrawer sideProfileDrawer = (SideProfileDrawer) findViewById(R.id.drawer_layout);
+        if(sideProfileDrawer != null && sideProfileDrawer.getProfileImageView() != null){
+
+            sideProfileDrawer.getProfileImageView().setImageResource(0);
+            ImageHelper.loadImage(UserHelper.getAppUserProfilePic(), sideProfileDrawer.getProfileImageView());
+            sideProfileDrawer.getProfileImageView().invalidate();
+        }
+    }
 }

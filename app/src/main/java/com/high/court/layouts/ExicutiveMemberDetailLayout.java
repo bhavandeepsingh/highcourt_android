@@ -32,6 +32,7 @@ import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ProfileUpdateInterface;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -114,6 +115,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public CircleImageView getProfilePicShow() {
+        if (profilePicShow != null) setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
         return profilePicShow;
     }
 
@@ -315,10 +317,18 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     private MultipartBody.Part makeImageRequest() {
-        if(getExicutiveMemberDetailsEdit().getImagedirectry() != null) {
-            File file = new File(getExicutiveMemberDetailsEdit().getImagedirectry());
-            Log.d("imagedirectry"," "+getExicutiveMemberDetailsEdit().getImagedirectry());
-            return  MultipartBody.Part.createFormData("UploadForm[imageFile]", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        if(getExicutiveMemberDetailsEdit().getCropImageView() != null) {
+            File file = new File(getExicutiveMemberDetailsEdit().getCropImageView().getImageUri().toString());
+            File outPutFile = null;
+            for(int i = 0; i< getContext().getCacheDir().list().length ; i++){
+                if(file.getName().equals(getContext().getCacheDir().list()[i].toString())){
+                    outPutFile = getContext().getCacheDir().listFiles()[i];
+                }
+            }
+            if(outPutFile == null)return null;
+            ImageLoader.getInstance().clearMemoryCache();
+            ImageLoader.getInstance().clearDiskCache();
+            return  MultipartBody.Part.createFormData("UploadForm[imageFile]", outPutFile.getName(), RequestBody.create(MediaType.parse("image/*"), outPutFile));
         }
         return null;
     }

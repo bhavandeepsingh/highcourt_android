@@ -335,6 +335,7 @@ public class ProfileModel extends HighCourtModel {
         .setCourt_address(UserHelper.getAppUserCourtAddress())
         .setDesignation_name(UserHelper.getAppUserDesignation())
         .setEmail(UserHelper.getEmail())
+        .setProfile_pic(UserHelper.getAppUserProfilePic())
         .setResidential_address(UserHelper.getAppUserResidential())
         .setDesignation_name(UserHelper.getAppUserDesignation())
         .setBlood_group(UserHelper.getAppUserBloodGroup())
