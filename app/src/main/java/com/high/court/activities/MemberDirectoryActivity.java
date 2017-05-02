@@ -115,10 +115,10 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
 
     }
 
-    private Map<String, RequestBody> makeRequest() {
-        Map<String, RequestBody>  stringRequestBodyMap = new HashMap<>();
+    private Map<String, String> makeRequest() {
+        Map<String, String>  stringRequestBodyMap = new HashMap<>();
         if(findViewById(R.id.serach_edit_text) != null){
-            stringRequestBodyMap.put("Profile[name]", RequestBody.create(MediaType.parse("text/plain"), ((EditText)findViewById(R.id.serach_edit_text)).getText().toString()));
+            stringRequestBodyMap.put("ProfileSearch[name]", ((EditText)findViewById(R.id.serach_edit_text)).getText().toString());
         }
         return stringRequestBodyMap;
     }
@@ -146,18 +146,23 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
         }
         if(excecutiveMemberModel != null && excecutiveMemberModel.getPagination().isLoad_more()){
             loadingNextPage = false;
+        }else{
+            page_no = 2;
         }
     }
 
     @Override
     public void onProfileMemberSearch(ExcecutiveMemberModel excecutiveMemberModel) {
         getHighCourtLoader().stop();
-        if(excecutiveMemberModel != null && excecutiveMemberModel.getPagination().isLoad_more()) {
+        if(excecutiveMemberModel != null) {
             getAdapterDirectoryMember().setProfileModelList(excecutiveMemberModel.getProfileModels());
             getAdapterDirectoryMember().notifyDataSetChanged();
-            loadingNextPage = false;
-            page_no = 1;
+
+            if(excecutiveMemberModel.getPagination().isLoad_more()){
+                loadingNextPage = false;
+            }else{ page_no = 2; }
         }
+
     }
 
     @Override

@@ -46,7 +46,7 @@ public interface HighCourtWebService {
 
     @FormUrlEncoded
     @POST("user/members")
-    Call<ExcecutiveMemberModel> getMembers(@FieldMap Map<String, RequestBody> request, @Query("page") int page_no);
+    Call<ExcecutiveMemberModel> getMembers(@FieldMap Map<String, String> request, @Query("page") int page_no);
 
 
     @GET("user/blood-group-list")

@@ -3,8 +3,11 @@ package com.high.court.layouts;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -28,6 +31,10 @@ import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ProfileUpdateInterface;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +44,8 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+
+import static android.R.attr.id;
 
 /**
  * Created by admin on 4/26/2017.
@@ -309,8 +318,10 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
         }
-        if(getExicutiveMemberDetailsEdit().getCropImage() != null)
-            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getCropImage().getBitmap().toString())));
+        if(getExicutiveMemberDetailsEdit().getCropImage() != null) {
+            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getCropImage().getUri().toString())));
+            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), createFile()));
+        }
         return stringStringMap;
     }
 
@@ -402,4 +413,30 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     public ExicutiveMemberDetailsEdit getExicutiveMemberDetailsEdit(){
         return (ExicutiveMemberDetailsEdit) getContext();
     }
+
+    public File createFile(){
+        File f;
+        /*try
+        {
+            f = new File(getHighCourtActivity().getCacheDir() + File.separator + "high_court_profile_pic.jpg");
+            InputStream is = getHighCourtActivity().getResources().openRawResource(R.drawable.profilepic);
+            OutputStream out = new FileOutputStream(f);
+
+            int bytesRead;
+            byte[] buffer = new byte[1024];
+            while((bytesRead = is.read(buffer)) > 0)
+            {
+                out.write(buffer, 0, bytesRead);
+            }
+
+            out.close();
+            is.close();
+        }
+        catch (IOException ex)
+        {
+            f = null;
+        }*/
+        return null;
+    }
+
 }

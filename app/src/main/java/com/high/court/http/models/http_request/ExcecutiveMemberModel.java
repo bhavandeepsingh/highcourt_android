@@ -52,7 +52,7 @@ public class ExcecutiveMemberModel extends HighCourtModel {
     }
 
 
-    public static void getMembersList(final MemberInterface memberInterface, Map<String, RequestBody> stringRequestBodyMap, int page_no, final boolean is_search){
+    public static void getMembersList(final MemberInterface memberInterface, Map<String, String> stringRequestBodyMap, int page_no, final boolean is_search){
 
         RestAdapter.get().getMembers(stringRequestBodyMap, page_no).enqueue(new Callback<ExcecutiveMemberModel>() {
             @Override

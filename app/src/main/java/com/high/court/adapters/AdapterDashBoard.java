@@ -76,7 +76,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             }
             if (i == 1) {
                 getHighCourtLoader().start();
-                ExcecutiveMemberModel.getMembersList(AdapterDashBoard.this, new HashMap<String, RequestBody>(), 0, false);
+                ExcecutiveMemberModel.getMembersList(AdapterDashBoard.this, new HashMap<String, String>(), 0, false);
             }
             if (i == 2) {
              //   Intent intent = new Intent(context, HonbleJudgesActivity.class);
