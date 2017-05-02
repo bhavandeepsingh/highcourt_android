@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 
 
@@ -37,6 +38,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
 
@@ -50,7 +52,8 @@
                   android:windowSoftInputMode="stateHidden" />
 
         <activity android:name=".activities.NoificationActivity"
-                  android:windowSoftInputMode="stateHidden" />
+                  android:windowSoftInputMode="stateHidden" >
+        </activity>
 
         <activity android:name=".activities.DisplayBoardActivity"
                   android:windowSoftInputMode="stateHidden" />
@@ -65,13 +68,18 @@
                   android:windowSoftInputMode="stateHidden" />
 
         <activity android:name=".activities.CalenderActivity"
-                  android:windowSoftInputMode="stateHidden" />
+                  android:windowSoftInputMode="stateHidden" >
+
+        </activity>
 
         <activity android:name=".activities.ChangePassword"
                   android:windowSoftInputMode="stateHidden" />
 
         <activity android:name=".activities.ExicutiveMemberDetail"
                   android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activities.ExicutiveMemberDetailsEdit"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name=".activities.ForgotPasswordActivity" />
         <activity android:name=".activities.HighCourtActivity" />
@@ -83,6 +91,7 @@
         <activity android:name=".activities.DisplayBoardDetail" />
         <activity android:name=".activities.CaseLowActivity" />
         <activity android:name=".activities.CommingSoonActivity"></activity>
+        <activity android:name=".activities.WebViewActivity"/>
 
 
     </application>

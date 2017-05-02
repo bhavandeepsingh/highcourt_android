@@ -115,4 +115,12 @@ public class ToastHelper {
     public static void showBloodgroupNotFill(Context context) {
         showToast("Blood group cannot be blank!", context);
     }
+
+    public static void profileUpdateFail(Context context) {
+        showToast("Profile not update please try again!", context);
+    }
+
+    public static void profileUpdateSuccess(Context context) {
+        showToast("Profile update successfully!", context);
+    }
 }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
+import android.provider.SyncStateContract;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,6 +23,13 @@ import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
+
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -261,76 +270,60 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
 
 
     void select_MyProfile() {
-        getMyProfile_text().setTextColor(getContext().getColor(R.color.clr_white));
+
+        getMyProfile_text().setTextColor(ContextCompat.getColor(getContext(), R.color.clr_white));
         getLmyprofile_row().setBackgroundResource(R.color.colorPrimary);
-        getIcon_profile().setColorFilter(getContext().getColor(R.color.clr_white));
+        getIcon_profile().setColorFilter(ContextCompat.getColor(getContext(),R.color.clr_white));
 
-        getPayMyDuesText().setTextColor(getContext().getColor(R.color.clr_black));
+        getPayMyDuesText().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getPaymudues_row().setBackgroundResource(R.color.clr_white);
-        getIcon_paymydues().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_paymydues().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
-        getChnagePassword().setTextColor(getContext().getColor(R.color.clr_black));
+        getChnagePassword().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getChangepassword_row().setBackgroundResource(R.color.clr_white);
-        getIcon_changepassword().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_changepassword().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
-        getSide_logouttext().setTextColor(getContext().getColor(R.color.clr_black));
+        getSide_logouttext().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getLogout_row().setBackgroundResource(R.color.clr_white);
-        getIcon_logout().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_logout().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
     }
 
     void select_PayMyDues() {
-        getMyProfile_text().setTextColor(getContext().getColor(R.color.clr_black));
+        getMyProfile_text().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getLmyprofile_row().setBackgroundResource(R.color.clr_white);
-        getIcon_profile().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_profile().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
-        getPayMyDuesText().setTextColor(getContext().getColor(R.color.clr_white));
+        getPayMyDuesText().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_white));
         getPaymudues_row().setBackgroundResource(R.color.colorPrimary);
-        getIcon_paymydues().setColorFilter(getContext().getColor(R.color.clr_white));
+        getIcon_paymydues().setColorFilter(ContextCompat.getColor(getContext(),R.color.clr_white));
 
-        getChnagePassword().setTextColor(getContext().getColor(R.color.clr_black));
+        getChnagePassword().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getChangepassword_row().setBackgroundResource(R.color.clr_white);
-        getIcon_changepassword().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_changepassword().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
-        getSide_logouttext().setTextColor(getContext().getColor(R.color.clr_black));
+        getSide_logouttext().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getLogout_row().setBackgroundResource(R.color.clr_white);
-        getIcon_logout().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_logout().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
     }
 
     void select_ChangePass() {
-        getMyProfile_text().setTextColor(getContext().getColor(R.color.clr_black));
+        getMyProfile_text().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getLmyprofile_row().setBackgroundResource(R.color.clr_white);
-        getIcon_profile().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_profile().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
-        getPayMyDuesText().setTextColor(getContext().getColor(R.color.clr_black));
+        getPayMyDuesText().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getPaymudues_row().setBackgroundResource(R.color.clr_white);
-        getIcon_paymydues().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_paymydues().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
-        getChnagePassword().setTextColor(getContext().getColor(R.color.clr_white));
+        getChnagePassword().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_white));
         getChangepassword_row().setBackgroundResource(R.color.colorPrimary);
-        getIcon_changepassword().setColorFilter(getContext().getColor(R.color.clr_white));
+        getIcon_changepassword().setColorFilter(ContextCompat.getColor(getContext(),R.color.clr_white));
 
-        getSide_logouttext().setTextColor(getContext().getColor(R.color.clr_black));
+        getSide_logouttext().setTextColor(ContextCompat.getColor(getContext(),R.color.clr_black));
         getLogout_row().setBackgroundResource(R.color.clr_white);
-        getIcon_logout().setColorFilter(getContext().getColor(R.color.colorPrimary));
+        getIcon_logout().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary));
     }
 
-    void select_Logout() {
-        getMyProfile_text().setTextColor(getContext().getColor(R.color.clr_black));
-        getLmyprofile_row().setBackgroundResource(R.color.clr_white);
-        getIcon_profile().setColorFilter(getContext().getColor(R.color.colorPrimary));
-
-        getPayMyDuesText().setTextColor(getContext().getColor(R.color.clr_black));
-        getPaymudues_row().setBackgroundResource(R.color.clr_white);
-        getIcon_paymydues().setColorFilter(getContext().getColor(R.color.colorPrimary));
-
-        getChnagePassword().setTextColor(getContext().getColor(R.color.clr_black));
-        getChangepassword_row().setBackgroundResource(R.color.clr_white);
-        getIcon_changepassword().setColorFilter(getContext().getColor(R.color.colorPrimary));
-
-        getSide_logouttext().setTextColor(getContext().getColor(R.color.clr_white));
-        getLogout_row().setBackgroundResource(R.color.colorPrimary);
-        getIcon_logout().setColorFilter(getContext().getColor(R.color.clr_white));
-    }
 
     @Override
     public void onClick(View v) {

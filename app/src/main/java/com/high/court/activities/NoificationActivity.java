@@ -17,18 +17,6 @@ public class NoificationActivity extends HighCourtActivity {
 
     Context context = NoificationActivity.this;
 
-    public static String[] judgesnamelist = {
-            "Satish Kumar Mittal",
-            "Satish Kumar Mittal",
-
-    };
-    public static String[] courtroomlist = {
-            "75/-",
-            "75/-",
-    };
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +32,7 @@ public class NoificationActivity extends HighCourtActivity {
         final LinearLayoutManager llm = new GridLayoutManager(context, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        AdapterNotification adapter = new AdapterNotification(context,  judgesnamelist,courtroomlist);
+        AdapterNotification adapter = new AdapterNotification(context);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 

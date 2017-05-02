@@ -18,47 +18,100 @@
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="@dimen/spacing_normal"
-
             android:layout_marginRight="@dimen/spacing_normal"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:background="@color/clr_white"
+
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/notif_layer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/border_subscription"
                 android:padding="10dp"
-                android:text="When an unknown printer took a galley of type and scrambled it to make a type specimen book."
                 android:textColor="@color/clr_textcolor_dark"
                 android:textIsSelectable="true"
                 android:textSize="@dimen/dim_textsize"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:background="@drawable/border_subscription"
+                android:orientation="vertical">
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notification_description"
+                    android:text=""
+                    android:padding="10dp"
+                    android:textColor="@color/clr_textcolor_dark"
+                    android:textIsSelectable="true"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="normal" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:id="@+id/download_file"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="-6dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="download file"
+                            android:textAllCaps="true"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_download" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                       android:layout_alignParentTop="true"
+                        android:layout_marginBottom="8dp"
+                        android:text="eeeee"
+                        android:layout_marginLeft="@dimen/spacing_normal"
+                        android:layout_marginRight="@dimen/spacing_normal"
+                        android:layout_marginTop="-2dp"
+                        android:id="@+id/notification_time"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
 
         </LinearLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="@dimen/spacing_normal"
-                android:layout_marginRight="@dimen/spacing_normal"
-                android:layout_marginTop="-2dp"
-                android:text="5 minutes ago"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                android:textStyle="normal" />
-
-        </RelativeLayout>
-
 
     </LinearLayout>
 

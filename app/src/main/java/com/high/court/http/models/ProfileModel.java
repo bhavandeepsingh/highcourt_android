@@ -5,6 +5,15 @@ import android.view.View;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.RestAdapter;
+import com.high.court.http.models.http_interface.ProfileUpdateInterface;
+
+import java.util.Map;
+
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by admin on 4/25/2017.
@@ -41,7 +50,7 @@ public class ProfileModel extends HighCourtModel {
 
     @SerializedName("designation")
     @Expose
-    String designation;
+    DesignationModel designation;
 
     @SerializedName("profile")
     @Expose
@@ -71,9 +80,13 @@ public class ProfileModel extends HighCourtModel {
     @Expose
     String court_address;
 
-    @SerializedName("blood_group")
+
+    @SerializedName("bloodGroup")
     @Expose
+    BloodGroupsModel.BloodGroup blood_group_model;
+
     String blood_group;
+    int blood_group_id;
 
     @SerializedName("lat1")
     @Expose
@@ -91,9 +104,11 @@ public class ProfileModel extends HighCourtModel {
     @Expose
     String long2;
 
-    @SerializedName("profile_pic")
+    @SerializedName("profilePic")
     @Expose
     String profile_pic;
+
+    String designation_name;
 
     public int getUser_id() {
         return user_id;
@@ -156,11 +171,11 @@ public class ProfileModel extends HighCourtModel {
         this.timezone = timezone;
     }
 
-    public String getDesignation() {
+    public DesignationModel getDesignation() {
         return designation;
     }
 
-    public ProfileModel setDesignation(String designation) {
+    public ProfileModel setDesignation(DesignationModel designation) {
         this.designation = designation;
         return this;
     }
@@ -169,8 +184,9 @@ public class ProfileModel extends HighCourtModel {
         return profile;
     }
 
-    public void setProfile(String profile) {
+    public ProfileModel setProfile(String profile) {
         this.profile = profile;
+        return this;
     }
 
     public String getEnrollment_number() {
@@ -204,16 +220,18 @@ public class ProfileModel extends HighCourtModel {
         return mobile;
     }
 
-    public void setMobile(String mobile) {
+    public ProfileModel setMobile(String mobile) {
         this.mobile = mobile;
+        return this;
     }
 
     public String getResidential_address() {
         return residential_address;
     }
 
-    public void setResidential_address(String residential_address) {
+    public ProfileModel setResidential_address(String residential_address) {
         this.residential_address = residential_address;
+        return this;
     }
 
     public String getCourt_address() {
@@ -226,6 +244,7 @@ public class ProfileModel extends HighCourtModel {
     }
 
     public String getBlood_group() {
+        if(getBlood_group_model() != null){ setBlood_group(getBlood_group_model().getName());}
         return blood_group;
     }
 
@@ -270,12 +289,40 @@ public class ProfileModel extends HighCourtModel {
         return this;
     }
 
+    public BloodGroupsModel.BloodGroup getBlood_group_model() {
+        return blood_group_model;
+    }
+
+    public void setBlood_group_model(BloodGroupsModel.BloodGroup blood_group_model) {
+        this.blood_group_model = blood_group_model;
+    }
+
     public String getProfile_pic() {
         return profile_pic;
     }
 
-    public void setProfile_pic(String profile_pic) {
+    public ProfileModel setProfile_pic(String profile_pic) {
         this.profile_pic = profile_pic;
+        return this;
+    }
+
+    public String getDesignation_name() {
+        if(designation_name == null && getDesignation() != null) return getDesignation().getName();
+        else return designation_name;
+    }
+
+    public ProfileModel setDesignation_name(String designation_name) {
+        this.designation_name = designation_name;
+        return this;
+    }
+
+    public int getBlood_group_id() {
+        return blood_group_id;
+    }
+
+    public ProfileModel setBlood_group_id(int blood_group_id) {
+        this.blood_group_id = blood_group_id;
+        return this;
     }
 
     public static ProfileModel getLoginUserProfile() {
@@ -284,17 +331,41 @@ public class ProfileModel extends HighCourtModel {
         .setName(UserHelper.getName())
         .setBio(UserHelper.getAppUserBio())
         .setCourt_address(UserHelper.getAppUserCourtAddress())
-        .setDesignation(UserHelper.getAppUserDesignation())
+        .setDesignation_name(UserHelper.getAppUserDesignation())
         .setEmail(UserHelper.getEmail())
-        .setDesignation(UserHelper.getAppUserDesignation())
+        .setResidential_address(UserHelper.getAppUserResidential())
+        .setDesignation_name(UserHelper.getAppUserDesignation())
         .setBlood_group(UserHelper.getAppUserBloodGroup())
         .setEnrollment_number(UserHelper.getAppUserEnrollmentNumber())
         .setLandline(UserHelper.getAppUserLandline())
         .setMembership_number(UserHelper.getAppUserMemberShipNo())
+        .setMobile(UserHelper.getAppUserMobile())
+        .setProfile(UserHelper.getAppUserProfile())
         .setLat1(UserHelper.getAppUserLat01())
         .setLat2(UserHelper.getAppUserLat02())
         .setLong1(UserHelper.getAppUserLong01())
         .setLong2(UserHelper.getAppUserLong02())
-        .setLocation(UserHelper.getAppUserLocation());
+        .setLocation(UserHelper.getAppUserLocation())
+        .setBlood_group(UserHelper.getAppUserBloodGroup())
+        .setBlood_group_id(Integer.parseInt(UserHelper.getAppUserBloodGroupId()));
     }
+
+    public static void profileUpdate(Map<String, RequestBody> stringStringMap, final ProfileUpdateInterface profileUpdateInterface){
+        RestAdapter.get().profileUpdate(stringStringMap).enqueue(new Callback<UserLoginModel>() {
+            @Override
+            public void onResponse(Call<UserLoginModel> call, Response<UserLoginModel> response) {
+                if(response.body() != null && response.body().is_success()){
+                    profileUpdateInterface.onProfileSuccess(response.body());
+                }else{
+                    profileUpdateInterface.onProfileFailure(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserLoginModel> call, Throwable t) {
+                profileUpdateInterface.onProfileError(t);
+            }
+        });
+    }
+
 }

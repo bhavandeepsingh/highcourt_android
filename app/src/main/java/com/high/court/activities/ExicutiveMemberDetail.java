@@ -23,19 +23,29 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.helpers.HighCourtLoader;
+import com.high.court.helpers.NetworkHelper;
+import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.RestAdapter;
+import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.ProfileModel;
+import com.high.court.http.models.http_interface.BloodGroupInterface;
 import com.high.court.layouts.ExicutiveMemberDetailLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapReadyCallback {
+public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapReadyCallback, BloodGroupInterface {
 
     Context context = ExicutiveMemberDetail.this;
     Button logoutbtn;
     ImageView pickimage;
+
+    HighCourtLoader highCourtLoader;
+
+    CropImage.ActivityResult result;
 
     public static String PROFILE_INDEX_KEY = "PROFILE_INDEX_KEY";
 
@@ -49,7 +59,9 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
     Double lcurrent_longval = 75.8534603;
 
     String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
+    ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
 
+    boolean edit_status = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +71,16 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
 
         if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
-        }else{
+        }
+        else{
+            edit_status = true;
             profileModel = ProfileModel.getLoginUserProfile();
         }
 
-        ExicutiveMemberDetailLayout exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
+         exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
         exicutiveMemberDetailLayout.setProfile(profileModel);
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -101,12 +117,11 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
                 quick_start_cropped_image.setImageResource(0);
                 quick_start_cropped_image.setImageURI(result.getUri());
-                quick_start_cropped_image.invalidate();
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Failed: " + result.getError(), Toast.LENGTH_LONG).show();
@@ -116,7 +131,9 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profilee, menu);
+       if (UserHelper.getLoginId()==exicutiveMemberDetailLayout.getProfileModel().getUser_id() && edit_status){
+           getMenuInflater().inflate(R.menu.menu_profilee, menu);
+       }
         return true;
     }
 
@@ -126,6 +143,13 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
         int id = item.getItemId();
         if (id == android.R.id.home) {
             onBackPressed();
+        }if (id == R.id.action_edit_profile) {
+            if(!NetworkHelper.state()){
+                ToastHelper.showNoNetwork(context);
+            }else{
+                getHighCourtLoader().start();
+                BloodGroupsModel.getBloodGroupList(this);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -149,4 +173,29 @@ public class ExicutiveMemberDetail extends AppCompatActivity implements OnMapRea
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(zoom);
     }
+
+    public HighCourtLoader getHighCourtLoader() {
+        if(highCourtLoader == null) highCourtLoader = HighCourtLoader.init(context);
+        return highCourtLoader;
+    }
+
+    @Override
+    public void onBloodGroupSuccess(BloodGroupsModel bloodGroupsModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setBloodGroupsModel(bloodGroupsModel);
+        if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
+            context.startActivity(new Intent(context, ExicutiveMemberDetailsEdit.class).putExtra(PROFILE_INDEX_KEY, getIntent().getExtras().getString(PROFILE_INDEX_KEY)));
+        }else{
+            context.startActivity(new Intent(context, ExicutiveMemberDetailsEdit.class));
+        }
+        finish();
+    }
+
+    @Override
+    public void onBloodGroupFailur(Throwable t) {
+        getHighCourtLoader().stop();
+        ToastHelper.showToast(t.getMessage(), context);
+    }
+
+
 }
