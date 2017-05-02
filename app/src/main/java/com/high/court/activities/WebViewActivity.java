@@ -15,7 +15,7 @@ public class WebViewActivity extends HighCourtActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         WebView mywebview = (WebView) findViewById(R.id.webView1);
-        mywebview.loadUrl(getIntent().getStringExtra("file_url_for_web_view"));
+        mywebview.loadUrl("https://phhc.gov.in/display_board_full_width.php");
 
     }
 
