@@ -1,12 +1,17 @@
 package com.high.court.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -44,7 +49,9 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     Button logoutbtn;
     ImageView pickimage;
 
-    String profile_image_path;
+
+    private Uri mCropImageUri;
+
 
     public static String PROFILE_INDEX_KEY = "PROFILE_INDEX_KEY";
 
@@ -59,6 +66,8 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
     String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
     ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
+
+    ImageView profile_pic_image_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +102,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         pickimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imagePicker();
+                CropImage.startPickImageActivity(ExicutiveMemberDetailsEdit.this);
             }
         });
 
@@ -109,29 +118,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        CropImage.ActivityResult activityResult = CropImage.getActivityResult(data);
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            profile_image_path = saveToInternalStorage(CropImage.getActivityResult(data).getBitmap());
-            if (resultCode == RESULT_OK) {
-                CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
-                quick_start_cropped_image.setImageResource(0);
-                quick_start_cropped_image.setImageDrawable(Drawable.createFromPath(profile_image_path));
-
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-
-            }
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
-
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
@@ -139,16 +125,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    void imagePicker() {
-        CropImage.activity(null)
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .setRequestedSize(1000, 1000)
-                .setFixAspectRatio(true)
-                .start(ExicutiveMemberDetailsEdit.this);
-    }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -160,31 +136,72 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         mMap.animateCamera(zoom);
     }
 
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("highcourt_profile_pic", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,"highcourt_profile_pic.jpg");
 
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return mypath.getAbsolutePath();
+    /**
+     * Start pick image activity with chooser.
+     */
+    public void onSelectImageClick(View view) {
+        CropImage.startPickImageActivity(this);
     }
 
-    public String getProfile_image_path() {
-        return profile_image_path;
+    @Override
+    @SuppressLint("NewApi")
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // handle result of pick image chooser
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(this, data);
+
+            // For API >= 23 we need to check specifically that we have permissions to read external storage.
+            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
+                // request permissions and handle the result in onRequestPermissionsResult()
+                mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
+            } else {
+                // no permissions required or already grunted, can start crop image activity
+                startCropImageActivity(imageUri);
+            }
+        }
+
+        // handle result of CropImageActivity
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                mCropImageUri = result.getUri();
+                profile_pic_image_view = ((ImageView ) findViewById(R.id.quick_start_cropped_image));
+                profile_pic_image_view.setImageURI(result.getUri());
+                //Toast.makeText(this, "Cropping successful, Sample: " + result.getSampleSize(), Toast.LENGTH_LONG).show();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                //Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // required permissions granted, start crop image activity
+            startCropImageActivity(mCropImageUri);
+        } else {
+            Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * Start crop image activity for the given image.
+     */
+    private void startCropImageActivity(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setMultiTouchEnabled(true)
+                .start(this);
+    }
+
+    public ImageView getProfile_pic_image_view() {
+        return profile_pic_image_view;
+    }
+
+    public Uri getmCropImageUri() {
+        return mCropImageUri;
     }
 }

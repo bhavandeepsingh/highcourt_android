@@ -320,8 +320,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
         }
-        if(getExicutiveMemberDetailsEdit().getProfile_image_path() != null) {
-            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getProfile_image_path())));
+        if(getExicutiveMemberDetailsEdit().getProfile_pic_image_view() != null) {
+            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getmCropImageUri().toString())));
             //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), createFile()));
         }
         return stringStringMap;
