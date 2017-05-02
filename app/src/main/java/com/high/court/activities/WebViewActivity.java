@@ -1,7 +1,7 @@
 package com.high.court.activities;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
@@ -14,8 +14,11 @@ public class WebViewActivity extends HighCourtActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+
+        String geturl = getIntent().getStringExtra("url");
         WebView mywebview = (WebView) findViewById(R.id.webView1);
-        mywebview.loadUrl(getIntent().getStringExtra("file_url_for_web_view"));
+        mywebview.loadUrl(geturl);
+
 
     }
 
@@ -23,7 +26,7 @@ public class WebViewActivity extends HighCourtActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id==android.R.id.home){
+        if (id == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

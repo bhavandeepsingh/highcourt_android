@@ -13,10 +13,12 @@ import android.widget.TextView;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.CommingSoonActivity;
+import com.high.court.activities.DisplayBoardActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.activities.MemberDirectoryActivity;
 import com.high.court.activities.NoificationActivity;
+import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
 import com.high.court.http.models.NotificationModel;
@@ -42,6 +44,9 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     int[] imageId;
 
     HighCourtLoader highCourtLoader;
+    String displayboard_url="https://phhc.gov.in/display_board_full_width.php";
+    String judges_url="http://highcourtchd.gov.in/?trs=chief";
+    String roster_url="http://highcourtchd.gov.in/?trs=roster";
 
     public AdapterDashBoard(Context ctx, String[] judgesnamelist, int[] prgmImages) {
         super();
@@ -79,8 +84,8 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                 ExcecutiveMemberModel.getMembersList(AdapterDashBoard.this, new HashMap<String, String>(), 0, false);
             }
             if (i == 2) {
-             //   Intent intent = new Intent(context, HonbleJudgesActivity.class);
-                Intent intent = new Intent(context, CommingSoonActivity.class);
+                Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra("url",judges_url);
                 context.startActivity(intent);
             }
             if (i == 3) {
@@ -88,22 +93,20 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                 NotificationModel.getNotificationList(AdapterDashBoard.this);
             }
             if (i == 4) {
-//                    Intent intent = new Intent(context, DisplayBoardActivity.class);
-                Intent intent = new Intent(context, CommingSoonActivity.class);
+                    Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra("url",displayboard_url);
                 context.startActivity(intent);
             }
             if (i == 5) {
-//                    Intent intent = new Intent(context, CalenderActivity.class);
                 Intent intent = new Intent(context, CommingSoonActivity.class);
                 context.startActivity(intent);
             }
             if (i == 6) {
-//                    Intent intent = new Intent(context, RosterActivity.class);
-                Intent intent = new Intent(context, CommingSoonActivity.class);
+                Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra("url",roster_url);
                 context.startActivity(intent);
             }
             if (i == 7) {
-//                    Intent intent = new Intent(context, CaseLowActivity.class);
                 Intent intent = new Intent(context, CommingSoonActivity.class);
                 context.startActivity(intent);
             }
