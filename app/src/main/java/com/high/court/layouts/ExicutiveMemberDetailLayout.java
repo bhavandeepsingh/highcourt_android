@@ -317,7 +317,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     private MultipartBody.Part makeImageRequest() {
         if(getExicutiveMemberDetailsEdit().getImagedirectry() != null) {
             File file = new File(getExicutiveMemberDetailsEdit().getImagedirectry());
-
             return  MultipartBody.Part.createFormData("UploadForm[imageFile]", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
         return null;
@@ -325,7 +324,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     private Map<String, RequestBody> makeRequest() {
         Map<String, RequestBody> stringStringMap = new HashMap<>();
-        stringStringMap.put("Profile[email]", RequestBody.create(MediaType.parse("text/plain"), getEmail_id().getText().toString()));
+        stringStringMap.put("Profile[public_email]", RequestBody.create(MediaType.parse("text/plain"), getEmail_id().getText().toString()));
         stringStringMap.put("Profile[landline]", RequestBody.create(MediaType.parse("text/plain"), getLandline_no().getText().toString()));
         stringStringMap.put("Profile[mobile]", RequestBody.create(MediaType.parse("text/plain"), getMobile_no().getText().toString()));
         stringStringMap.put("Profile[residential_address]", RequestBody.create(MediaType.parse("text/plain"), getResidential_adress().getText().toString()));
