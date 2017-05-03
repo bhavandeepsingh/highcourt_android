@@ -13,8 +13,10 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
@@ -47,7 +49,7 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
     AdapterDirectoryMember adapterDirectoryMember;
 
     HighCourtLoader highCourtLoader;
-
+   public RelativeLayout loader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,8 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Member Directory");
+
+        loader = (RelativeLayout)findViewById(R.id.loader);
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -83,6 +87,7 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
                         if (!loadingNextPage) {
                             ExcecutiveMemberModel.getMembersList(MemberDirectoryActivity.this, makeRequest(), page_no, false);
                             loadingNextPage = true;
+                            loader.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -144,12 +149,16 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
             getAdapterDirectoryMember().getProfileModelList().addAll(excecutiveMemberModel.getProfileModels());
             getAdapterDirectoryMember().notifyDataSetChanged();
             page_no++;
+
         }
         if(excecutiveMemberModel != null && excecutiveMemberModel.getPagination().isLoad_more()){
             loadingNextPage = false;
+
         }else{
             page_no = 2;
+
         }
+        loader.setVisibility(View.GONE);
     }
 
     @Override
@@ -162,6 +171,7 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
 
             if(excecutiveMemberModel.getPagination().isLoad_more()){
                 loadingNextPage = false;
+
             }else{ page_no = 2; }
         }
 
@@ -170,11 +180,13 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
     @Override
     public void onProfileMemberFailur(ExcecutiveMemberModel excecutiveMemberModel) {
         loadingNextPage = false;
+        loader.setVisibility(View.GONE);
     }
 
     @Override
     public void onProfileMemberFailur(Throwable t) {
         loadingNextPage = false;
+        loader.setVisibility(View.GONE);
     }
 
     public AdapterDirectoryMember getAdapterDirectoryMember() {

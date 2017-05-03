@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
 
-
     <application
         android:name=".HighCourtApplication"
         android:allowBackup="true"
