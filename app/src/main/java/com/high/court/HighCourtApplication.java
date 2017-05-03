@@ -7,11 +7,13 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.UILApplication;
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -31,10 +33,16 @@ public class HighCourtApplication extends UILApplication {
 
     @Override
     public void onCreate() {
+//        ImageLoader.getInstance().clearMemoryCache();
+//        ImageLoader.getInstance().clearDiskCache();
         super.onCreate();
         adjustFontScale(getApplicationContext(),getApplicationContext().getResources().getConfiguration());
         highCourtApplication = this;
     }
+
+
+
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

@@ -149,6 +149,7 @@ public class HighCourtLogin extends HighCourtMainLinearLayout implements View.On
         if(userLoginModel.is_success()){
             if(UserHelper.login(userLoginModel)){
                 ((HighCourtActivity) getContext()).startActivity(new Intent(getContext(), DashboardActivity.class));
+                ((HighCourtActivity) getContext()).finish();
             }
         }else {
             Toast.makeText(getContext(), userLoginModel.getError(), Toast.LENGTH_SHORT).show();

@@ -326,9 +326,9 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
                 }
             }
             if(outPutFile == null)return null;
-            ImageLoader.getInstance().clearMemoryCache();
-            ImageLoader.getInstance().clearDiskCache();
-            return  MultipartBody.Part.createFormData("UploadForm[imageFile]", outPutFile.getName(), RequestBody.create(MediaType.parse("image/*"), outPutFile));
+                ImageLoader.getInstance().clearMemoryCache();
+                ImageLoader.getInstance().clearDiskCache();
+                return  MultipartBody.Part.createFormData("UploadForm[imageFile]", outPutFile.getName(), RequestBody.create(MediaType.parse("image/*"), outPutFile));
         }
         return null;
     }
