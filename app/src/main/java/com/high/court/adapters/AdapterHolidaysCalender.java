@@ -11,14 +11,9 @@ import com.high.court.R;
 
 public class AdapterHolidaysCalender extends RecyclerView.Adapter<AdapterHolidaysCalender.ViewHolder> {
     Context context;
-    String[] get_judgesnamelist;
-    String[] get_courtroomlist;
 
-    public AdapterHolidaysCalender(Context ctx, String[] judgesnamelist, String[] courtroomlist) {
+    public AdapterHolidaysCalender(Context ctx) {
         super();
-        get_judgesnamelist = judgesnamelist;
-        get_courtroomlist = courtroomlist;
-
         this.context = ctx;
     }
 

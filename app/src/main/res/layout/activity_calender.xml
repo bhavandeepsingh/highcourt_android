@@ -36,7 +36,6 @@
                 android:selectedWeekBackgroundColor="@color/colorPrimary"
                />
 
-            <!--<include layout="@layout/include_recyclerview" />-->
 
         </LinearLayout>
 

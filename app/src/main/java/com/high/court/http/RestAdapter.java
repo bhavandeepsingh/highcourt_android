@@ -22,8 +22,8 @@ public class RestAdapter {
 
     private static HighCourtWebService REST_CLIENT = null;
 
-    private static String ROOT = "http://highcourtbarassociations.com/api/web/v1/";
-    //private static String ROOT = "http://192.168.1.100/highcourt/api/web/v1/";
+    //private static String ROOT = "http://highcourtbarassociations.com/api/web/v1/";
+    private static String ROOT = "http://192.168.1.9/highcourt/api/web/v1/";
 
     static {
         setupRestClient();
