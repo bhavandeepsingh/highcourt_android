@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.UILApplication;
 import com.high.court.http.models.BloodGroupsModel;
+import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 
@@ -25,6 +26,8 @@ public class HighCourtApplication extends UILApplication {
     static List<ProfileModel> profileModels;
     static List<NotificationModel.Notifications> notificationsList;
     static BloodGroupsModel bloodGroupsModel;
+
+    static HolidaysModel holidaysModel;
 
     @Override
     public void onCreate() {
@@ -90,6 +93,18 @@ public class HighCourtApplication extends UILApplication {
 
     public static void setBloodGroupsModel(BloodGroupsModel bloodGroupsModel) {
         HighCourtApplication.bloodGroupsModel = bloodGroupsModel;
+    }
+
+    public static void setNotificationsList(List<NotificationModel.Notifications> notificationsList) {
+        HighCourtApplication.notificationsList = notificationsList;
+    }
+
+    public static HolidaysModel getHolidaysModel() {
+        return holidaysModel;
+    }
+
+    public static void setHolidaysModel(HolidaysModel holidaysModel) {
+        HighCourtApplication.holidaysModel = holidaysModel;
     }
 }
 

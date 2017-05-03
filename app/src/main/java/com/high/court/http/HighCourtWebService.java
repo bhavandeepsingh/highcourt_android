@@ -1,6 +1,7 @@
 package com.high.court.http;
 
 import com.high.court.http.models.BloodGroupsModel;
+import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
@@ -61,5 +62,7 @@ public interface HighCourtWebService {
     @POST("profile/update")
     Call<UserLoginModel> profileUpdate(@PartMap Map<String, RequestBody> stringStringMap, @Part MultipartBody.Part part);
 
+    @GET("holidays/list")
+    Call<HolidaysModel> getHolidays();
 
 }

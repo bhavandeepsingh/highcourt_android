@@ -20,10 +20,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="01Feb"
             android:padding="@dimen/dim_subscriptionpaddings"
             android:gravity="center_horizontal"
             android:textColor="@color/clr_textcolor_light"
+            android:id="@+id/holidays_date"
             android:textSize="@dimen/dim_textsize" />
 
 
@@ -42,7 +42,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:text="Vasant Panchmi"
+                android:id="@+id/holiday_title"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dim_textsize" />
@@ -62,11 +62,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="Punjab &amp; Haryana High Court
-        Supreme Court of India
-        Subordinate Courts Punjab
-        Subordinate Courts Haryana
-        Subordinate Courts Chandigarh"
+                    android:id="@+id/holiday_highcourt"
                     android:layout_marginTop="-2dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/clr_textcolor_dark"

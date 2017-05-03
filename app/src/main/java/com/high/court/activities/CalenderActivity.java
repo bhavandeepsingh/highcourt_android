@@ -35,8 +35,6 @@ public class CalenderActivity extends HighCourtActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Calendar");
 
-
-
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         final LinearLayoutManager llm = new GridLayoutManager(context, 1);
@@ -45,8 +43,6 @@ public class CalenderActivity extends HighCourtActivity {
         AdapterHolidaysCalender adapter = new AdapterHolidaysCalender(context);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
-
-
 
     }
 

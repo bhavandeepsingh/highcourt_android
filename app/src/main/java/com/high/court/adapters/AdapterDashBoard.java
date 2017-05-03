@@ -22,10 +22,13 @@ import com.high.court.activities.NoificationActivity;
 import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
+import com.high.court.helpers.ToastHelper;
+import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
+import com.high.court.http.models.http_interface.HolidayInterface;
 import com.high.court.http.models.http_interface.MemberInterface;
 import com.high.court.http.models.http_interface.NotificationInterface;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
@@ -36,7 +39,7 @@ import java.util.List;
 import okhttp3.RequestBody;
 
 
-public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface {
+public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface {
 
     Context context;
 
@@ -99,8 +102,8 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                 context.startActivity(intent);
             }
             if (i == 5) {
-                Intent intent = new Intent(context, CalenderActivity.class);
-                context.startActivity(intent);
+                getHighCourtLoader().start();
+                HolidaysModel.getHolidays(AdapterDashBoard.this);
             }
             if (i == 6) {
                 Intent intent = new Intent(context, WebViewActivity.class);
@@ -178,6 +181,24 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     @Override
     public void onProfileMemberFailur(Throwable t) {
         getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onHolidaysSuccess(HolidaysModel holidaysModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setHolidaysModel(holidaysModel);
+        context.startActivity(new Intent(context, CalenderActivity.class));
+    }
+
+    @Override
+    public void onHolidaysFailur() {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onHolidaysFailur(Throwable t) {
+        getHighCourtLoader().stop();
+        ToastHelper.showToast(t.getMessage(), getContext());
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
