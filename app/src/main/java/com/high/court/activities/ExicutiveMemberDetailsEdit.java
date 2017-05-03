@@ -199,6 +199,8 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     private void startCropImageActivity(Uri imageUri) {
         CropImage.activity(imageUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
+                .setMaxCropResultSize(1024, 1024)
+                .setFixAspectRatio(true)
                 .setMultiTouchEnabled(true)
                 .start(this);
     }
