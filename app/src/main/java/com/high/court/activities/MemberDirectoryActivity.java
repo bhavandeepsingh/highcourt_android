@@ -17,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.adapters.AdapterDirectoryMember;
 import com.high.court.adapters.AdapterHonbleHudges;
@@ -155,6 +156,7 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
     public void onProfileMemberSearch(ExcecutiveMemberModel excecutiveMemberModel) {
         //getHighCourtLoader().stop();
         if(excecutiveMemberModel != null) {
+            HighCourtApplication.setProfileModels(excecutiveMemberModel.getProfileModels());
             getAdapterDirectoryMember().setProfileModelList(excecutiveMemberModel.getProfileModels());
             getAdapterDirectoryMember().notifyDataSetChanged();
 

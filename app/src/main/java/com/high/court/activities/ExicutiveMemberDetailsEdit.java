@@ -202,6 +202,8 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
                 .setMaxCropResultSize(1024, 1024)
                 .setFixAspectRatio(true)
                 .setMultiTouchEnabled(true)
+                .setMaxCropResultSize(1024,1024)
+                .setFixAspectRatio(true)
                 .start(this);
     }
 
