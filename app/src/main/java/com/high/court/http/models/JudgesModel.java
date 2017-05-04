@@ -7,6 +7,7 @@ import com.high.court.http.RestAdapter;
 import com.high.court.http.models.http_interface.JudgesModelInterface;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -192,8 +193,11 @@ public class JudgesModel extends HighCourtModel {
         }
     }
 
-    public static void getJudges(final JudgesModelInterface judgesModelInterface, Map<String, RequestBody> stringRequestBodyMap, int page_no, final boolean is_search){
-        RestAdapter.get().getJudges().enqueue(new Callback<JudgesModel>() {
+    public static void getJudges(final JudgesModelInterface judgesModelInterface, Map<String, String> stringRequestBodyMap, int page_no, final boolean is_search){
+
+        if(stringRequestBodyMap == null) stringRequestBodyMap = new HashMap<>();
+
+        RestAdapter.get().getJudges(stringRequestBodyMap, page_no).enqueue(new Callback<JudgesModel>() {
             @Override
             public void onResponse(Call<JudgesModel> call, Response<JudgesModel> response) {
                 if(response.body() != null){
@@ -207,5 +211,6 @@ public class JudgesModel extends HighCourtModel {
                 judgesModelInterface.onJudgesFailur(t);
             }
         });
+
     }
 }

@@ -11,22 +11,10 @@ import android.view.MenuItem;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterCaseLow;
-import com.high.court.adapters.AdapterHolidaysCalender;
 
-public class CaseLowActivity extends AppCompatActivity {
+public class CaseLawActivity extends AppCompatActivity {
 
-    Context context = CaseLowActivity.this;
-
-    public static String[] judgesnamelist = {
-            "Satish Kumar Mittal",
-            "Satish Kumar Mittal",
-
-    };
-    public static String[] courtroomlist = {
-            "75/-",
-            "75/-",
-    };
-
+    Context context = CaseLawActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +32,7 @@ public class CaseLowActivity extends AppCompatActivity {
         final LinearLayoutManager llm = new GridLayoutManager(context, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        AdapterCaseLow adapter = new AdapterCaseLow(context,  judgesnamelist,courtroomlist);
+        AdapterCaseLow adapter = new AdapterCaseLow(context);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 

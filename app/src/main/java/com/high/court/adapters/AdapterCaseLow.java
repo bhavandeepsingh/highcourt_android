@@ -10,15 +10,11 @@ import com.high.court.R;
 
 
 public class AdapterCaseLow extends RecyclerView.Adapter<AdapterCaseLow.ViewHolder> {
+
     Context context;
-    String[] get_judgesnamelist;
-    String[] get_courtroomlist;
 
-    public AdapterCaseLow(Context ctx, String[] judgesnamelist, String[] courtroomlist) {
+    public AdapterCaseLow(Context ctx) {
         super();
-        get_judgesnamelist = judgesnamelist;
-        get_courtroomlist = courtroomlist;
-
         this.context = ctx;
     }
 
@@ -33,23 +29,16 @@ public class AdapterCaseLow extends RecyclerView.Adapter<AdapterCaseLow.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
 
-
-
     }
 
     @Override
     public int getItemCount() {
-       // return get_ratelist_title.length;
         return 22;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-       // TextView title, title_val;
-
         public ViewHolder(View itemView) {
             super(itemView);
-//            title = (TextView) itemView.findViewById(R.id.title);
-//            title_val = (TextView) itemView.findViewById(R.id.title_val);
         }
     }
 

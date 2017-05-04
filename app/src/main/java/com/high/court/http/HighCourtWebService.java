@@ -66,7 +66,9 @@ public interface HighCourtWebService {
     @GET("holidays/list")
     Call<HolidaysModel> getHolidays();
 
-    @GET("judges/list")
-    Call<JudgesModel> getJudges();
+    @FormUrlEncoded
+    @POST("judges/list")
+    Call<JudgesModel> getJudges(@FieldMap Map<String, String> stringRequestBodyMap, @Query("page") int page_no);
+
 
 }

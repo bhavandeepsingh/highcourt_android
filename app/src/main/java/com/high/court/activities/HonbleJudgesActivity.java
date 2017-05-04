@@ -79,7 +79,7 @@ public class HonbleJudgesActivity extends HighCourtActivity implements JudgesMod
                     pastVisiblesItems = llm.findFirstVisibleItemPosition();
 
                     if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        if (!loadingNextPage) {
+                        if (!loadingNextPage && HighCourtApplication.getJudgesModel().getPagination().isLoad_more()) {
                             JudgesModel.getJudges(HonbleJudgesActivity.this, makeRequest(), page_no, false);
                             loadingNextPage = true;
                             loader.setVisibility(View.VISIBLE);
@@ -105,6 +105,7 @@ public class HonbleJudgesActivity extends HighCourtActivity implements JudgesMod
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                    page_no = 1;
                     JudgesModel.getJudges(HonbleJudgesActivity.this, makeRequest(), page_no, true);
                 }
 
@@ -112,10 +113,10 @@ public class HonbleJudgesActivity extends HighCourtActivity implements JudgesMod
         }
     }
 
-    private Map<String, RequestBody> makeRequest() {
+    private Map<String, String> makeRequest() {
         if((EditText) (findViewById(R.id.judges_serach_text)) != null && ((EditText) (findViewById(R.id.judges_serach_text))).getText().toString().length() > 0){
-            Map<String, RequestBody> stringRequestBodyMap = new HashMap<>();
-            stringRequestBodyMap.put("Judges[name]", RequestBody.create(MediaType.parse("text/plain"), ((EditText) (findViewById(R.id.judges_serach_text))).getText().toString()));
+            Map<String, String> stringRequestBodyMap = new HashMap<>();
+            stringRequestBodyMap.put("JudgesSearch[name]", ((EditText) (findViewById(R.id.judges_serach_text))).getText().toString());
             return stringRequestBodyMap;
         }
         return null;
@@ -157,7 +158,6 @@ public class HonbleJudgesActivity extends HighCourtActivity implements JudgesMod
     @Override
     public void onJudgesSearch(JudgesModel judgesModel) {
         HighCourtApplication.setJudgesModel(judgesModel);
-        page_no = 0;
         getAdapter().notifyDataSetChanged();
     }
 
