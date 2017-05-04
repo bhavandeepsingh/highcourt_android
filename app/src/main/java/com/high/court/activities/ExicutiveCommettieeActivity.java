@@ -17,21 +17,6 @@ public class ExicutiveCommettieeActivity extends HighCourtActivity {
 
     Context context = ExicutiveCommettieeActivity.this;
 
-        public static String[] judgesnamelist = {
-                "Satish Kumar Mittal",
-                "Satish Kumar Mittal",
-
-        };
-        public static String[] courtroomlist = {
-                "75/-",
-                "75/-",
-        };
-
-
-//    @BindView(R.id.designation_val)
-//    EditText designation_val;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +32,7 @@ public class ExicutiveCommettieeActivity extends HighCourtActivity {
         final LinearLayoutManager llm = new GridLayoutManager(context, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        AdapterExicutiveComm adapter = new AdapterExicutiveComm(context,  judgesnamelist,courtroomlist);
+        AdapterExicutiveComm adapter = new AdapterExicutiveComm(context);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 

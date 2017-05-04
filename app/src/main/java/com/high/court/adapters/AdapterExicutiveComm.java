@@ -26,16 +26,11 @@ import java.util.List;
 public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveComm.ViewHolder> {
 
     Context context;
-    String[] get_judgesnamelist;
-    String[] get_courtroomlist;
 
     List<ProfileModel> profileModelList;
 
-    public AdapterExicutiveComm(Context ctx, String[] judgesnamelist, String[] courtroomlist) {
+    public AdapterExicutiveComm(Context ctx) {
         super();
-        get_judgesnamelist = judgesnamelist;
-        get_courtroomlist = courtroomlist;
-
         this.context = ctx;
     }
 

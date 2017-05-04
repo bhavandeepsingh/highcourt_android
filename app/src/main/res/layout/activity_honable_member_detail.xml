@@ -26,6 +26,7 @@
         android:layout_marginTop="-65dp"
         android:src="@drawable/profilepic"
         app:finalHeight="@dimen/image_final_width"
+        android:id="@+id/judge_profile_pic"
         app:layout_behavior="com.high.court.activities.AvatarImageBehavior"
         app:startToolbarPosition="2dp"
         app:startXPosition="2dp" />
@@ -82,7 +83,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
-                                android:text="0172-245789"
+                                android:id="@+id/judge_landine"
                                 android:textAllCaps="true"
                                 android:textColor="@color/clr_textcolor_dark" />
 
@@ -108,7 +109,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
-                                android:text="534"
+                                android:id="@+id/judge_ext"
                                 android:textAllCaps="true"
                                 android:textColor="@color/clr_textcolor_dark" />
 
@@ -145,7 +146,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="Sec17, Chd"
+                        android:id="@+id/judge_address"
                         android:textAllCaps="true"
                         android:textColor="@color/clr_textcolor_dark" />
 
@@ -175,7 +176,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="1-1-1970"
+                        android:id="@+id/judge_dob"
                         android:textAllCaps="true"
                         android:textColor="@color/clr_textcolor_dark" />
 
@@ -205,7 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="2651417"
+                        android:id="@+id/judge_apoint_ment"
                         android:textAllCaps="true"
                         android:textColor="@color/clr_textcolor_dark" />
 
@@ -234,7 +235,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
-                        android:text="94177-59300"
+                        android:id="@+id/judge_retirement_date"
                         android:textAllCaps="true"
                         android:textColor="@color/clr_textcolor_dark" />
 
@@ -251,7 +252,7 @@
                     android:layout_marginLeft="@dimen/padding"
                     android:layout_marginTop="@dimen/padding"
                     android:paddingBottom="@dimen/padding"
-                    android:text="Born on 4th May 1956. Completed school education in 1972 from Rishi Valley School. Graduated from St. Xavier's College, Bombay. Completed his LL.B. from Hinduja Law College, Bombay. Enrolled as an Advocate on the rolls of Bar Council of Maharashtra and Goa on 17th October, 1980. Practiced on both Original and Appellate Sides in the Bombay High Court in Civil, Constitutional, Company and Arbitration matters. Also appeared in the Supreme Court, various High Courts, Tribunals, District Courts etc. Sworn in as Additional Judge of the Bombay High Court on 22nd January, 2001. He was appointed as a permanent Judge on January 21, 2003. Assumed charge as the Acting Chief Justice of Punjab &amp; Haryana High Court on 15.12.2014 (A.N.) on transfer from Bombay High Court. Took oath as Chief Justice of Punjab and Haryana High Court on 06th August, 2016."
+                    android:id="@+id/judge_bio"
                     android:textAllCaps="true"
                     android:textColor="@color/clr_textcolor_dark" />
 

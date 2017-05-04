@@ -25,14 +25,13 @@
                 style="@style/stl_devider"
                 android:background="@color/clr_white" />
 
-            <CalendarView
+            <com.high.court.layouts.HighCourtCalender
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:theme="@style/Theme.AppCompat.Light"
                 android:focusedMonthDateColor="@color/colorPrimary"
                 android:focusableInTouchMode="true"
-              android:selectedDateVerticalBar="@color/colorPrimary"
                 android:selectedWeekBackgroundColor="@color/colorPrimary"
                />
             <include

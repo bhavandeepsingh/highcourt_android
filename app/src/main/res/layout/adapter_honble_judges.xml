@@ -20,10 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
+            android:id="@+id/judge_name"
             android:maxWidth="150dp"
-
-            android:text="Hon’ble Mr. Justice
-Shiavax Jal Vazifdar"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="normal" />
@@ -32,7 +30,6 @@ Shiavax Jal Vazifdar"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_centerVertical="true"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="10dp"
@@ -40,8 +37,8 @@ Shiavax Jal Vazifdar"
             android:background="@drawable/border_courtroom_textvalue"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="5"
             android:textColor="@color/clr_white"
+            android:id="@+id/judge_court_room"
             android:textSize="14sp" />
 
 

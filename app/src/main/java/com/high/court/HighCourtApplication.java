@@ -11,6 +11,7 @@ import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.UILApplication;
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.HolidaysModel;
+import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,8 +29,8 @@ public class HighCourtApplication extends UILApplication {
     static List<ProfileModel> profileModels;
     static List<NotificationModel.Notifications> notificationsList;
     static BloodGroupsModel bloodGroupsModel;
-
     static HolidaysModel holidaysModel;
+    static JudgesModel judgesModel;
 
     @Override
     public void onCreate() {
@@ -113,6 +114,14 @@ public class HighCourtApplication extends UILApplication {
 
     public static void setHolidaysModel(HolidaysModel holidaysModel) {
         HighCourtApplication.holidaysModel = holidaysModel;
+    }
+
+    public static JudgesModel getJudgesModel() {
+        return judgesModel;
+    }
+
+    public static void setJudgesModel(JudgesModel judgesModel) {
+        HighCourtApplication.judgesModel = judgesModel;
     }
 }
 

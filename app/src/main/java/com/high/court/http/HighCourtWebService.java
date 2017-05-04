@@ -2,6 +2,7 @@ package com.high.court.http;
 
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.HolidaysModel;
+import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
@@ -64,5 +65,8 @@ public interface HighCourtWebService {
 
     @GET("holidays/list")
     Call<HolidaysModel> getHolidays();
+
+    @GET("judges/list")
+    Call<JudgesModel> getJudges();
 
 }

@@ -6,22 +6,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
+import com.high.court.activities.HighCourtActivity;
 import com.high.court.activities.HonableMemberDetail;
+import com.high.court.activities.HonbleJudgesActivity;
+import com.high.court.http.models.JudgesModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AdapterHonbleHudges extends RecyclerView.Adapter<AdapterHonbleHudges.ViewHolder> {
+
     Context context;
-    String[] get_judgesnamelist;
-    String[] get_courtroomlist;
 
-    public AdapterHonbleHudges(Context ctx, String[] judgesnamelist, String[] courtroomlist) {
+    public AdapterHonbleHudges(Context ctx) {
         super();
-        get_judgesnamelist = judgesnamelist;
-        get_courtroomlist = courtroomlist;
-
         this.context = ctx;
     }
 
@@ -35,36 +39,39 @@ public class AdapterHonbleHudges extends RecyclerView.Adapter<AdapterHonbleHudge
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-
-
-
+        if(viewHolder.itemView != null){
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context, HonableMemberDetail.class).putExtra(HonableMemberDetail.PROFILE_LIST_JUDGE_INDEX, String.valueOf(i)));
+                }
+            });
+        }
+        if(viewHolder.judge_name != null) viewHolder.judge_name.setText(getJudgesList().get(i).getName());
+        if(viewHolder.judge_court_room != null) viewHolder.judge_court_room.setText(getJudgesList().get(i).getCourt_room());
     }
 
     @Override
     public int getItemCount() {
-       // return get_ratelist_title.length;
-        return 22;
+        return getJudgesList().size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-       // TextView title, title_val;
-
+        TextView judge_name, judge_court_room;
         public ViewHolder(View itemView) {
             super(itemView);
-//            title = (TextView) itemView.findViewById(R.id.title);
-//            title_val = (TextView) itemView.findViewById(R.id.title_val);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, HonableMemberDetail.class);
-                    context.startActivity(intent);
-                }
-            });
-
-
+            judge_name = (TextView) itemView.findViewById(R.id.judge_name);
+            judge_court_room = (TextView) itemView.findViewById(R.id.judge_court_room);
         }
     }
+
+
+    public List<JudgesModel.Judge>  getJudgesList(){
+        if(HighCourtApplication.getJudgesModel() != null) return HighCourtApplication.getJudgesModel().getJudgeList();
+        return new ArrayList<>();
+    }
+
+
 
 }
 
