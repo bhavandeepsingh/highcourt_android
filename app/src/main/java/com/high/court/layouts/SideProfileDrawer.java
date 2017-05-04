@@ -20,6 +20,7 @@ import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.activities.MySubscriptionActivity;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
@@ -251,7 +252,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
+        getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
         select_PayMyDues();
     }
 

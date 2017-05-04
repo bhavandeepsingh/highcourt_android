@@ -143,13 +143,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     }
 
 
-    /**
-     * Start pick image activity with chooser.
-     */
-    public void onSelectImageClick(View view) {
-        CropImage.startPickImageActivity(this);
-    }
-
     @Override
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -202,8 +195,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
                 .setMaxCropResultSize(1024, 1024)
                 .setFixAspectRatio(true)
                 .setMultiTouchEnabled(true)
-                .setMaxCropResultSize(1024,1024)
-                .setFixAspectRatio(true)
                 .start(this);
     }
 

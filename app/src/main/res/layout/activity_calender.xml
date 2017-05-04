@@ -35,10 +35,12 @@
               android:selectedDateVerticalBar="@color/colorPrimary"
                 android:selectedWeekBackgroundColor="@color/colorPrimary"
                />
+            <include
+                android:id="@+id/recyclerview"
+                layout="@layout/include_recyclerview" />
 
 
         </LinearLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 
