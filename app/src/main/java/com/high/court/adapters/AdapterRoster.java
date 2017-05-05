@@ -11,19 +11,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.http.models.RosterModel;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder> {
     Context context;
-    String[] get_judgesnamelist;
-    String[] get_courtroomlist;
 
-    public AdapterRoster(Context ctx, String[] judgesnamelist, String[] courtroomlist) {
+    public AdapterRoster(Context ctx) {
         super();
-        get_judgesnamelist = judgesnamelist;
-        get_courtroomlist = courtroomlist;
-
         this.context = ctx;
     }
 
@@ -37,49 +40,49 @@ public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-
-
-
+        if(viewHolder.roster_sr_no != null) viewHolder.roster_sr_no.setText(String.valueOf(i+1));
+        if(viewHolder.roster_bench_name != null) viewHolder.roster_bench_name.setText(getRosterList().get(i).getBenchNames());
+        if(viewHolder.roster_judges_name != null) viewHolder.roster_judges_name.setText(getRosterList().get(i).getJugesName());
+        if(viewHolder.itemView != null){
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showDialog(getRosterList().get(i).getTitle(), getRosterList().get(i).getDescription());
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
-       // return get_ratelist_title.length;
-        return 22;
+        return getRosterList().size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-       // TextView title, title_val;
+
+        TextView roster_sr_no, roster_bench_name, roster_judges_name;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            title = (TextView) itemView.findViewById(R.id.title);
-//            title_val = (TextView) itemView.findViewById(R.id.title_val);
-
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
-
-                    // Create custom dialog object
-                    final Dialog dialog = new Dialog(context);
-                    // Include dialog.xml file
-                    dialog.setContentView(R.layout.dialog_roster);
-                    // Set dialog title
-                    dialog.setTitle("Custom Dialog");
-
-
-
-                    dialog.show();
-
-
-
-
-                }
-            });
-            
+            roster_sr_no = (TextView) itemView.findViewById(R.id.roster_sr_no);
+            roster_bench_name = (TextView) itemView.findViewById(R.id.roster_bench_name);
+            roster_judges_name = (TextView) itemView.findViewById(R.id.roster_judges_name);
         }
+    }
+
+    List<RosterModel.Roster> getRosterList(){
+        if(HighCourtApplication.getRosterModel() != null){
+            return HighCourtApplication.getRosterModel().getRosterList();
+        }
+        return new ArrayList<>();
+    }
+
+    void showDialog(String title, String description){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_roster);
+        if(dialog.findViewById(R.id.roster_dialog_title) != null) ((TextView) dialog.findViewById(R.id.roster_dialog_title)).setText(title);
+        if(dialog.findViewById(R.id.roster_dialog_description) != null) ((TextView) dialog.findViewById(R.id.roster_dialog_description)).setText(description);
+        dialog.show();
     }
 
 }

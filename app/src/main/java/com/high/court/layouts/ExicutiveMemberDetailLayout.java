@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -14,10 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.high.court.BuildConfig;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
@@ -29,7 +32,9 @@ import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ProfileUpdateInterface;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,6 +48,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static android.R.attr.id;
@@ -109,6 +115,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public CircleImageView getProfilePicShow() {
+        if (profilePicShow != null) setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
         return profilePicShow;
     }
 
@@ -306,12 +313,29 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     private void updateProfileStart() {
         getHighCourtLoader().start();
-        ProfileModel.profileUpdate(makeRequest(), this);
+        ProfileModel.profileUpdate(makeRequest(), makeImageRequest(), this);
+    }
+
+    private MultipartBody.Part makeImageRequest() {
+        if(getExicutiveMemberDetailsEdit().getCropImageView() != null) {
+            File file = new File(getExicutiveMemberDetailsEdit().getCropImageView().getImageUri().toString());
+            File outPutFile = null;
+            for(int i = 0; i< getContext().getCacheDir().list().length ; i++){
+                if(file.getName().equals(getContext().getCacheDir().list()[i].toString())){
+                    outPutFile = getContext().getCacheDir().listFiles()[i];
+                }
+            }
+            if(outPutFile == null)return null;
+                ImageLoader.getInstance().clearMemoryCache();
+                ImageLoader.getInstance().clearDiskCache();
+                return  MultipartBody.Part.createFormData("UploadForm[imageFile]", outPutFile.getName(), RequestBody.create(MediaType.parse("image/*"), outPutFile));
+        }
+        return null;
     }
 
     private Map<String, RequestBody> makeRequest() {
         Map<String, RequestBody> stringStringMap = new HashMap<>();
-        stringStringMap.put("Profile[email]", RequestBody.create(MediaType.parse("text/plain"), getEmail_id().getText().toString()));
+        stringStringMap.put("Profile[public_email]", RequestBody.create(MediaType.parse("text/plain"), getEmail_id().getText().toString()));
         stringStringMap.put("Profile[landline]", RequestBody.create(MediaType.parse("text/plain"), getLandline_no().getText().toString()));
         stringStringMap.put("Profile[mobile]", RequestBody.create(MediaType.parse("text/plain"), getMobile_no().getText().toString()));
         stringStringMap.put("Profile[residential_address]", RequestBody.create(MediaType.parse("text/plain"), getResidential_adress().getText().toString()));
@@ -319,10 +343,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         stringStringMap.put("Profile[profile]", RequestBody.create(MediaType.parse("text/plain"), getProfile_val().getText().toString()));
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
-        }
-        if(getExicutiveMemberDetailsEdit().getProfile_pic_image_view() != null) {
-            stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), new File(getExicutiveMemberDetailsEdit().getmCropImageUri().toString())));
-            //stringStringMap.put("UploadForm[imageFile]", RequestBody.create(MediaType.parse("image/jpeg"), createFile()));
         }
         return stringStringMap;
     }
@@ -408,7 +428,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     @Override
     public void onProfileFailure(UserLoginModel userLoginModel) {
         getHighCourtLoader().stop();
-        ToastHelper.profileUpdateFail(getContext());
+        if(userLoginModel != null) ToastHelper.showToast(userLoginModel.getError(), getContext());
+        else ToastHelper.profileUpdateFail(getContext());
     }
 
 

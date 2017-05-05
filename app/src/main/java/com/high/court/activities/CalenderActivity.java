@@ -17,24 +17,13 @@ import android.widget.CalendarView;
 
 
 import com.high.court.R;
+import com.high.court.adapters.AdapterHolidaysCalender;
 
 import java.lang.reflect.Field;
 
 public class CalenderActivity extends HighCourtActivity {
 
     Context context = CalenderActivity.this;
-
-    public static String[] judgesnamelist = {
-            "Satish Kumar Mittal",
-            "Satish Kumar Mittal",
-
-    };
-    public static String[] courtroomlist = {
-            "75/-",
-            "75/-",
-    };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +35,14 @@ public class CalenderActivity extends HighCourtActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Calendar");
 
-
-
-//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
-//        recyclerView.setHasFixedSize(true);
-//        final LinearLayoutManager llm = new GridLayoutManager(context, 1);
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(llm);
-//        AdapterHolidaysCalender adapter = new AdapterHolidaysCalender(context,  judgesnamelist,courtroomlist);
-//        recyclerView.setNestedScrollingEnabled(false);
-//        recyclerView.setAdapter(adapter);
-
-
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+        final LinearLayoutManager llm = new GridLayoutManager(context, 1);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        AdapterHolidaysCalender adapter = new AdapterHolidaysCalender(context);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(adapter);
 
     }
 

@@ -2,6 +2,7 @@ package com.high.court.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.util.AsyncListUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +14,33 @@ import android.widget.TextView;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.CalenderActivity;
+import com.high.court.activities.CaseLawActivity;
 import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DisplayBoardActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.activities.HonbleJudgesActivity;
 import com.high.court.activities.MemberDirectoryActivity;
 import com.high.court.activities.NoificationActivity;
+import com.high.court.activities.RosterActivity;
 import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
+import com.high.court.helpers.ToastHelper;
+import com.high.court.http.models.CaseLawModel;
+import com.high.court.http.models.HolidaysModel;
+import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
+import com.high.court.http.models.RosterModel;
 import com.high.court.http.models.UserLoginModel;
+import com.high.court.http.models.http_interface.CaseLawInterface;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
+import com.high.court.http.models.http_interface.HolidayInterface;
+import com.high.court.http.models.http_interface.JudgesModelInterface;
 import com.high.court.http.models.http_interface.MemberInterface;
 import com.high.court.http.models.http_interface.NotificationInterface;
+import com.high.court.http.models.http_interface.RosterInterface;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
 
 import java.util.HashMap;
@@ -36,7 +49,7 @@ import java.util.List;
 import okhttp3.RequestBody;
 
 
-public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface {
+public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface, JudgesModelInterface, CaseLawInterface, RosterInterface {
 
     Context context;
 
@@ -85,31 +98,29 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                 ExcecutiveMemberModel.getMembersList(AdapterDashBoard.this, new HashMap<String, String>(), 0, false);
             }
             if (i == 2) {
-                Intent intent = new Intent(context, WebViewActivity.class);
-                intent.putExtra("url",judges_url);
-                context.startActivity(intent);
+                getHighCourtLoader().start();
+                JudgesModel.getJudges(AdapterDashBoard.this, null, 0, false);
             }
             if (i == 3) {
                 getHighCourtLoader().start();
                 NotificationModel.getNotificationList(AdapterDashBoard.this);
             }
             if (i == 4) {
-                    Intent intent = new Intent(context, WebViewActivity.class);
+                Intent intent = new Intent(context, WebViewActivity.class);
                 intent.putExtra("url",displayboard_url);
                 context.startActivity(intent);
             }
             if (i == 5) {
-                Intent intent = new Intent(context, CalenderActivity.class);
-                context.startActivity(intent);
+                getHighCourtLoader().start();
+                HolidaysModel.getHolidays(AdapterDashBoard.this);
             }
             if (i == 6) {
-                Intent intent = new Intent(context, WebViewActivity.class);
-                intent.putExtra("url",roster_url);
-                context.startActivity(intent);
+                getHighCourtLoader().start();
+                RosterModel.getRoster(AdapterDashBoard.this, null, 1);
             }
             if (i == 7) {
-                Intent intent = new Intent(context, CommingSoonActivity.class);
-                context.startActivity(intent);
+                getHighCourtLoader().start();
+                CaseLawModel.getCaseLaw(AdapterDashBoard.this, 1);
             }
             }
         });
@@ -141,9 +152,11 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     @Override
     public void onNotificationSuccess(NotificationModel notificationModel) {
-        HighCourtApplication.setNotifcationList(notificationModel.getNotificationses());
         getHighCourtLoader().stop();
-        context.startActivity(new Intent(context, NoificationActivity.class));
+        if(notificationModel != null) {
+            HighCourtApplication.setNotifcationList(notificationModel.getNotificationses());
+            context.startActivity(new Intent(context, NoificationActivity.class));
+        }
     }
 
     @Override
@@ -177,6 +190,73 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     @Override
     public void onProfileMemberFailur(Throwable t) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onHolidaysSuccess(HolidaysModel holidaysModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setHolidaysModel(holidaysModel);
+        context.startActivity(new Intent(context, CalenderActivity.class));
+    }
+
+    @Override
+    public void onHolidaysFailur() {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onHolidaysFailur(Throwable t) {
+        getHighCourtLoader().stop();
+        ToastHelper.showToast(t.getMessage(), getContext());
+    }
+
+    @Override
+    public void onJudgesSuccess(JudgesModel judgesModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setJudgesModel(judgesModel);
+        getContext().startActivity(new Intent(getContext(), HonbleJudgesActivity.class));
+    }
+
+    @Override
+    public void onJudgesFailur(Throwable t) {
+        getHighCourtLoader().stop();
+        ToastHelper.showToast(t.getMessage(), getContext());
+    }
+
+    @Override
+    public void onJudgesSearch(JudgesModel judgesModel) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onCaseLawSuccess(CaseLawModel caseLawModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setCaseLawModel(caseLawModel);
+        getContext().startActivity(new Intent(context, CaseLawActivity.class));
+    }
+
+    @Override
+    public void onCaseLawFailur(Throwable t) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onRosterSuccess(RosterModel rosterModel) {
+        getHighCourtLoader().stop();
+        if(rosterModel != null){
+            HighCourtApplication.setRosterModel(rosterModel);
+            context.startActivity(new Intent(context, RosterActivity.class));
+        }
+    }
+
+    @Override
+    public void onRosterFailur(Throwable t) {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onRosterFailur() {
         getHighCourtLoader().stop();
     }
 

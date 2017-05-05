@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
 
-
     <application
         android:name=".HighCourtApplication"
         android:allowBackup="true"
@@ -89,7 +88,7 @@
         <activity android:name=".activities.ProfileActivity2" />
 
         <activity android:name=".activities.DisplayBoardDetail" />
-        <activity android:name=".activities.CaseLowActivity" />
+        <activity android:name=".activities.CaseLawActivity" />
         <activity android:name=".activities.CommingSoonActivity"></activity>
         <activity android:name=".activities.WebViewActivity"/>
 

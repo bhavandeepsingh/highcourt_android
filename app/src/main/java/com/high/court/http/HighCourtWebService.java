@@ -1,7 +1,11 @@
 package com.high.court.http;
 
 import com.high.court.http.models.BloodGroupsModel;
+import com.high.court.http.models.CaseLawModel;
+import com.high.court.http.models.HolidaysModel;
+import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
+import com.high.court.http.models.RosterModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
@@ -10,6 +14,7 @@ import com.high.court.http.models.http_request.ResetMyPassword;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
@@ -58,7 +63,21 @@ public interface HighCourtWebService {
 
     @Multipart
     @POST("profile/update")
-    Call<UserLoginModel> profileUpdate(@PartMap Map<String, RequestBody> stringStringMap);
+    Call<UserLoginModel> profileUpdate(@PartMap Map<String, RequestBody> stringStringMap, @Part MultipartBody.Part part);
 
+    @GET("holidays/list")
+    Call<HolidaysModel> getHolidays();
+
+    @FormUrlEncoded
+    @POST("judges/list")
+    Call<JudgesModel> getJudges(@FieldMap Map<String, String> stringRequestBodyMap, @Query("page") int page_no);
+
+
+    @GET("case-law/list")
+    Call<CaseLawModel> getCaseLaw(@Query("page") int page_no);
+
+    @FormUrlEncoded
+    @POST("roster/list")
+    Call<RosterModel> getRoster(@FieldMap Map<String, String> stringStringMap, @Query("page") int page_no);
 
 }

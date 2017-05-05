@@ -10,10 +10,12 @@ import com.high.court.http.models.http_interface.ProfileUpdateInterface;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Multipart;
 
 /**
  * Created by admin on 4/25/2017.
@@ -333,6 +335,7 @@ public class ProfileModel extends HighCourtModel {
         .setCourt_address(UserHelper.getAppUserCourtAddress())
         .setDesignation_name(UserHelper.getAppUserDesignation())
         .setEmail(UserHelper.getEmail())
+        .setProfile_pic(UserHelper.getAppUserProfilePic())
         .setResidential_address(UserHelper.getAppUserResidential())
         .setDesignation_name(UserHelper.getAppUserDesignation())
         .setBlood_group(UserHelper.getAppUserBloodGroup())
@@ -350,8 +353,8 @@ public class ProfileModel extends HighCourtModel {
         .setBlood_group_id(Integer.parseInt(UserHelper.getAppUserBloodGroupId()));
     }
 
-    public static void profileUpdate(Map<String, RequestBody> stringStringMap, final ProfileUpdateInterface profileUpdateInterface){
-        RestAdapter.get().profileUpdate(stringStringMap).enqueue(new Callback<UserLoginModel>() {
+    public static void profileUpdate(Map<String, RequestBody> stringStringMap, MultipartBody.Part part, final ProfileUpdateInterface profileUpdateInterface){
+        RestAdapter.get().profileUpdate(stringStringMap, part).enqueue(new Callback<UserLoginModel>() {
             @Override
             public void onResponse(Call<UserLoginModel> call, Response<UserLoginModel> response) {
                 if(response.body() != null && response.body().is_success()){

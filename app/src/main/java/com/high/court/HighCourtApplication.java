@@ -7,10 +7,17 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.activities.RosterActivity;
+import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.UILApplication;
 import com.high.court.http.models.BloodGroupsModel;
+import com.high.court.http.models.CaseLawModel;
+import com.high.court.http.models.HolidaysModel;
+import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
+import com.high.court.http.models.RosterModel;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -25,13 +32,23 @@ public class HighCourtApplication extends UILApplication {
     static List<ProfileModel> profileModels;
     static List<NotificationModel.Notifications> notificationsList;
     static BloodGroupsModel bloodGroupsModel;
+    static HolidaysModel holidaysModel;
+    static JudgesModel judgesModel;
+    static CaseLawModel caseLawModel;
+    static RosterModel rosterModel;
 
     @Override
     public void onCreate() {
+//        ImageLoader.getInstance().clearMemoryCache();
+//        ImageLoader.getInstance().clearDiskCache();
         super.onCreate();
         adjustFontScale(getApplicationContext(),getApplicationContext().getResources().getConfiguration());
         highCourtApplication = this;
     }
+
+
+
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -91,5 +108,42 @@ public class HighCourtApplication extends UILApplication {
     public static void setBloodGroupsModel(BloodGroupsModel bloodGroupsModel) {
         HighCourtApplication.bloodGroupsModel = bloodGroupsModel;
     }
+
+    public static void setNotificationsList(List<NotificationModel.Notifications> notificationsList) {
+        HighCourtApplication.notificationsList = notificationsList;
+    }
+
+    public static HolidaysModel getHolidaysModel() {
+        return holidaysModel;
+    }
+
+    public static void setHolidaysModel(HolidaysModel holidaysModel) {
+        HighCourtApplication.holidaysModel = holidaysModel;
+    }
+
+    public static JudgesModel getJudgesModel() {
+        return judgesModel;
+    }
+
+    public static void setJudgesModel(JudgesModel judgesModel) {
+        HighCourtApplication.judgesModel = judgesModel;
+    }
+
+    public static CaseLawModel getCaseLawModel() {
+        return caseLawModel;
+    }
+
+    public static void setCaseLawModel(CaseLawModel caseLawModel) {
+        HighCourtApplication.caseLawModel = caseLawModel;
+    }
+
+    public static RosterModel getRosterModel() {
+        return rosterModel;
+    }
+
+    public static void setRosterModel(RosterModel rosterModel) {
+        HighCourtApplication.rosterModel = rosterModel;
+    }
+
 }
 

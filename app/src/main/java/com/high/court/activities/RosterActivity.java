@@ -25,16 +25,7 @@ import java.lang.reflect.Field;
 public class RosterActivity extends HighCourtActivity{
 
     Context context = RosterActivity.this;
-
-    public static String[] judgesnamelist = {
-            "Satish Kumar Mittal",
-            "Satish Kumar Mittal",
-
-    };
-    public static String[] courtroomlist = {
-            "75/-",
-            "75/-",
-    };
+    AdapterRoster adapterRoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +42,11 @@ public class RosterActivity extends HighCourtActivity{
         final LinearLayoutManager llm = new GridLayoutManager(context, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
-        AdapterRoster adapter = new AdapterRoster(context,  judgesnamelist,courtroomlist);
+        adapterRoster = new AdapterRoster(context);
         recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(adapter);
-
+        recyclerView.setAdapter(adapterRoster);
 
     }
-
-
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,7 +54,22 @@ public class RosterActivity extends HighCourtActivity{
         if (id==android.R.id.home){
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public AdapterRoster getAdapterRoster() {
+        return adapterRoster;
+    }
+
+    public void setAdapterRoster(AdapterRoster adapterRoster) {
+        this.adapterRoster = adapterRoster;
     }
 }
