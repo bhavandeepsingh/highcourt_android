@@ -428,7 +428,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     @Override
     public void onProfileFailure(UserLoginModel userLoginModel) {
         getHighCourtLoader().stop();
-        ToastHelper.profileUpdateFail(getContext());
+        if(userLoginModel != null) ToastHelper.showToast(userLoginModel.getError(), getContext());
+        else ToastHelper.profileUpdateFail(getContext());
     }
 
 

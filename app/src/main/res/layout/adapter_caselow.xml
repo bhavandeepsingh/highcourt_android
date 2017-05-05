@@ -30,11 +30,8 @@
                 android:layout_marginTop="8dp"
                 android:background="@color/clr_blank"
                 android:padding="10dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.
+                android:id="@+id/case_law_description"
 
-Ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-
-It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
                 android:textColor="@color/clr_textcolor_dark"
                 android:textIsSelectable="true"
                 android:textSize="@dimen/dim_textsize"
@@ -58,7 +55,7 @@ It has survived not only five centuries, but also the leap into electronic types
                 android:layout_marginLeft="@dimen/spacing_normal"
                 android:layout_marginRight="@dimen/spacing_normal"
                 android:layout_marginTop="-2dp"
-                android:text="A Vs B 2017 (1) Law 123"
+                android:id="@+id/case_law_below"
                 android:textColor="#093cad"
                 android:textSize="14sp"
                 android:textStyle="normal" />

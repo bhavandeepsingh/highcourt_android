@@ -1,9 +1,11 @@
 package com.high.court.http;
 
 import com.high.court.http.models.BloodGroupsModel;
+import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
+import com.high.court.http.models.RosterModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
@@ -70,5 +72,12 @@ public interface HighCourtWebService {
     @POST("judges/list")
     Call<JudgesModel> getJudges(@FieldMap Map<String, String> stringRequestBodyMap, @Query("page") int page_no);
 
+
+    @GET("case-law/list")
+    Call<CaseLawModel> getCaseLaw(@Query("page") int page_no);
+
+    @FormUrlEncoded
+    @POST("roster/list")
+    Call<RosterModel> getRoster(@FieldMap Map<String, String> stringStringMap, @Query("page") int page_no);
 
 }

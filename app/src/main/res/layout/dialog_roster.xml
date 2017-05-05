@@ -6,13 +6,21 @@
     android:background="@color/clr_white"
     android:orientation="vertical">
 
+    <!--<ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginRight="-10dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_cross"/>
+-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:text="Criminal case heading" />
+        android:id="@+id/roster_dialog_title"
+        android:textColor="@color/colorPrimary" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +28,8 @@
         android:lineSpacingExtra="4dp"
         android:textSize="@dimen/dim_textsize"
         android:textColor="@color/clr_textcolor_dark"
-        android:text="@string/str_dumytext" />
+        android:id="@+id/roster_dialog_description"
+    />
 
 
 </LinearLayout>

@@ -2,8 +2,14 @@ package com.high.court.http.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.high.court.http.RestAdapter;
+import com.high.court.http.models.http_interface.CaseLawInterface;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by admin on 5/4/2017.
@@ -84,6 +90,22 @@ public class CaseLawModel extends HighCourtModel {
         public void setUpdated_at(String updated_at) {
             this.updated_at = updated_at;
         }
+    }
+
+    public static void getCaseLaw(final CaseLawInterface caseLawInterface, int page_no){
+        RestAdapter.get().getCaseLaw(page_no).enqueue(new Callback<CaseLawModel>() {
+            @Override
+            public void onResponse(Call<CaseLawModel> call, Response<CaseLawModel> response) {
+                if(response.body() != null) {
+                    caseLawInterface.onCaseLawSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CaseLawModel> call, Throwable t) {
+                caseLawInterface.onCaseLawFailur(t);
+            }
+        });
     }
 
 }

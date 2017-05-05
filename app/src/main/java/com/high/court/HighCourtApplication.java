@@ -7,13 +7,16 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.activities.RosterActivity;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.UILApplication;
 import com.high.court.http.models.BloodGroupsModel;
+import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
+import com.high.court.http.models.RosterModel;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -31,6 +34,8 @@ public class HighCourtApplication extends UILApplication {
     static BloodGroupsModel bloodGroupsModel;
     static HolidaysModel holidaysModel;
     static JudgesModel judgesModel;
+    static CaseLawModel caseLawModel;
+    static RosterModel rosterModel;
 
     @Override
     public void onCreate() {
@@ -123,5 +128,22 @@ public class HighCourtApplication extends UILApplication {
     public static void setJudgesModel(JudgesModel judgesModel) {
         HighCourtApplication.judgesModel = judgesModel;
     }
+
+    public static CaseLawModel getCaseLawModel() {
+        return caseLawModel;
+    }
+
+    public static void setCaseLawModel(CaseLawModel caseLawModel) {
+        HighCourtApplication.caseLawModel = caseLawModel;
+    }
+
+    public static RosterModel getRosterModel() {
+        return rosterModel;
+    }
+
+    public static void setRosterModel(RosterModel rosterModel) {
+        HighCourtApplication.rosterModel = rosterModel;
+    }
+
 }
 

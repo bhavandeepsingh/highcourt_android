@@ -49,7 +49,8 @@ public class MemberDirectoryActivity extends HighCourtActivity implements Member
     AdapterDirectoryMember adapterDirectoryMember;
 
     HighCourtLoader highCourtLoader;
-   public RelativeLayout loader;
+    public RelativeLayout loader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
