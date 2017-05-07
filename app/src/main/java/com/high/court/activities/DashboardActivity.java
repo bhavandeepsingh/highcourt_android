@@ -11,13 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterDashBoard;
+import com.high.court.backround_service.NotificationService;
 import com.high.court.helpers.ImageHelper;
-import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
 import com.high.court.layouts.SideProfileDrawer;
 
@@ -62,11 +60,12 @@ public class DashboardActivity extends HighCourtActivity {
 
     void setupDashboard(){
         setContentView(R.layout.activity_dashboard);
-
+        startService(new Intent(getApplicationContext(), NotificationService.class));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("");
 
+        startService(new Intent(context, NotificationService.class));
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -118,4 +117,5 @@ public class DashboardActivity extends HighCourtActivity {
             sideProfileDrawer.getProfileImageView().invalidate();
         }
     }
+
 }

@@ -10,6 +10,8 @@ public interface RosterInterface {
 
     void onRosterSuccess(RosterModel rosterModel);
 
+    void onRosterSearch(RosterModel rosterModel);
+
     void onRosterFailur(Throwable t);
 
     void onRosterFailur();

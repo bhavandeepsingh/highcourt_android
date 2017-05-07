@@ -50,6 +50,8 @@
 
 
 
+    <style name="custom_calender" parent="AlertDialog.AppCompat.Light">
 
+    </style>
 
 </resources>

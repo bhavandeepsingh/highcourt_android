@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.HighCourtActivity;
 import com.high.court.http.models.CaseLawModel;
 
 import java.util.List;
@@ -35,13 +37,27 @@ public class AdapterCaseLow extends RecyclerView.Adapter<AdapterCaseLow.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         if(viewHolder.case_law_description != null) viewHolder.case_law_description.setText(getCaseLawList().get(i).getDiscription());
-        if(viewHolder.case_law_below!= null) viewHolder.case_law_below.setText(getCaseLawList().get(i).getDiscription());
+        if(viewHolder.case_law_below!= null) viewHolder.case_law_below.setText(getCaseLawList().get(i).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        if(getCaseLawList() != null && getCaseLawList().size() > 0) return getCaseLawList().size();
-        return 0;
+        int list_size = (getCaseLawList() != null && getCaseLawList().size() > 0)? getCaseLawList().size() : 0;
+        if(list_size <= 0) showNoRecords();
+        else hideNoRecords();
+        return list_size;
+    }
+
+    private void hideNoRecords() {
+        if(getNoRecordsFounds() != null){
+            getNoRecordsFounds().setVisibility(View.GONE);
+        }
+    }
+
+    private void showNoRecords() {
+        if(getNoRecordsFounds() != null){
+            getNoRecordsFounds().setVisibility(View.VISIBLE);
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,6 +78,10 @@ public class AdapterCaseLow extends RecyclerView.Adapter<AdapterCaseLow.ViewHold
 
     public void setCaseLawList(List<CaseLawModel.CaseLaw> caseLawList) {
         this.caseLawList = caseLawList;
+    }
+
+    public RelativeLayout getNoRecordsFounds(){
+        return  (RelativeLayout) ((HighCourtActivity) context).findViewById(R.id.no_records_found);
     }
 
 }

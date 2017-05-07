@@ -31,6 +31,7 @@
                 android:hint="Search"
                 android:padding="6dp"
                 android:singleLine="true"
+                android:id="@+id/roster_search_text"
                 android:textColor="@color/clr_textcolor_dark"
                 android:textColorHint="#c65f5f5f"
                 android:textSize="13sp" />
@@ -129,7 +130,50 @@
 
 
 
-    <include layout="@layout/include_recyclerview"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/include_recyclerview"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+            android:layout_above="@+id/loader"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/no_records_found"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:paddingTop="20dp"
+                android:textColor="@color/clr_black"
+                android:layout_centerInParent="true"
+                android:text="No Records Found"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_alignParentBottom="true"
+            android:background="#00000000"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
         />
 

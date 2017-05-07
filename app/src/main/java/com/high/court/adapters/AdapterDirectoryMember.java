@@ -6,21 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
-import com.high.court.activities.ProfileActivity2;
+import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.DialerHelper;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.http.models.ProfileModel;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
-import java.util.StringTokenizer;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,8 +73,24 @@ public class AdapterDirectoryMember extends RecyclerView.Adapter<AdapterDirector
 
     @Override
     public int getItemCount() {
-        return getProfileModelList().size();
+        int list_size = getProfileModelList().size();
+        if(list_size <= 0) showNoRecords();
+        else hideNoRecords();
+        return list_size;
     }
+
+    private void hideNoRecords() {
+        if(getNoRecordsFounds() != null){
+            getNoRecordsFounds().setVisibility(View.GONE);
+        }
+    }
+
+    private void showNoRecords() {
+        if(getNoRecordsFounds() != null){
+            getNoRecordsFounds().setVisibility(View.VISIBLE);
+        }
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView profile_image;
@@ -99,6 +112,10 @@ public class AdapterDirectoryMember extends RecyclerView.Adapter<AdapterDirector
 
     public void setProfileModelList(List<ProfileModel> profileModelList) {
         this.profileModelList = profileModelList;
+    }
+
+    public RelativeLayout getNoRecordsFounds(){
+        return  (RelativeLayout) ((HighCourtActivity) context).findViewById(R.id.no_records_found);
     }
 }
 

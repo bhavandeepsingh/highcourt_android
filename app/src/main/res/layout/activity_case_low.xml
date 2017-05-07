@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/cardview_light_background"
     tools:context="com.high.court.activities.CaseLawActivity">
 
     <include
@@ -15,12 +16,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/include_recyclerview"/>
+        <include layout="@layout/include_recyclerview"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+
+            android:layout_above="@+id/loader"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/no_records_found"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:paddingTop="20dp"
+                android:textColor="@color/clr_black"
+                android:layout_centerInParent="true"
+                android:text="No Records Found"/>
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/loader"
             android:layout_width="match_parent"
-            android:layout_below="@+id/recyclerview"
             android:layout_height="64dp"
             android:layout_alignParentBottom="true"
             android:background="#00000000"

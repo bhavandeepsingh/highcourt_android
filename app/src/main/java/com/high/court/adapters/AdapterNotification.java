@@ -7,17 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
-
 import com.high.court.R;
-import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.DateHelper;
 import com.high.court.http.models.NotificationModel;
 
-import java.net.URI;
 import java.util.List;
 
 
@@ -50,12 +47,18 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                 viewHolder.download_file.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getNotificationsList().get(i).getNotification_src())));
+                        if(getNotificationsList().get(i).getNotification_src() != null) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getNotificationsList().get(i).getNotification_src())));
+                        }
                     }
                 });
             }else{
                 viewHolder.download_file.setVisibility(View.GONE);
             }
+        }
+
+        if(getNotificationsList().get(i).getIsRead() <= 0){
+            viewHolder.notif_layer.setBackgroundResource(R.drawable.notification_un_read);
         }
 
     }
@@ -68,13 +71,15 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView notification_description, notification_time;
-        LinearLayout download_file;
+        LinearLayout download_file, notif_layer;
 
         public ViewHolder(View itemView) {
             super(itemView);
             notification_description = (TextView) itemView.findViewById(R.id.notification_description);
             notification_time = (TextView) itemView.findViewById(R.id.notification_time);
             download_file = (LinearLayout)itemView.findViewById(R.id.download_file);
+            notif_layer = (LinearLayout) itemView.findViewById(R.id.notif_layer);
+
         }
     }
 

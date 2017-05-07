@@ -1,7 +1,6 @@
 package com.high.court.activities;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,9 +15,8 @@ import com.high.court.R;
 import com.high.court.adapters.AdapterCaseLow;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.http_interface.CaseLawInterface;
-import com.high.court.http.models.http_request.ExcecutiveMemberModel;
 
-public class CaseLawActivity extends AppCompatActivity implements CaseLawInterface {
+public class CaseLawActivity extends HighCourtActivity implements CaseLawInterface {
 
     Context context = CaseLawActivity.this;
 

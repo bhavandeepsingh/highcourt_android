@@ -31,8 +31,9 @@
                 android:layout_height="match_parent"
                 android:theme="@style/Theme.AppCompat.Light"
                 android:focusedMonthDateColor="@color/colorPrimary"
-                android:focusableInTouchMode="true"
+                android:focusableInTouchMode="false"
                 android:selectedWeekBackgroundColor="@color/colorPrimary"
+                android:weekNumberColor="@color/clr_red"
                />
             <include
                 android:id="@+id/recyclerview"

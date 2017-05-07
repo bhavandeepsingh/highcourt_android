@@ -6,24 +6,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.HighCourtActivity;
 import com.high.court.http.models.RosterModel;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 
 public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder> {
+
     Context context;
+
+    List<RosterModel.Roster> rosterList;
 
     public AdapterRoster(Context ctx) {
         super();
@@ -53,9 +51,25 @@ public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder
         }
     }
 
+
     @Override
     public int getItemCount() {
-        return getRosterList().size();
+        int list_size = (getRosterList() != null)? getRosterList().size() : 0;
+        if(list_size <= 0) showNoRecords();
+        else hideNoRecords();
+        return list_size;
+    }
+
+    private void hideNoRecords() {
+        if(getNoRecordsFounds() != null){
+            getNoRecordsFounds().setVisibility(View.GONE);
+        }
+    }
+
+    private void showNoRecords() {
+        if(getNoRecordsFounds() != null){
+            getNoRecordsFounds().setVisibility(View.VISIBLE);
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,11 +84,9 @@ public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder
         }
     }
 
-    List<RosterModel.Roster> getRosterList(){
-        if(HighCourtApplication.getRosterModel() != null){
-            return HighCourtApplication.getRosterModel().getRosterList();
-        }
-        return new ArrayList<>();
+    public List<RosterModel.Roster> getRosterList(){
+        if(rosterList == null) rosterList =HighCourtApplication.getRosterModel().getRosterList();
+        return rosterList;
     }
 
     void showDialog(String title, String description){
@@ -85,5 +97,12 @@ public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder
         dialog.show();
     }
 
+    public RelativeLayout getNoRecordsFounds(){
+        return  (RelativeLayout) ((HighCourtActivity) context).findViewById(R.id.no_records_found);
+    }
+
+    public void setRosterList(List<RosterModel.Roster> rosterList) {
+        this.rosterList = rosterList;
+    }
 }
 

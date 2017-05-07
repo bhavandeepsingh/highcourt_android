@@ -192,13 +192,14 @@ public class RosterModel extends HighCourtModel {
         }
     }
 
-    public static void getRoster(final RosterInterface rosterInterface, Map<String, String> stringStringMap, int page_no){
+    public static void getRoster(final RosterInterface rosterInterface, Map<String, String> stringStringMap, int page_no, final boolean is_search){
         if(stringStringMap == null) stringStringMap = new HashMap<>();
         RestAdapter.get().getRoster(stringStringMap, page_no).enqueue(new Callback<RosterModel>() {
             @Override
             public void onResponse(Call<RosterModel> call, Response<RosterModel> response) {
                 if(response.body() != null){
-                    rosterInterface.onRosterSuccess(response.body());
+                    if(is_search) rosterInterface.onRosterSearch(response.body());
+                    else rosterInterface.onRosterSuccess(response.body());
                 }else{
                     rosterInterface.onRosterFailur();
                 }

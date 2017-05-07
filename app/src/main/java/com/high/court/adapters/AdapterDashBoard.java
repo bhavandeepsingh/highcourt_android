@@ -2,7 +2,6 @@ package com.high.court.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.util.AsyncListUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,6 @@ import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.CalenderActivity;
 import com.high.court.activities.CaseLawActivity;
-import com.high.court.activities.CommingSoonActivity;
-import com.high.court.activities.DisplayBoardActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.activities.HonbleJudgesActivity;
@@ -33,7 +30,6 @@ import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.RosterModel;
-import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.CaseLawInterface;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
 import com.high.court.http.models.http_interface.HolidayInterface;
@@ -45,8 +41,6 @@ import com.high.court.http.models.http_request.ExcecutiveMemberModel;
 
 import java.util.HashMap;
 import java.util.List;
-
-import okhttp3.RequestBody;
 
 
 public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface, JudgesModelInterface, CaseLawInterface, RosterInterface {
@@ -116,7 +110,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             }
             if (i == 6) {
                 getHighCourtLoader().start();
-                RosterModel.getRoster(AdapterDashBoard.this, null, 1);
+                RosterModel.getRoster(AdapterDashBoard.this, null, 1, false);
             }
             if (i == 7) {
                 getHighCourtLoader().start();
@@ -248,6 +242,11 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             HighCourtApplication.setRosterModel(rosterModel);
             context.startActivity(new Intent(context, RosterActivity.class));
         }
+    }
+
+    @Override
+    public void onRosterSearch(RosterModel rosterModel) {
+        getHighCourtLoader().stop();
     }
 
     @Override

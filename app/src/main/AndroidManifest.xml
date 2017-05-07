@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.high.court">
 
-
-
-
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -92,6 +89,10 @@
         <activity android:name=".activities.CommingSoonActivity"></activity>
         <activity android:name=".activities.WebViewActivity"/>
 
+        <service
+            android:name=".backround_service.NotificationService"
+            android:exported="true"
+            android:process=":ServiceProcess"/>
 
     </application>
 

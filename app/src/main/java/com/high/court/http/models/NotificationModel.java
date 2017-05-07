@@ -2,10 +2,12 @@ package com.high.court.http.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.high.court.backround_service.NotificationService;
 import com.high.court.http.RestAdapter;
 import com.high.court.http.models.http_interface.NotificationInterface;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,9 +21,21 @@ public class NotificationModel extends HighCourtModel {
 
     public static int NOTIFAICATION_HAS_ATTACHMENT = 1;
 
+    @SerializedName("un_read_count")
+    @Expose
+    int un_read_count;
+
     @SerializedName("list")
     @Expose
     List<Notifications> notificationses;
+
+    public int getUn_read_count() {
+        return un_read_count;
+    }
+
+    public void setUn_read_count(int un_read_count) {
+        this.un_read_count = un_read_count;
+    }
 
     public List<Notifications> getNotificationses() {
         return notificationses;
@@ -41,6 +55,22 @@ public class NotificationModel extends HighCourtModel {
             @Override
             public void onFailure(Call<NotificationModel> call, Throwable t) {
                 notificantionInterface.onNotificationFailur(t);
+            }
+        });
+    }
+
+    public static void getUnReadCount(final NotificationService notificationService) {
+        RestAdapter.get().notificationUnReadCount().enqueue(new Callback<NotificationModel>() {
+            @Override
+            public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
+                if(response.body() != null) {
+                    notificationService.updateBadge(response.body().getUn_read_count());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NotificationModel> call, Throwable t) {
+
             }
         });
     }
@@ -82,6 +112,9 @@ public class NotificationModel extends HighCourtModel {
         @Expose
         String notification_src;
 
+        @SerializedName("isRead")
+        @Expose
+        int isRead;
 
         public int getId() {
             return id;
@@ -155,7 +188,28 @@ public class NotificationModel extends HighCourtModel {
             this.notification_src = notification_src;
         }
 
+        public int getIsRead() {
+            return isRead;
+        }
 
+        public void setIsRead(int isRead) {
+            this.isRead = isRead;
+        }
+    }
+
+
+    public static void unReadNotification(Map<String, Integer> stringIntegerMap){
+        RestAdapter.get().notificationUnRead(stringIntegerMap).enqueue(new Callback<NotificationModel>() {
+            @Override
+            public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
+                //Log.d("ASD", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<NotificationModel> call, Throwable t) {
+                //Log.d("ASD", t.getMessage());
+            }
+        });
     }
 
 }

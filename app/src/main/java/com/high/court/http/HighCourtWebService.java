@@ -9,7 +9,6 @@ import com.high.court.http.models.RosterModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
 import com.high.court.http.models.http_request.ExcecutiveMemberModel;
-
 import com.high.court.http.models.http_request.ResetMyPassword;
 
 import java.util.Map;
@@ -25,7 +24,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 
 /**
@@ -79,5 +77,13 @@ public interface HighCourtWebService {
     @FormUrlEncoded
     @POST("roster/list")
     Call<RosterModel> getRoster(@FieldMap Map<String, String> stringStringMap, @Query("page") int page_no);
+
+
+    @FormUrlEncoded
+    @POST("notification/read")
+    Call<NotificationModel> notificationUnRead(@FieldMap Map<String, Integer> stringStringMap);
+
+    @GET("notification/un-read-count")
+    Call<NotificationModel> notificationUnReadCount();
 
 }
