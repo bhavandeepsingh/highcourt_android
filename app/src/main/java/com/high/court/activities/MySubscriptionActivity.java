@@ -32,7 +32,6 @@ public class MySubscriptionActivity extends HighCourtActivity  {
             "75/-",
             "75/-",
     };
-
     private TabLayout tabLayout;
     private ViewPager viewPager;
 

@@ -8,5 +8,5 @@
 
     <corners android:radius="7dp" />
 
-    <solid android:color="@color/clr_red" />
+    <solid android:color="@color/clr_noti_unread" />
 </shape>
