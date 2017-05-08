@@ -17,7 +17,19 @@ public class NotificationService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //TODO do something useful
-        NotificationModel.getUnReadCount(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    try {
+                        Thread.sleep(30000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    NotificationModel.getUnReadCount(NotificationService.this);
+                }
+            }
+        }).start();
         return START_STICKY;
     }
 
