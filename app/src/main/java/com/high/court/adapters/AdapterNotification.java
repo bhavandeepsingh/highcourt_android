@@ -61,6 +61,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             viewHolder.notif_layer.setBackgroundResource(R.drawable.notification_un_read);
         }
 
+
     }
 
     @Override
