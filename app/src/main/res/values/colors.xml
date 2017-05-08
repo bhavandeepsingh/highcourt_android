@@ -16,6 +16,7 @@
     <color name="clr_textview_light_background">#e3e0d3</color>
     <color name="clr_paynow">#0f2229</color>
     <color name="clr_red">#ff0000</color>
+    <color name="clr_noti_unread">#e2e2e2</color>
 
 
     <!-- colors -->

@@ -94,6 +94,9 @@
             android:exported="true"
             android:process=":ServiceProcess"/>
 
+
+        <service android:name=".MyService" />
+
     </application>
 
 </manifest>

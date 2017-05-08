@@ -12,9 +12,9 @@
         android:id="@+id/toolbar"
         layout="@layout/app_bar" />
 
-
-
-    <include layout="@layout/include_recyclerview" />
+    <include layout="@layout/include_recyclerview"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 
 </LinearLayout>
