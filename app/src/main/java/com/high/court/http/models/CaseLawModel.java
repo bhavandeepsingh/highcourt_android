@@ -106,6 +106,7 @@ public class CaseLawModel extends HighCourtModel {
                 caseLawInterface.onCaseLawFailur(t);
             }
         });
+
     }
 
 }
