@@ -311,7 +311,7 @@ public class UserHelper {
         return getSharedPreferences().edit();
     }
 
-    static SharedPreferences getSharedPreferences(){
+    public static SharedPreferences getSharedPreferences(){
         return PreferenceManager.getDefaultSharedPreferences(HighCourtApplication.getHighCourtApplicationContext());
     }
 
