@@ -89,6 +89,9 @@
         <activity android:name=".activities.CaseLawActivity" />
         <activity android:name=".activities.CommingSoonActivity"></activity>
         <activity android:name=".activities.WebViewActivity"/>
+        <activity android:name=".activities.CCAvenue"/>
+        <activity android:name=".activities.CCAvenueStatus"/>
+
 
         <service
             android:name=".backround_service.NotificationService"

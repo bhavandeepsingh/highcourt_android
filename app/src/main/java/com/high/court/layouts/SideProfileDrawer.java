@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
-import android.provider.SyncStateContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,22 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.high.court.R;
+import com.high.court.activities.CCAvenue;
 import com.high.court.activities.ChangePassword;
-import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
-import com.high.court.activities.MySubscriptionActivity;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.high.court.utility.AvenuesParams;
+import com.high.court.utility.ServiceUtility;
 
 
 /**
@@ -252,8 +245,17 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
-        select_PayMyDues();
+        String vAmount = ServiceUtility.chkNull("100").toString().trim();
+        if(!vAmount.equals("")){
+            Intent intent = new Intent(getContext(), CCAvenue.class);
+            intent.putExtra(AvenuesParams.ORDER_ID, ServiceUtility.chkNull("1").toString().trim());
+            intent.putExtra(AvenuesParams.CURRENCY, ServiceUtility.chkNull("INR").toString().trim());
+            intent.putExtra(AvenuesParams.AMOUNT, ServiceUtility.chkNull("10").toString().trim());
+            getContext().startActivity(intent);
+
+        }
+        //getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
+        //select_PayMyDues();
     }
 
     void onClickChangePassword(){
