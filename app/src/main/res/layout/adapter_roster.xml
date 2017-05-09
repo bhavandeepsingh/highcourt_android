@@ -28,7 +28,7 @@
                 android:gravity="left"
                 android:id="@+id/roster_sr_no"
                 android:textAllCaps="true"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:textColor="@color/clr_black"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -38,7 +38,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="0.5"
             android:paddingBottom="@dimen/padding"
             android:paddingTop="@dimen/padding">
 
@@ -50,7 +50,7 @@
                 android:gravity="left"
                 android:paddingLeft="8dp"
                 android:id="@+id/roster_bench_name"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:textAllCaps="true"
                 android:textColor="@color/clr_black"
                 android:textSize="16sp" />
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:paddingLeft="8dp"
                 android:id="@+id/roster_judges_name"
                 android:textAllCaps="true"

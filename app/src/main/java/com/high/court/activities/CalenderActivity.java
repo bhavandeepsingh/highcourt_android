@@ -44,12 +44,14 @@ public class CalenderActivity extends HighCourtActivity {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 
+
+
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id==android.R.id.home){
             onBackPressed();
         }
