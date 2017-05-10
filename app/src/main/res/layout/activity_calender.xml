@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F5F5"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
@@ -29,12 +30,14 @@
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/Theme.AppCompat.Light"
-                android:focusedMonthDateColor="@color/colorPrimary"
-                android:focusableInTouchMode="false"
-                android:selectedWeekBackgroundColor="@color/colorPrimary"
-                android:weekNumberColor="@color/clr_red"
+                android:theme="@style/custom_calender"
+                app:mcv_tileHeight="32dp"
+                app:mcv_headerTextAppearance="@color/clr_black"
+                app:mcv_weekDayTextAppearance="@color/clr_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                />
+
             <include
                 android:id="@+id/recyclerview"
                 layout="@layout/include_recyclerview" />

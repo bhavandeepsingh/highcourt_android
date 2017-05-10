@@ -69,6 +69,7 @@ public class DateHelper {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date).getTime();
     }
 
+
     public static String getTimeAgo(String pubDate) {
         try {
             return getTimeAgo(getTime(pubDate));
@@ -100,5 +101,10 @@ public class DateHelper {
 
     public static String getHolidayDate(String date){
         return formateDateFromstring("yyyy-MM-dd", "dd MMM", date);
+    }
+
+    public static long getHolidayDateTime(String date) throws ParseException {
+        if(date == null) return 0;
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime();
     }
 }

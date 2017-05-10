@@ -51,7 +51,7 @@
 
 
     <style name="custom_calender" parent="AlertDialog.AppCompat.Light">
-
+        <item name="android:textColor">@color/clr_black</item>
     </style>
 
 </resources>

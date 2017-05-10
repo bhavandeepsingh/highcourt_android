@@ -14,16 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.high.court.R;
-import com.high.court.activities.CCAvenue;
 import com.high.court.activities.ChangePassword;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
+import com.high.court.activities.MySubscriptionActivity;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
-import com.high.court.utility.AvenuesParams;
-import com.high.court.utility.ServiceUtility;
 
 
 /**
@@ -245,17 +243,8 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        String vAmount = ServiceUtility.chkNull("100").toString().trim();
-        if(!vAmount.equals("")){
-            Intent intent = new Intent(getContext(), CCAvenue.class);
-            intent.putExtra(AvenuesParams.ORDER_ID, ServiceUtility.chkNull("1").toString().trim());
-            intent.putExtra(AvenuesParams.CURRENCY, ServiceUtility.chkNull("INR").toString().trim());
-            intent.putExtra(AvenuesParams.AMOUNT, ServiceUtility.chkNull("10").toString().trim());
-            getContext().startActivity(intent);
-
-        }
-        //getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
-        //select_PayMyDues();
+        getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
+        select_PayMyDues();
     }
 
     void onClickChangePassword(){
