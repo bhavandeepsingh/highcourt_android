@@ -9,6 +9,12 @@
     android:orientation="vertical"
     tools:context="com.high.court.activities.HonbleJudgesActivity">
 
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,9 +24,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/app_bar" />
 
             <View
                 style="@style/stl_devider"
@@ -29,7 +32,7 @@
             <com.high.court.layouts.HighCourtCalender
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:theme="@style/custom_calender"
                 app:mcv_tileHeight="32dp"
                 app:mcv_headerTextAppearance="@color/clr_black"
@@ -46,6 +49,7 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
 
 
 </LinearLayout>

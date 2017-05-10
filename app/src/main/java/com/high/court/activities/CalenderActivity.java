@@ -47,6 +47,7 @@ public class CalenderActivity extends HighCourtActivity {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 
+
         HighCourtCalender highCourtCalender = (HighCourtCalender) findViewById(R.id.calendarView);
 
         if(HighCourtApplication.getHolidaysModel() != null && HighCourtApplication.getHolidaysModel().getHolidaysList() != null){
@@ -64,14 +65,11 @@ public class CalenderActivity extends HighCourtActivity {
             }
             if(dates.size() > 0) highCourtCalender.addDecorator(new EventDecorator(Color.RED, dates));
         }
-
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id==android.R.id.home){
             onBackPressed();
         }

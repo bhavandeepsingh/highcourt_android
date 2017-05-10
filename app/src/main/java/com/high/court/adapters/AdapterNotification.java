@@ -1,5 +1,6 @@
 package com.high.court.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
@@ -57,11 +59,11 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             }
         }
 
-        if(getNotificationsList().get(i).getIsRead() <= 0){
+        if(getNotificationsList().get(i).getIsRead() <= 0||true){
             viewHolder.notif_layer.setBackgroundResource(R.drawable.notification_un_read);
+
+
         }
-
-
     }
 
     @Override
@@ -70,7 +72,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView notification_description, notification_time;
         LinearLayout download_file, notif_layer;
 
@@ -80,7 +81,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             notification_time = (TextView) itemView.findViewById(R.id.notification_time);
             download_file = (LinearLayout)itemView.findViewById(R.id.download_file);
             notif_layer = (LinearLayout) itemView.findViewById(R.id.notif_layer);
-
         }
     }
 
@@ -88,5 +88,7 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
         if(notificationsList == null) notificationsList = HighCourtApplication.getNotificationsList();
         return notificationsList;
     }
+
+
 }
 

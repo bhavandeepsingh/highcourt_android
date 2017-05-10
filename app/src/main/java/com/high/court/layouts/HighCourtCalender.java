@@ -15,6 +15,7 @@ public class HighCourtCalender extends MaterialCalendarView {
 
     public HighCourtCalender(@NonNull Context context) {
         super(context);
+
     }
 
     public HighCourtCalender(@NonNull Context context, @Nullable AttributeSet attrs) {
