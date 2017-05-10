@@ -1,12 +1,14 @@
 package com.high.court.layouts;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.high.court.R;
 import com.high.court.activities.ChangePassword;
+import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
@@ -243,7 +246,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
+        getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
         select_PayMyDues();
     }
 
@@ -255,6 +258,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     void onClickLogout() {
         if (UserHelper.logout()) {
             getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
+            getHighCourtActivity().finish();
         } else {
             ToastHelper.showLogoutFailuer(getContext());
         }
@@ -326,13 +330,38 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         } else if (getChangepassword_row().getId() == v.getId()) {
             onClickChangePassword();
         } else if (getLogout_row().getId() == v.getId()) {
-            onClickLogout();
+            alertDialog();
         }
     }
+
 
     public boolean isInitiate() {
         return initiate;
     }
+
+
+    void alertDialog(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext(),R.style.MyAlertDialogStyle);
+        builder1.setMessage("Are you sure you want to Logout ?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        onClickLogout();
+                    }
+                });
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder1.show();
+    }
+
 
     public void setInitiate(boolean initiate) {
         this.initiate = initiate;

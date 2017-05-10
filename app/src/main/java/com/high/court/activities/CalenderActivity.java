@@ -13,16 +13,21 @@ import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.adapters.AdapterHolidaysCalender;
 import com.high.court.decorators.EventDecorator;
+import com.high.court.decorators.HighlightWeekendsDecorator;
 import com.high.court.helpers.DateHelper;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.layouts.HighCourtCalender;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import butterknife.BindView;
+
 
 public class CalenderActivity extends HighCourtActivity {
 
@@ -48,6 +53,10 @@ public class CalenderActivity extends HighCourtActivity {
         recyclerView.setAdapter(adapter);
 
 
+
+
+
+
         HighCourtCalender highCourtCalender = (HighCourtCalender) findViewById(R.id.calendarView);
 
         if(HighCourtApplication.getHolidaysModel() != null && HighCourtApplication.getHolidaysModel().getHolidaysList() != null){
@@ -65,6 +74,11 @@ public class CalenderActivity extends HighCourtActivity {
             }
             if(dates.size() > 0) highCourtCalender.addDecorator(new EventDecorator(Color.RED, dates));
         }
+
+//        highCourtCalender.addDecorators(
+//                new HighlightWeekendsDecorator()
+//        );
+
     }
 
     @Override
