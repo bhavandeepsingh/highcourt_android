@@ -1,30 +1,19 @@
 package com.high.court.layouts;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.high.court.BuildConfig;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
-import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.ExicutiveMemberDetailsEdit;
+import com.high.court.helpers.DialerHelper;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
@@ -34,13 +23,7 @@ import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ProfileUpdateInterface;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,8 +33,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import static android.R.attr.id;
 
 /**
  * Created by admin on 4/26/2017.
@@ -232,7 +213,10 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setLandline_no(EditText landline_no) {
-        if(landline_no != null) landline_no.setText(getProfileModel().getLandline());
+        if(landline_no != null){
+            landline_no.setText(getProfileModel().getLandline());
+            landline_no.setOnClickListener(this);
+        }
         this.landline_no = landline_no;
     }
 
@@ -242,7 +226,10 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setMobile_no(EditText mobile_no) {
-        if (mobile_no != null) mobile_no.setText(getProfileModel().getMobile());
+        if (mobile_no != null){
+            mobile_no.setText(getProfileModel().getMobile());
+            mobile_no.setOnClickListener(this);
+        }
         this.mobile_no = mobile_no;
     }
 
@@ -294,6 +281,13 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         if (v.getId() == getSave_text_view().getId()) {
             onSaveButtonClick(v);
         }
+        else if(v.getId() == getLandline_no().getId()){
+            DialerHelper.dial(getContext(), getLandline_no().getText().toString());
+        }else if(v.getId() == getMobile_no().getId()){
+            DialerHelper.dial(getContext(), getMobile_no().getText().toString());
+        }
+
+
     }
 
     private void onSaveButtonClick(View v) {

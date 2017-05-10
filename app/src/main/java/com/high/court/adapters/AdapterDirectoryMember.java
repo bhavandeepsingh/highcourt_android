@@ -52,13 +52,7 @@ public class AdapterDirectoryMember extends RecyclerView.Adapter<AdapterDirector
             viewHolder.mobile_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    phoneCallDialog("21212112","32323322","34555555");
-
-
-                  //  DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
-
-
+                DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
                 }
             });
         }
