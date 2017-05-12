@@ -5,6 +5,7 @@ import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
+import com.high.court.http.models.PaymentsModel;
 import com.high.court.http.models.RosterModel;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ChangePasswordModel;
@@ -63,8 +64,9 @@ public interface HighCourtWebService {
     @POST("profile/update")
     Call<UserLoginModel> profileUpdate(@PartMap Map<String, RequestBody> stringStringMap, @Part MultipartBody.Part part);
 
-    @GET("holidays/list")
-    Call<HolidaysModel> getHolidays();
+    @FormUrlEncoded
+    @POST("holidays/list")
+    Call<HolidaysModel> getHolidays(@FieldMap Map<String, String> stringStringMap);
 
     @FormUrlEncoded
     @POST("judges/list")
@@ -85,5 +87,8 @@ public interface HighCourtWebService {
 
     @GET("notification/un-read-count")
     Call<NotificationModel> notificationUnReadCount();
+
+    @GET("payment-log/list")
+    Call<PaymentsModel> getPayment();
 
 }

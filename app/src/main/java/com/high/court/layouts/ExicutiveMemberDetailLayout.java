@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetailsEdit;
-import com.high.court.helpers.DialerHelper;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
@@ -38,7 +37,7 @@ import okhttp3.RequestBody;
  * Created by admin on 4/26/2017.
  */
 
-public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ProfileUpdateInterface {
+public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ProfileUpdateInterface{
 
 
     CircleImageView profilePicShow;
@@ -213,10 +212,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setLandline_no(EditText landline_no) {
-        if(landline_no != null){
-            landline_no.setText(getProfileModel().getLandline());
-            landline_no.setOnClickListener(this);
-        }
+        if(landline_no != null) landline_no.setText(getProfileModel().getLandline());
         this.landline_no = landline_no;
     }
 
@@ -226,10 +222,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     public void setMobile_no(EditText mobile_no) {
-        if (mobile_no != null){
-            mobile_no.setText(getProfileModel().getMobile());
-            mobile_no.setOnClickListener(this);
-        }
+        if (mobile_no != null) mobile_no.setText(getProfileModel().getMobile());
         this.mobile_no = mobile_no;
     }
 
@@ -281,13 +274,6 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         if (v.getId() == getSave_text_view().getId()) {
             onSaveButtonClick(v);
         }
-        else if(v.getId() == getLandline_no().getId()){
-            DialerHelper.dial(getContext(), getLandline_no().getText().toString());
-        }else if(v.getId() == getMobile_no().getId()){
-            DialerHelper.dial(getContext(), getMobile_no().getText().toString());
-        }
-
-
     }
 
     private void onSaveButtonClick(View v) {
@@ -430,5 +416,4 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     public ExicutiveMemberDetailsEdit getExicutiveMemberDetailsEdit(){
         return (ExicutiveMemberDetailsEdit) getContext();
     }
-
 }

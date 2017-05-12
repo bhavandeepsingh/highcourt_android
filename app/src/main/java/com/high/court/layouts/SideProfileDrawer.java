@@ -15,28 +15,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ChangePassword;
-import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.activities.MySubscriptionActivity;
+import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.models.PaymentsModel;
+import com.high.court.http.models.http_interface.PaymentsInterface;
 
 
 /**
  * Created by admin on 4/26/2017.
  */
 
-public class SideProfileDrawer extends DrawerLayout implements View.OnClickListener {
+public class SideProfileDrawer extends DrawerLayout implements View.OnClickListener, PaymentsInterface {
 
     ImageView profileImageView;
     ImageView icon_profile, icon_paymydues, icon_changepassword, icon_logout;
     TextView profileNameText, myProfile_text, payMyDuesText, chnagePassword, side_logouttext;
     LinearLayout lmyprofile_row, paymudues_row, changepassword_row, logout_row, logoutRow;
+
+    HighCourtLoader highCourtLoader;
 
     boolean initiate = false;
 
@@ -246,8 +251,8 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
-        select_PayMyDues();
+        getHighCourtLoader().start();
+        PaymentsModel.getPayments(this);
     }
 
     void onClickChangePassword(){
@@ -362,8 +367,26 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         builder1.show();
     }
 
-
     public void setInitiate(boolean initiate) {
         this.initiate = initiate;
+    }
+
+    public HighCourtLoader getHighCourtLoader() {
+        if(highCourtLoader == null) highCourtLoader = HighCourtLoader.init(getContext());
+        return highCourtLoader;
+    }
+
+    @Override
+    public void onPaymentSuccess(PaymentsModel paymentsModel) {
+        getHighCourtLoader().stop();
+        if(paymentsModel != null) {
+            HighCourtApplication.setPaymentsModel(paymentsModel);
+            getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
+        }
+    }
+
+    @Override
+    public void onPaymentFailur(Throwable t) {
+        getHighCourtLoader().stop();
     }
 }

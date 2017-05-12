@@ -12,6 +12,7 @@ import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
+import com.high.court.http.models.PaymentsModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.RosterModel;
 
@@ -32,6 +33,7 @@ public class HighCourtApplication extends UILApplication {
     static JudgesModel judgesModel;
     static CaseLawModel caseLawModel;
     static RosterModel rosterModel;
+    static PaymentsModel paymentsModel;
 
     @Override
     public void onCreate() {
@@ -141,5 +143,12 @@ public class HighCourtApplication extends UILApplication {
         HighCourtApplication.rosterModel = rosterModel;
     }
 
+    public static PaymentsModel getPaymentsModel() {
+        return paymentsModel;
+    }
+
+    public static void setPaymentsModel(PaymentsModel paymentsModel) {
+        HighCourtApplication.paymentsModel = paymentsModel;
+    }
 }
 

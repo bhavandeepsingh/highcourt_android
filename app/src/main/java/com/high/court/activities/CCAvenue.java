@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.high.court.R;
+import com.high.court.helpers.UserHelper;
 import com.high.court.utility.AvenuesParams;
 import com.high.court.utility.Constants;
 import com.high.court.utility.ServiceUtility;
@@ -81,7 +83,7 @@ public class CCAvenue extends HighCourtActivity{
                     }else{
                         status = "Status Not Known!";
                     }
-                    //Toast.makeText(getApplicationContext(), status, Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getApplicationContext(), CCAvenueStatus.class);
                     intent.putExtra("transStatus", status);
                     startActivity(intent);
@@ -96,8 +98,10 @@ public class CCAvenue extends HighCourtActivity{
                 public void onPageFinished(WebView view, String url) {
                     if(dialog.isShowing()) dialog.cancel();
                     super.onPageFinished(webview, url);
-                    if(url.indexOf("/ccavResponseHandler.jsp")!=-1){
+                    if(url.indexOf("/success") != -1){
                         webview.loadUrl("javascript:window.HTMLOUT.processHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+                    }else if(url.indexOf("/payment/cancel") != -1){
+                        Log.d("ASD", "CANCEL");
                     }
                 }
 
@@ -109,10 +113,12 @@ public class CCAvenue extends HighCourtActivity{
             });
 
             /* An instance of this class will be registered as a JavaScript interface */
+
             StringBuffer params = new StringBuffer();
 
-            params.append(ServiceUtility.addToPostParams(AvenuesParams.ORDER_ID, "1"));
-            params.append(ServiceUtility.addToPostParams(AvenuesParams.AMOUNT, "100"));
+            params.append(ServiceUtility.addToPostParams(AvenuesParams.USER_ID, String.valueOf(UserHelper.getLoginId())));
+            params.append(ServiceUtility.addToPostParams(AvenuesParams.AMOUNT, mainIntent.getStringExtra(AvenuesParams.AMOUNT)));
+            params.append(ServiceUtility.addToPostParams(AvenuesParams.PAYMENT_TYPE, mainIntent.getStringExtra(AvenuesParams.PAYMENT_TYPE)));
 
             String vPostParams = params.substring(0,params.length()-1);
             try {

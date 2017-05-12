@@ -6,11 +6,9 @@ import com.high.court.helpers.DateHelper;
 import com.high.court.http.RestAdapter;
 import com.high.court.http.models.http_interface.HolidayInterface;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -151,9 +149,10 @@ public class HolidaysModel extends HighCourtModel {
     }
 
 
-    public static void getHolidays(final HolidayInterface holidayInterface){
+    public static void getHolidays(final HolidayInterface holidayInterface, Map<String, String> params){
+        if(params == null) params = new HashMap<>();
 
-        RestAdapter.get().getHolidays().enqueue(new Callback<HolidaysModel>() {
+        RestAdapter.get().getHolidays(params).enqueue(new Callback<HolidaysModel>() {
 
             @Override
             public void onResponse(Call<HolidaysModel> call, Response<HolidaysModel> response) {

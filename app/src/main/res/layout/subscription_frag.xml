@@ -16,167 +16,112 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/dim_subscription_row_paddings"
-                android:paddingRight="@dimen/dim_subscription_row_paddings"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                    android:paddingTop="@dimen/dim_subscription_row_paddings"
-                    android:text="Employee Welfare Fund"
-                    android:textSize="@dimen/dim_textsize"
-                    android:textColor="@color/clr_textcolor_dark" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                    android:paddingTop="@dimen/dim_subscription_row_paddings"
-                    android:text="2016"
-                    android:textSize="@dimen/dim_textsize"
-                    android:layout_alignParentRight="true"
-                    android:textColor="@color/colorPrimary" />
-
-
-            </RelativeLayout>
-
-            <View style="@style/stl_devider"
-                android:layout_marginTop="8dp"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/dim_subscription_row_paddings"
-                android:paddingRight="@dimen/dim_subscription_row_paddings"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                    android:paddingTop="@dimen/dim_subscription_row_paddings"
-                    android:text="Pay From"
-                    android:textSize="@dimen/dim_textsize"
-                    android:textColor="@color/clr_textcolor_dark" />
-
-
-            </RelativeLayout>
-            <View style="@style/stl_devider"
-                android:layout_marginTop="0dp"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/dim_subscription_row_paddings"
-                android:paddingRight="@dimen/dim_subscription_row_paddings"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                    android:paddingTop="@dimen/dim_subscription_row_paddings"
-                    android:text="From"
-                    android:textSize="@dimen/dim_textsize"
-                    android:textColor="@color/clr_textcolor_dark" />
-
-
-            </RelativeLayout>
-
-            <View style="@style/stl_devider"
-                android:layout_marginTop="0dp"/>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/dim_subscription_row_paddings"
-                android:paddingRight="@dimen/dim_subscription_row_paddings"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                    android:paddingTop="@dimen/dim_subscription_row_paddings"
-                    android:text="(Rs. 200 Per year x 1)"
-                    android:textSize="@dimen/dim_textsize"
-                    android:textColor="@color/clr_textcolor_dark" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                    android:paddingTop="@dimen/dim_subscription_row_paddings"
-                    android:text="Rs. 200"
-                    android:textSize="@dimen/dim_textsize"
-                    android:layout_alignParentRight="true"
-                    android:textColor="@color/colorPrimary" />
-
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/clr_textview_light_background"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/dim_subscription_row_paddings"
-                android:paddingRight="@dimen/dim_subscription_row_paddings">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="12dp"
-                    android:paddingTop="12dp"
-                    android:text="TOTAL"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/clr_textcolor_dark" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:textSize="17sp"
-                    android:paddingBottom="1dp"
-                    android:paddingLeft="10dp"
-
-                    android:paddingTop="1dp"
-                    android:textStyle="bold"
-                    android:text="Rs. 200"
-                    android:textColor="@color/clr_black"
-                    />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/loginbtn"
-                style="@style/stl_login_button"
-                android:text="paynow"
-                android:textAllCaps="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="21dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:paddingBottom="13dp"
-                android:paddingLeft="11dp"
-                android:paddingTop="13dp"
-                />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/payments_due_container"
+                android:visibility="visible"
                 android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                    android:paddingRight="@dimen/dim_subscription_row_paddings"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                        android:paddingTop="@dimen/dim_subscription_row_paddings"
+                        android:text="Monthly Subscription"
+                        android:textSize="@dimen/dim_textsize"
+                        android:textColor="@color/clr_textcolor_dark" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                        android:paddingTop="@dimen/dim_subscription_row_paddings"
+                        android:id="@+id/subscription_year"
+                        android:textSize="@dimen/dim_textsize"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/colorPrimary" />
+
+
+                </RelativeLayout>
+
+                <View style="@style/stl_devider"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                    android:paddingRight="@dimen/dim_subscription_row_paddings"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                        android:paddingTop="@dimen/dim_subscription_row_paddings"
+                        android:id="@+id/pay_due_from"
+                        android:textSize="@dimen/dim_textsize"
+                        android:textColor="@color/clr_textcolor_dark" />
+
+
+                </RelativeLayout>
+                <View style="@style/stl_devider"
+                    android:layout_marginTop="0dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                    android:paddingRight="@dimen/dim_subscription_row_paddings"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                        android:paddingTop="@dimen/dim_subscription_row_paddings"
+                        android:id="@+id/pay_due_to"
+                        android:textSize="@dimen/dim_textsize"
+                        android:textColor="@color/clr_textcolor_dark" />
+
+                </RelativeLayout>
+
+                <View style="@style/stl_devider"
+                    android:layout_marginTop="0dp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                    android:paddingRight="@dimen/dim_subscription_row_paddings"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                        android:paddingTop="@dimen/dim_subscription_row_paddings"
+                        android:id="@+id/month_amount_pending_text"
+                        android:textSize="@dimen/dim_textsize"
+                        android:textColor="@color/clr_textcolor_dark" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                        android:paddingTop="@dimen/dim_subscription_row_paddings"
+                        android:id="@+id/month_amount_total"
+                        android:textSize="@dimen/dim_textsize"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/colorPrimary" />
+
+
+                </RelativeLayout>
 
 
                 <RelativeLayout
@@ -191,9 +136,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/dim_subscription_row_paddings"
-                        android:paddingTop="@dimen/dim_subscription_row_paddings"
-                        android:text="Jan 01, 2017 - Feb 28, 2017"
+                        android:paddingBottom="12dp"
+                        android:paddingTop="12dp"
+                        android:text="TOTAL"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
                         android:textColor="@color/clr_textcolor_dark" />
 
 
@@ -202,23 +149,83 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:background="@drawable/border_payment"
+                        android:textSize="17sp"
                         android:paddingBottom="1dp"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+
                         android:paddingTop="1dp"
-                        android:text="DUE"
-                        android:textColor="@color/clr_white"
-                        android:textSize="13sp" />
+                        android:textStyle="bold"
+                        android:id="@+id/subscription_total_year"
+                        android:textColor="@color/clr_black"
+                        />
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/subscription_pay_button"
+                    style="@style/stl_login_button"
+                    android:text="paynow"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="21dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:paddingBottom="13dp"
+                    android:paddingLeft="11dp"
+                    android:paddingTop="13dp"
+                    />
 
-                <RelativeLayout
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:paddingLeft="@dimen/dim_subscription_row_paddings"
-                    android:paddingRight="@dimen/dim_subscription_row_paddings">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/payment_due_row"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/clr_textview_light_background"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                        android:paddingRight="@dimen/dim_subscription_row_paddings">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dim_subscription_row_paddings"
+                            android:paddingTop="@dimen/dim_subscription_row_paddings"
+                            android:id="@+id/payment_due_row_text"
+                            android:textColor="@color/clr_textcolor_dark" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border_payment"
+                            android:paddingBottom="1dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="1dp"
+                            android:text="DUE"
+                            android:textColor="@color/clr_white"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+            </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="@dimen/dim_subscription_row_paddings"
+                android:paddingRight="@dimen/dim_subscription_row_paddings">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -245,9 +252,33 @@
 
                 <View style="@style/stl_devider" />
 
-                <include layout="@layout/include_recyclerview" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <include layout="@layout/include_recyclerview"
+                        android:layout_above="@+id/no_records_found"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/no_records_found"
+                        android:visibility="visible"
+                        android:layout_height="wrap_content">
+
+                        <TextView android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:paddingTop="20dp"
+                            android:textColor="@color/clr_black"
+                            android:layout_centerInParent="true"
+                            android:text="No Records Found"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
         </LinearLayout>
 
 

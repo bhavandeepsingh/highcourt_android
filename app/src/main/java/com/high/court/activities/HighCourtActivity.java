@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.high.court.helpers.HighCourtLoader;
-import com.high.court.high_court_interface.LayoutActivityInterface;
-
 import butterknife.ButterKnife;
 
 /**
@@ -39,6 +36,7 @@ public class HighCourtActivity extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
     }
+
 }
 
 

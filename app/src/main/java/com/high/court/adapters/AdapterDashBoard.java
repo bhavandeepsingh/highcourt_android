@@ -53,14 +53,11 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     HighCourtLoader highCourtLoader;
     String displayboard_url="https://phhc.gov.in/display_board_full_width.php";
-    String judges_url="http://highcourtchd.gov.in/?trs=chief";
-    String roster_url="http://highcourtchd.gov.in/?trs=roster";
 
     public AdapterDashBoard(Context ctx, String[] judgesnamelist, int[] prgmImages) {
         super();
         get_judgesnamelist = judgesnamelist;
         imageId = prgmImages;
-
         this.context = ctx;
     }
 
@@ -106,7 +103,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             }
             if (i == 5) {
                 getHighCourtLoader().start();
-                HolidaysModel.getHolidays(AdapterDashBoard.this);
+                HolidaysModel.getHolidays(AdapterDashBoard.this, null);
             }
             if (i == 6) {
                 getHighCourtLoader().start();
