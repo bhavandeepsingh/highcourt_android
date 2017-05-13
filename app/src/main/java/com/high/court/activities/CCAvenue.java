@@ -84,6 +84,8 @@ public class CCAvenue extends HighCourtActivity{
                         status = "Status Not Known!";
                     }
 
+                    CCAvenue.this.html = html;
+
                     Intent intent = new Intent(getApplicationContext(), CCAvenueStatus.class);
                     intent.putExtra("transStatus", status);
                     startActivity(intent);
@@ -98,10 +100,11 @@ public class CCAvenue extends HighCourtActivity{
                 public void onPageFinished(WebView view, String url) {
                     if(dialog.isShowing()) dialog.cancel();
                     super.onPageFinished(webview, url);
+                    Log.d("HTML_RESOPNCE", String.valueOf(webview.getContentDescription()));
                     if(url.indexOf("/success") != -1){
-                        webview.loadUrl("javascript:window.HTMLOUT.processHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+                        webview.loadUrl("javascript:window.HTMLOUT.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
                     }else if(url.indexOf("/payment/cancel") != -1){
-                        Log.d("ASD", "CANCEL");
+                        webview.loadUrl("javascript:window.HTMLOUT.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
                     }
                 }
 

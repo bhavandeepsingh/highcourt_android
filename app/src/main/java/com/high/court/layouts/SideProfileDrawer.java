@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ChangePassword;
+import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
@@ -251,8 +252,9 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtLoader().start();
-        PaymentsModel.getPayments(this);
+        getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
+        /*getHighCourtLoader().start();
+        PaymentsModel.getPayments(this);*/
     }
 
     void onClickChangePassword(){
