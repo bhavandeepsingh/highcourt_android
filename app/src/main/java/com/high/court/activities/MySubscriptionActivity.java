@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.tabs.Pager;
 
@@ -63,4 +64,12 @@ public class MySubscriptionActivity extends HighCourtActivity  {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(HighCourtApplication.isPaymentRecreateStatus()){
+            HighCourtApplication.setPaymentRecreateStatus(false);
+            recreate();
+        }
+    }
 }

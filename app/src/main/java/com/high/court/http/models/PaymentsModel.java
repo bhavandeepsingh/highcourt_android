@@ -26,6 +26,10 @@ public class PaymentsModel extends HighCourtModel {
     @Expose
     Subscription welfair;
 
+    @SerializedName("status")
+    @Expose
+    int status;
+
     public Subscription getSubscription() {
         return subscription;
     }
@@ -40,6 +44,14 @@ public class PaymentsModel extends HighCourtModel {
 
     public void setWelfair(Subscription welfair) {
         this.welfair = welfair;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public class Subscription{

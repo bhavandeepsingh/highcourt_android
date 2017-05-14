@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.models.PaymentsModel;
 import com.high.court.utility.AvenuesParams;
 import com.high.court.utility.Constants;
 import com.high.court.utility.ServiceUtility;
@@ -72,23 +75,21 @@ public class CCAvenue extends HighCourtActivity{
                 @JavascriptInterface
                 public void processHTML(String html)
                 {
+                    html = html.replace("<head></head><body>", "").replace("</body>", "");
                     // process the html as needed by the app
-                    String status = null;
-                    if(html.indexOf("Failure")!=-1){
-                        status = "Transaction Declined!";
-                    }else if(html.indexOf("Success")!=-1){
-                        status = "Transaction Successful!";
-                    }else if(html.indexOf("Aborted")!=-1){
-                        status = "Transaction Cancelled!";
-                    }else{
-                        status = "Status Not Known!";
-                    }
 
                     CCAvenue.this.html = html;
+                    if(dialog.isShowing()) dialog.cancel();
 
-                    Intent intent = new Intent(getApplicationContext(), CCAvenueStatus.class);
-                    intent.putExtra("transStatus", status);
-                    startActivity(intent);
+                    PaymentsModel paymentsModel = new Gson().fromJson(html, PaymentsModel.class);
+                    if(paymentsModel != null && paymentsModel.getStatus() == AvenuesParams.SUCCESS){
+                        HighCourtApplication.setPaymentsModel(paymentsModel);
+                        HighCourtApplication.setPaymentRecreateStatus(true);
+                        showToast("Payment successfully done.");
+                    }else{
+                        showToast("Some error occurs in payment please try again.");
+                    }
+                    CCAvenue.this.finish();
                 }
             }
 
@@ -100,11 +101,11 @@ public class CCAvenue extends HighCourtActivity{
                 public void onPageFinished(WebView view, String url) {
                     if(dialog.isShowing()) dialog.cancel();
                     super.onPageFinished(webview, url);
-                    Log.d("HTML_RESOPNCE", String.valueOf(webview.getContentDescription()));
-                    if(url.indexOf("/success") != -1){
+
+                    if(url.indexOf("/success") != -1 || url.indexOf("/payment/cancel") != -1){
+                        webview.setVisibility(View.GONE);
                         webview.loadUrl("javascript:window.HTMLOUT.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
-                    }else if(url.indexOf("/payment/cancel") != -1){
-                        webview.loadUrl("javascript:window.HTMLOUT.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
+                        if(!dialog.isShowing()) dialog.show();
                     }
                 }
 
@@ -134,6 +135,6 @@ public class CCAvenue extends HighCourtActivity{
     }
 
     public void showToast(String msg) {
-        Toast.makeText(this, "Toast: " + msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }

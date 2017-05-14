@@ -35,18 +35,14 @@ public class HighCourtApplication extends UILApplication {
     static RosterModel rosterModel;
     static PaymentsModel paymentsModel;
 
+    static boolean paymentRecreateStatus = false;
+
     @Override
     public void onCreate() {
-//        ImageLoader.getInstance().clearMemoryCache();
-//        ImageLoader.getInstance().clearDiskCache();
         super.onCreate();
         adjustFontScale(getApplicationContext(),getApplicationContext().getResources().getConfiguration());
         highCourtApplication = this;
     }
-
-
-
-
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -149,6 +145,14 @@ public class HighCourtApplication extends UILApplication {
 
     public static void setPaymentsModel(PaymentsModel paymentsModel) {
         HighCourtApplication.paymentsModel = paymentsModel;
+    }
+
+    public static boolean isPaymentRecreateStatus() {
+        return paymentRecreateStatus;
+    }
+
+    public static void setPaymentRecreateStatus(boolean paymentRecreateSattus) {
+        HighCourtApplication.paymentRecreateStatus = paymentRecreateSattus;
     }
 }
 
