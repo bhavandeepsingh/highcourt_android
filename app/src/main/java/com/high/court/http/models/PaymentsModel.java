@@ -121,8 +121,8 @@ public class PaymentsModel extends HighCourtModel {
         }
 
         public String getFromToString() {
-            String from = DateHelper.formateDateFromstring("yyyy-MM-dd" , "MMM dd, yyyyy", getPending_from());
-            String to = DateHelper.formateDateFromstring("yyyy-MM-dd" , "MMM dd, yyyyy", getPending_to());
+            String from = DateHelper.formateDateFromstring("yyyy-MM-dd" , "MMM dd, yyyy", getPending_from());
+            String to = DateHelper.formateDateFromstring("yyyy-MM-dd" , "MMM dd, yyyy", getPending_to());
             return from + " - " + to;
         }
 
