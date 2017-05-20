@@ -7,9 +7,9 @@ android {
         applicationId "com.high.court"
         minSdkVersion 15
         targetSdkVersion 25
-        versionName '1.1'
+        versionName '1.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 2
+        versionCode 4
     }
     buildTypes {
         release {

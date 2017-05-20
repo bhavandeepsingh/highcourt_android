@@ -25,7 +25,7 @@ public class NotificationService extends Service {
             public void run() {
                 while (true){
                     try {
-                        Thread.sleep(3000  );
+                        Thread.sleep((1000*60*10));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

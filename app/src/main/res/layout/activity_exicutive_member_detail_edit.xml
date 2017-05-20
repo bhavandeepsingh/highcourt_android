@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.high.court.layouts.ExicutiveMemberDetailLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:local="http://schemas.android.com/tools"
     android:id="@+id/exicutive_member_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -547,6 +548,8 @@
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="4dp"
+                           
+
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"

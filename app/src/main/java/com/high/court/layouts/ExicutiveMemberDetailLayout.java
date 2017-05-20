@@ -388,6 +388,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             blood_group_spinner.setAdapter(dataAdapter);
             blood_group_spinner.setSelection(selected_index);
+
         }
         this.blood_group_spinner = blood_group_spinner;
     }
