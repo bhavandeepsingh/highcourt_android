@@ -49,6 +49,10 @@ public class AchievementModel extends HighCourtModel {
         @Expose
         String image;
 
+        @SerializedName("destination")
+        @Expose
+        String destination;
+
         public int getId() {
             return id;
         }
@@ -87,6 +91,14 @@ public class AchievementModel extends HighCourtModel {
 
         public void setImage(String image) {
             this.image = image;
+        }
+
+        public String getDestination() {
+            return destination;
+        }
+
+        public void setDestination(String destination) {
+            this.destination = destination;
         }
     }
 

@@ -31,6 +31,7 @@ public class AchievementActivity extends HighCourtActivity {
             ImageHelper.loadImage(achievement.getImage(), (ImageView) findViewById(R.id.achiv_profile_pic));
             ((TextView) findViewById(R.id.achievment_name)).setText(achievement.getTitle());
             ((WebView) findViewById(R.id.achievmenttext)).loadData(achievement.getDescription(), "text/html; charset=UTF-8", null);
+            ((TextView) findViewById(R.id.achievement_destination)).setText(achievement.getDestination());
         }
 
     }

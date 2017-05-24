@@ -1,5 +1,7 @@
 package com.high.court.http.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.high.court.http.RestAdapter;
@@ -21,12 +23,24 @@ public class BannnerModel extends HighCourtModel {
     @Expose
     List<Banner> banners;
 
+    @SerializedName("banner_timing")
+    @Expose
+    int banner_timing = (1000 * 15);
+
     public List<Banner> getBanners() {
         return banners;
     }
 
     public void setBanners(List<Banner> banners) {
         this.banners = banners;
+    }
+
+    public int getBanner_timing() {
+        return (1000 * banner_timing);
+    }
+
+    public void setBanner_timing(int banner_timing) {
+        this.banner_timing = banner_timing;
     }
 
     public class Banner{
@@ -86,12 +100,15 @@ public class BannnerModel extends HighCourtModel {
             public void onResponse(Call<BannnerModel> call, Response<BannnerModel> response) {
                 if(response != null && response.body() != null){
                     bannerInterface.onSuccess(response.body());
+                }else{
+                    bannerInterface.onBannerError(new Throwable());
                 }
             }
 
             @Override
             public void onFailure(Call<BannnerModel> call, Throwable t) {
-
+                Log.d("Asd", "sds");
+                bannerInterface.onBannerError(t);
             }
         });
     }

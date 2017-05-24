@@ -11,26 +11,30 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterDashBoard;
 import com.high.court.backround_service.NotificationService;
 import com.high.court.helpers.ImageHelper;
+import com.high.court.helpers.NetworkHelper;
 import com.high.court.helpers.UserHelper;
+import com.high.court.http.models.BannnerModel;
+import com.high.court.http.models.http_interface.BannerInterface;
 import com.high.court.layouts.SideProfileDrawer;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.high.court.R.id.adimagevieww;
-
-public class DashboardActivity extends HighCourtActivity {
+public class DashboardActivity extends HighCourtActivity implements BannerInterface{
 
     Context context = DashboardActivity.this;
     ImageView adimageview;
-    int banner_change_count;
-int bannerchangetime=15000;
+
+    int bannerchangetime=15000;
+    BannnerModel bannnerModels;
+    int banner_index = 0;
     public static String[] judgesnamelist = {
             "Executive",
             "Member's directory",
@@ -89,42 +93,40 @@ int bannerchangetime=15000;
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 
-        adimageview = (ImageView) findViewById(adimagevieww);
+        adimageview = (ImageView) findViewById(R.id.adimagevieww);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.app_name, R.string.app_name);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        changingAddImages();
+        if(NetworkHelper.state()){
+            BannnerModel.getBanner(this);
+        }
+        else{
+            adimageview.setVisibility(View.GONE);
+        }
 
     }
 
     public void changingAddImages() {
-
-        Timer timerObj = new Timer();
-        TimerTask timerTaskObj = new TimerTask() {
-            public void run() {
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        banner_change_count++;
-                        if (banner_change_count ==1){
-                            adimageview.setImageResource(R.drawable.image_ad);
-                        }else if (banner_change_count ==2){
-                            adimageview.setImageResource(R.drawable.image_ad2);
-                        }else if (banner_change_count ==3){
-                            adimageview.setImageResource(R.drawable.image_ad3);
-                            banner_change_count =0;
+        banner_index = 0;
+        if(bannnerModels.getBanners() != null && bannnerModels.getBanners().size() > 0) {
+            adimageview.setVisibility(View.VISIBLE);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (banner_index >= bannnerModels.getBanners().size()) banner_index = 0;
+                            ImageHelper.loadImage(bannnerModels.getBanners().get(banner_index).getImage_path(), adimageview);
+                            banner_index++;
                         }
-                    }
-                });
-
-            }
-        };
-        timerObj.schedule(timerTaskObj, 0, bannerchangetime);
-
+                    });
+                }
+            }, 0, bannnerModels.getBanner_timing());
+        }
     }
 
 
@@ -160,4 +162,16 @@ int bannerchangetime=15000;
         }
     }
 
+    @Override
+    public void onSuccess(BannnerModel bannnerModel) {
+        if(bannnerModel != null){
+            this.bannnerModels = bannnerModel;
+            changingAddImages();
+        }
+    }
+
+    @Override
+    public void onBannerError(Throwable t) {
+        adimageview.setVisibility(View.GONE);
+    }
 }

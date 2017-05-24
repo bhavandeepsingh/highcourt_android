@@ -1,6 +1,7 @@
 package com.high.court.layouts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.ExicutiveMemberDetailsEdit;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
@@ -398,6 +400,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         getHighCourtLoader().stop();
         UserHelper.login(userLoginModel);
         ToastHelper.profileUpdateSuccess(getContext());
+        getHighCourtActivity().startActivity(new Intent(getContext(), ExicutiveMemberDetail.class));
+        getHighCourtActivity().finish();
     }
 
     @Override

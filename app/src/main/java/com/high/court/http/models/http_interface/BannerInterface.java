@@ -10,4 +10,6 @@ public interface BannerInterface {
 
     void onSuccess(BannnerModel bannnerModel);
 
+    void onBannerError(Throwable t);
+
 }
