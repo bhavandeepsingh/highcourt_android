@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,53 +11,40 @@
         layout="@layout/app_bar" />
 
     <LinearLayout
+        android:id="@+id/achievment_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        android:paddingTop="20dp">
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        tools:ignore="UseCompoundDrawables">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="65dp" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/side_profile_pic"
-            startToolbarPosition="2dp"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-65dp"
-            android:src="@drawable/profilepic"
-            app:finalHeight="@dimen/image_final_width"
-            app:layout_behavior="com.high.court.activities.AvatarImageBehavior"
-            app:startToolbarPosition="2dp"
-            app:startXPosition="2dp" />
-
+        <ImageView
+            android:id="@+id/icon_achievment"
+            android:layout_width="@dimen/dim_dashboard_iconsize"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_achievment" />
 
         <TextView
-            android:id="@+id/side_profile_name"
-            android:layout_width="match_parent"
+
+            android:id="@+id/side_achievement"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="Welcome Admin"
-            android:textColor="@color/clr_white"
-            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="@dimen/dim_dashboard_text_marg_top"
+            android:layout_toRightOf="@+id/icon"
+            android:allowUndo="true"
+            android:text="Achievement"
+            android:textAllCaps="true"
+            android:textColor="@color/clr_textcolor_dark"
             android:textStyle="bold" />
+
     </LinearLayout>
-    <TextView
-        android:id="@+id/side_my_pay_dues"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_vertical"
-        android:text="@string/lorem"
-        android:padding="10dp"
-        android:textColor="@color/clr_textcolor_dark"
-        android:textStyle="normal" />
 
 
 

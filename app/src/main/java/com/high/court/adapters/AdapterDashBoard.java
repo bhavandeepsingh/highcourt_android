@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.AchievementActivity;
 import com.high.court.activities.CalenderActivity;
 import com.high.court.activities.CaseLawActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
@@ -112,6 +113,9 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             if (i == 7) {
                 getHighCourtLoader().start();
                 CaseLawModel.getCaseLaw(AdapterDashBoard.this, 1);
+            }if (i == 8) {
+               Intent intent = new Intent(context, AchievementActivity.class);
+                    context.startActivity(intent);
             }
             }
         });

@@ -40,6 +40,7 @@ int bannerchangetime=15000;
             "Calendar",
             "Roster",
             "Case Law",
+            "Achievement",
     };
 
     int[] iconlist = {
@@ -51,6 +52,7 @@ int bannerchangetime=15000;
             R.drawable.ic_calender,
             R.drawable.ic_roaster,
             R.drawable.ic_caselaw,
+            R.drawable.ic_achievment,
     };
 
 

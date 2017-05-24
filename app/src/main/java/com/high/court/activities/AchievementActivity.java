@@ -1,9 +1,12 @@
 package com.high.court.activities;
 
 import android.content.Context;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.high.court.R;
 
@@ -21,4 +24,16 @@ public class AchievementActivity extends HighCourtActivity {
         setTitle("Achievements");
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id==android.R.id.home){
+            onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

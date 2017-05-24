@@ -121,7 +121,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
-
                     android:orientation="horizontal"
                     android:padding="10dp">
 
@@ -223,11 +222,9 @@
                         android:textAllCaps="true"
                         android:textColor="@color/clr_textcolor_dark"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <View style="@style/stl_devider" />
-
             </LinearLayout>
 
         </LinearLayout>
