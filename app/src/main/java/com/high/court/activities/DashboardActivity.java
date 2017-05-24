@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterDashBoard;
@@ -19,10 +20,17 @@ import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.UserHelper;
 import com.high.court.layouts.SideProfileDrawer;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.high.court.R.id.adimagevieww;
+
 public class DashboardActivity extends HighCourtActivity {
 
     Context context = DashboardActivity.this;
-
+    ImageView adimageview;
+    int banner_change_count;
+int bannerchangetime=15000;
     public static String[] judgesnamelist = {
             "Executive",
             "Member's directory",
@@ -49,16 +57,19 @@ public class DashboardActivity extends HighCourtActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(UserHelper.getState()){ setupDashboard(); }
-        else{ setupLogin(); }
+        if (UserHelper.getState()) {
+            setupDashboard();
+        } else {
+            setupLogin();
+        }
 
     }
 
-    void setupLogin(){
+    void setupLogin() {
         setContentView(R.layout.activity_login);
     }
 
-    void setupDashboard(){
+    void setupDashboard() {
         setContentView(R.layout.activity_dashboard);
         startService(new Intent(getApplicationContext(), NotificationService.class));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,12 +87,41 @@ public class DashboardActivity extends HighCourtActivity {
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 
+        adimageview = (ImageView) findViewById(adimagevieww);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.app_name, R.string.app_name);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        changingAddImages();
 
+    }
+
+    public void changingAddImages() {
+
+        Timer timerObj = new Timer();
+        TimerTask timerTaskObj = new TimerTask() {
+            public void run() {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        banner_change_count++;
+                        if (banner_change_count ==1){
+                            adimageview.setImageResource(R.drawable.image_ad);
+                        }else if (banner_change_count ==2){
+                            adimageview.setImageResource(R.drawable.image_ad2);
+                        }else if (banner_change_count ==3){
+                            adimageview.setImageResource(R.drawable.image_ad3);
+                            banner_change_count =0;
+                        }
+                    }
+                });
+
+            }
+        };
+        timerObj.schedule(timerTaskObj, 0, bannerchangetime);
 
     }
 
@@ -110,7 +150,7 @@ public class DashboardActivity extends HighCourtActivity {
     protected void onResume() {
         super.onResume();
         SideProfileDrawer sideProfileDrawer = (SideProfileDrawer) findViewById(R.id.drawer_layout);
-        if(sideProfileDrawer != null && sideProfileDrawer.getProfileImageView() != null){
+        if (sideProfileDrawer != null && sideProfileDrawer.getProfileImageView() != null) {
 
             sideProfileDrawer.getProfileImageView().setImageResource(0);
             ImageHelper.loadImage(UserHelper.getAppUserProfilePic(), sideProfileDrawer.getProfileImageView());

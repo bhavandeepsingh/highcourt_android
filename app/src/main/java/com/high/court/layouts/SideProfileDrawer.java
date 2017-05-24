@@ -75,7 +75,6 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         .setSide_logouttext((TextView) findViewById(R.id.side_logouttext));
     //    .setLogoutText((LinearLayout) findViewById(R.id.logout_row));
 
-
         setIcon_profile((ImageView) findViewById(R.id.icon_profile));
         setIcon_paymydues((ImageView) findViewById(R.id.icon_paymydues));
         setIcon_changepassword((ImageView) findViewById(R.id.icon_changepassword));
@@ -85,7 +84,6 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         setPaymudues_row((LinearLayout) findViewById(R.id.paymudues_row));
         setChangepassword_row((LinearLayout) findViewById(R.id.changepassword_row));
         setLogout_row((LinearLayout) findViewById(R.id.logout_row));
-
 
     }
 
