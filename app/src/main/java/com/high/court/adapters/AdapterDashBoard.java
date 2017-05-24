@@ -25,12 +25,14 @@ import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.ToastHelper;
+import com.high.court.http.models.AchievementModel;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.RosterModel;
+import com.high.court.http.models.http_interface.AchievementInterface;
 import com.high.court.http.models.http_interface.CaseLawInterface;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
 import com.high.court.http.models.http_interface.HolidayInterface;
@@ -44,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface, JudgesModelInterface, CaseLawInterface, RosterInterface {
+public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface, JudgesModelInterface, CaseLawInterface, RosterInterface, AchievementInterface {
 
     Context context;
 
@@ -114,8 +116,8 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
                 getHighCourtLoader().start();
                 CaseLawModel.getCaseLaw(AdapterDashBoard.this, 1);
             }if (i == 8) {
-               Intent intent = new Intent(context, AchievementActivity.class);
-                    context.startActivity(intent);
+                getHighCourtLoader().start();
+                AchievementModel.getAchievement(AdapterDashBoard.this);
             }
             }
         });
@@ -257,6 +259,18 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     @Override
     public void onRosterFailur() {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onAchievementSuccess(AchievementModel achievementModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setAchievementModel(achievementModel);
+        context.startActivity(new Intent(context, AchievementActivity.class));
+    }
+
+    @Override
+    public void onAchievementError(Throwable t) {
         getHighCourtLoader().stop();
     }
 

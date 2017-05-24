@@ -1,5 +1,7 @@
 package com.high.court.http;
 
+import com.high.court.http.models.AchievementModel;
+import com.high.court.http.models.BannnerModel;
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
@@ -90,5 +92,11 @@ public interface HighCourtWebService {
 
     @GET("payment-log/list")
     Call<PaymentsModel> getPayment();
+
+    @GET("bannner/list-all")
+    Call<BannnerModel> getBanner();
+
+    @GET("achievements/list")
+    Call<AchievementModel> getAchievement();
 
 }
