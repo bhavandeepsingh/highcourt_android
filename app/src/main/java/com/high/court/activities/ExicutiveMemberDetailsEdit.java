@@ -154,6 +154,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
                 //Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
             }
         }
+
     }
 
     @Override
@@ -163,6 +164,9 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
             startCropImageActivity(mCropImageUri);
         } else {
             //Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
+        }
+        if(requestCode == 231 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            exicutiveMemberDetailLayout.onGrantPermission();
         }
     }
 

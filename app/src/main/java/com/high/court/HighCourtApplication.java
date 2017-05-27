@@ -7,6 +7,7 @@ import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.helpers.UILApplication;
+import com.high.court.http.models.AchievementModel;
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
@@ -34,6 +35,7 @@ public class HighCourtApplication extends UILApplication {
     static CaseLawModel caseLawModel;
     static RosterModel rosterModel;
     static PaymentsModel paymentsModel;
+    static AchievementModel achievementModel;
 
     static boolean paymentRecreateStatus = false;
 
@@ -153,6 +155,14 @@ public class HighCourtApplication extends UILApplication {
 
     public static void setPaymentRecreateStatus(boolean paymentRecreateSattus) {
         HighCourtApplication.paymentRecreateStatus = paymentRecreateSattus;
+    }
+
+    public static AchievementModel getAchievementModel() {
+        return achievementModel;
+    }
+
+    public static void setAchievementModel(AchievementModel achievementModel) {
+        HighCourtApplication.achievementModel = achievementModel;
     }
 }
 

@@ -3,13 +3,10 @@ package com.high.court.layouts;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +14,9 @@ import com.high.court.R;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ForgotPasswordActivity;
 import com.high.court.activities.HighCourtActivity;
-import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.NetworkHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
-import com.high.court.high_court_interface.LayoutActivityInterface;
 import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.HighCourtLoginInterface;
 
@@ -146,7 +141,7 @@ public class HighCourtLogin extends HighCourtMainLinearLayout implements View.On
     @Override
     public void onLoginSuccess(UserLoginModel userLoginModel) {
         getHighCourtLoader().stop();
-        if(userLoginModel.is_success()){
+        if(userLoginModel != null && userLoginModel.is_success()){
             if(UserHelper.login(userLoginModel)){
                 ((HighCourtActivity) getContext()).startActivity(new Intent(getContext(), DashboardActivity.class));
                 ((HighCourtActivity) getContext()).finish();

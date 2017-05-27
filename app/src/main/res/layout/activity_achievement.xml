@@ -52,33 +52,35 @@
                 android:layout_marginBottom="0dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Welcome Admin"
+                android:id="@+id/achievment_name"
                 android:textColor="@color/clr_white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="0dp"
                 android:gravity="center"
-                android:text="Honorary Secretary"
+                android:id="@+id/achievement_destination"
                 android:textColor="@color/clr_white"
                 android:textSize="20sp"
                 android:textStyle="normal" />
         </LinearLayout>
-        <TextView
+
+        <WebView
             android:id="@+id/achievmenttext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:text="@string/lorem"
             android:textSize="16sp"
             android:padding="18dp"
             android:lineSpacingExtra="5dp"
             android:textColor="@color/clr_textcolor_dark"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            tools:ignore="WebViewLayout" />
 
 
         </LinearLayout>
