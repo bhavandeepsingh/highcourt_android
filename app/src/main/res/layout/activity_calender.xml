@@ -3,10 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F5F5"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context="com.high.court.activities.HonbleJudgesActivity">
+
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -17,9 +24,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/app_bar" />
 
             <View
                 style="@style/stl_devider"
@@ -28,21 +32,49 @@
             <com.high.court.layouts.HighCourtCalender
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:theme="@style/Theme.AppCompat.Light"
-                android:focusedMonthDateColor="@color/colorPrimary"
-                android:focusableInTouchMode="false"
-                android:selectedWeekBackgroundColor="@color/colorPrimary"
-                android:weekNumberColor="@color/clr_red"
+                android:layout_height="wrap_content"
+                android:theme="@style/custom_calender"
+                app:mcv_tileHeight="32dp"
+                app:mcv_headerTextAppearance="@color/clr_black"
+                app:mcv_weekDayTextAppearance="@color/clr_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                />
-            <include
-                android:id="@+id/recyclerview"
-                layout="@layout/include_recyclerview" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/recyclerview"
+                    layout="@layout/include_recyclerview"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_above="@+id/no_records_found"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/no_records_found"
+                    android:visibility="visible"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:paddingTop="20dp"
+                        android:textColor="@color/clr_black"
+                        android:layout_centerInParent="true"
+                        android:text="No Records Found"/>
+
+                </RelativeLayout>
+
+        </RelativeLayout>
 
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
 
 
 </LinearLayout>

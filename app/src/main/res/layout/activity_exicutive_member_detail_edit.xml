@@ -17,21 +17,20 @@
         android:background="@color/colorPrimary" />
 
     <com.theartofdev.edmodo.cropper.CropImageView
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cropImageView"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:visibility="gone" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/quick_start_cropped_image"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        app:civ_border_width="0dp"
-        app:civ_border_color="@color/clr_white"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="-65dp"
+        app:civ_border_color="@color/clr_white"
+        app:civ_border_width="0dp"
         app:layout_behavior="com.high.court.activities.AvatarImageBehavior" />
 
     <ImageView
@@ -43,7 +42,6 @@
         android:layout_marginTop="-50dp"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_camera" />
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -94,7 +92,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-
+                            android:background="@color/clr_blank"
                             android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
@@ -111,6 +109,58 @@
 
 
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/padding">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:alpha="0.8"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_name" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/padding"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="name"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorPrimary" />
+
+                        <EditText
+                            android:id="@+id/edit_profile_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:background="@drawable/border_edittext"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="6dp"
+                            android:paddingRight="5dp"
+
+                            android:paddingTop="3dp"
+                            android:textAllCaps="false"
+                            android:textColor="@color/clr_textcolor_dark" />
+
+                        <View
+                            style="@style/stl_devider"
+                            android:layout_marginTop="@dimen/padding_top" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,6 +198,7 @@
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
+
                             android:paddingTop="3dp"
                             android:textAllCaps="false"
                             android:textColor="@color/clr_textcolor_dark" />
@@ -195,7 +246,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-
+                            android:background="@color/clr_blank"
                             android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
@@ -246,7 +297,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
-
+                            android:background="@color/clr_blank"
                             android:enabled="false"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
@@ -302,6 +353,7 @@
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
+
                             android:textColor="@color/clr_textcolor_dark" />
 
                         <View
@@ -396,6 +448,7 @@
                         <EditText
                             android:id="@+id/mobilenumber_val"
                             android:layout_width="match_parent"
+
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
@@ -451,6 +504,7 @@
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
+
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:textColor="@color/clr_textcolor_dark" />
@@ -500,6 +554,7 @@
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="2dp"
                             android:paddingLeft="6dp"
+
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
                             android:textColor="@color/clr_textcolor_dark" />
@@ -547,6 +602,8 @@
                             android:layout_marginTop="0dp"
                             android:background="@drawable/border_edittext"
                             android:paddingBottom="4dp"
+
+
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"
@@ -562,10 +619,29 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/padding">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:padding="3dp"
+                        android:id="@+id/set_current_location_as_home"
+                        android:src="@drawable/ic_bloodgroup"
+                        android:text=" Set your current location as home address."
+                        android:textColor="@color/clr_textcolor_dark"
+                        android:theme="@style/MyCheckBox" />
+                </LinearLayout>
+
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="14dp"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/padding">
 
@@ -628,6 +704,8 @@
 
 
     </ScrollView>
+
+
 
 
 </com.high.court.layouts.ExicutiveMemberDetailLayout>

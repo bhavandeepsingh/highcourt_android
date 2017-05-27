@@ -1,5 +1,7 @@
 package com.high.court.http.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.high.court.backround_service.NotificationService;
@@ -202,12 +204,12 @@ public class NotificationModel extends HighCourtModel {
         RestAdapter.get().notificationUnRead(stringIntegerMap).enqueue(new Callback<NotificationModel>() {
             @Override
             public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
-                //Log.d("ASD", response.body().toString());
+                Log.d("ASD", response.body().toString());
             }
 
             @Override
             public void onFailure(Call<NotificationModel> call, Throwable t) {
-                //Log.d("ASD", t.getMessage());
+                Log.d("ASD", t.getMessage());
             }
         });
     }

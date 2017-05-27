@@ -1,48 +1,47 @@
 package com.high.court.layouts;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Build;
-import android.provider.SyncStateContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ChangePassword;
-import com.high.court.activities.CommingSoonActivity;
 import com.high.court.activities.DashboardActivity;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.HighCourtActivity;
 import com.high.court.activities.MySubscriptionActivity;
+import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.high.court.http.models.PaymentsModel;
+import com.high.court.http.models.http_interface.PaymentsInterface;
 
 
 /**
  * Created by admin on 4/26/2017.
  */
 
-public class SideProfileDrawer extends DrawerLayout implements View.OnClickListener {
+public class SideProfileDrawer extends DrawerLayout implements View.OnClickListener, PaymentsInterface {
 
     ImageView profileImageView;
     ImageView icon_profile, icon_paymydues, icon_changepassword, icon_logout;
     TextView profileNameText, myProfile_text, payMyDuesText, chnagePassword, side_logouttext;
     LinearLayout lmyprofile_row, paymudues_row, changepassword_row, logout_row, logoutRow;
+
+    HighCourtLoader highCourtLoader;
 
     boolean initiate = false;
 
@@ -76,7 +75,6 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         .setSide_logouttext((TextView) findViewById(R.id.side_logouttext));
     //    .setLogoutText((LinearLayout) findViewById(R.id.logout_row));
 
-
         setIcon_profile((ImageView) findViewById(R.id.icon_profile));
         setIcon_paymydues((ImageView) findViewById(R.id.icon_paymydues));
         setIcon_changepassword((ImageView) findViewById(R.id.icon_changepassword));
@@ -86,7 +84,6 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         setPaymudues_row((LinearLayout) findViewById(R.id.paymudues_row));
         setChangepassword_row((LinearLayout) findViewById(R.id.changepassword_row));
         setLogout_row((LinearLayout) findViewById(R.id.logout_row));
-
 
     }
 
@@ -252,8 +249,9 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     }
 
     void onClickMyDues() {
-        getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
-        select_PayMyDues();
+        //getHighCourtActivity().startActivity(new Intent(getContext(), CommingSoonActivity.class));
+        getHighCourtLoader().start();
+        PaymentsModel.getPayments(this);
     }
 
     void onClickChangePassword(){
@@ -264,6 +262,7 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
     void onClickLogout() {
         if (UserHelper.logout()) {
             getHighCourtActivity().startActivity(new Intent(getContext(), DashboardActivity.class));
+            getHighCourtActivity().finish();
         } else {
             ToastHelper.showLogoutFailuer(getContext());
         }
@@ -335,15 +334,58 @@ public class SideProfileDrawer extends DrawerLayout implements View.OnClickListe
         } else if (getChangepassword_row().getId() == v.getId()) {
             onClickChangePassword();
         } else if (getLogout_row().getId() == v.getId()) {
-            onClickLogout();
+            alertDialog();
         }
     }
+
 
     public boolean isInitiate() {
         return initiate;
     }
 
+
+    void alertDialog(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext(),R.style.MyAlertDialogStyle);
+        builder1.setMessage("Are you sure you want to Logout ?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        onClickLogout();
+                    }
+                });
+        builder1.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder1.show();
+    }
+
     public void setInitiate(boolean initiate) {
         this.initiate = initiate;
+    }
+
+    public HighCourtLoader getHighCourtLoader() {
+        if(highCourtLoader == null) highCourtLoader = HighCourtLoader.init(getContext());
+        return highCourtLoader;
+    }
+
+    @Override
+    public void onPaymentSuccess(PaymentsModel paymentsModel) {
+        getHighCourtLoader().stop();
+        if(paymentsModel != null) {
+            HighCourtApplication.setPaymentsModel(paymentsModel);
+            getHighCourtActivity().startActivity(new Intent(getContext(), MySubscriptionActivity.class));
+        }
+    }
+
+    @Override
+    public void onPaymentFailur(Throwable t) {
+        getHighCourtLoader().stop();
     }
 }

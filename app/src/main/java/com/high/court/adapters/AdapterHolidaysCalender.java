@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.HighCourtActivity;
 import com.high.court.http.models.HolidaysModel;
 
 import java.util.List;
@@ -38,8 +40,24 @@ public class AdapterHolidaysCalender extends RecyclerView.Adapter<AdapterHoliday
 
     @Override
     public int getItemCount() {
-        return getHolidaysList().size();
+        int list_size = getHolidaysList().size();
+        if(list_size <= 0) showNoRecords();
+        else hideNoRecords();
+        return list_size;
     }
+
+    private void hideNoRecords() {
+        if(getNoRecordsFounds() != null && getNoRecordsFounds().getVisibility() == View.VISIBLE){
+            getNoRecordsFounds().setVisibility(View.GONE);
+        }
+    }
+
+    private void showNoRecords() {
+        if(getNoRecordsFounds() != null && getNoRecordsFounds().getVisibility() == View.GONE){
+            getNoRecordsFounds().setVisibility(View.VISIBLE);
+        }
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
        TextView holidays_date, holiday_title, holiday_highcourt;
@@ -57,6 +75,12 @@ public class AdapterHolidaysCalender extends RecyclerView.Adapter<AdapterHoliday
             return HighCourtApplication.getHolidaysModel().getHolidaysList();
         }return null;
     }
+
+
+    public RelativeLayout getNoRecordsFounds(){
+        return  (RelativeLayout) ((HighCourtActivity) context).findViewById(R.id.no_records_found);
+    }
+
 
 }
 

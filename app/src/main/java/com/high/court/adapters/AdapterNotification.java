@@ -39,29 +39,28 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
 
-        if(viewHolder.notification_description != null) viewHolder.notification_description.setText(getNotificationsList().get(i).getDescription());
-        if(viewHolder.notification_time != null) viewHolder.notification_time.setText(DateHelper.getTimeAgo(Long.parseLong(getNotificationsList().get(i).getCreated_at())));
-        if(viewHolder.download_file != null){
-            if(getNotificationsList().get(i).getIs_file() == NotificationModel.NOTIFAICATION_HAS_ATTACHMENT){
+        if (viewHolder.notification_description != null)
+            viewHolder.notification_description.setText(getNotificationsList().get(i).getDescription());
+        if (viewHolder.notification_time != null)
+            viewHolder.notification_time.setText(DateHelper.getTimeAgo(Long.parseLong(getNotificationsList().get(i).getCreated_at())));
+        if (viewHolder.download_file != null) {
+            if (getNotificationsList().get(i).getIs_file() == NotificationModel.NOTIFAICATION_HAS_ATTACHMENT) {
                 viewHolder.download_file.setVisibility(View.VISIBLE);
                 viewHolder.download_file.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(getNotificationsList().get(i).getNotification_src() != null) {
+                        if (getNotificationsList().get(i).getNotification_src() != null) {
                             context.startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getNotificationsList().get(i).getNotification_src())));
                         }
                     }
                 });
-            }else{
+            } else {
                 viewHolder.download_file.setVisibility(View.GONE);
             }
         }
-
-        if(getNotificationsList().get(i).getIsRead() <= 0){
+        if (getNotificationsList().get(i).getIsRead() <= 0) {
             viewHolder.notif_layer.setBackgroundResource(R.drawable.notification_un_read);
         }
-
-
     }
 
     @Override
@@ -70,7 +69,6 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView notification_description, notification_time;
         LinearLayout download_file, notif_layer;
 
@@ -78,15 +76,17 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
             super(itemView);
             notification_description = (TextView) itemView.findViewById(R.id.notification_description);
             notification_time = (TextView) itemView.findViewById(R.id.notification_time);
-            download_file = (LinearLayout)itemView.findViewById(R.id.download_file);
+            download_file = (LinearLayout) itemView.findViewById(R.id.download_file);
             notif_layer = (LinearLayout) itemView.findViewById(R.id.notif_layer);
-
         }
     }
 
     public List<NotificationModel.Notifications> getNotificationsList() {
-        if(notificationsList == null) notificationsList = HighCourtApplication.getNotificationsList();
+        if (notificationsList == null)
+            notificationsList = HighCourtApplication.getNotificationsList();
         return notificationsList;
     }
+
+
 }
 

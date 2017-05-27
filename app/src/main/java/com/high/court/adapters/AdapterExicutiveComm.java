@@ -2,16 +2,13 @@ package com.high.court.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
@@ -44,24 +41,29 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        if(viewHolder.exicutive_name != null) viewHolder.exicutive_name.setText(getProfileModelList().get(i).getName());
-        if(viewHolder.visrpresident != null) viewHolder.visrpresident.setText(getProfileModelList().get(i).getProfile());
-        if(viewHolder.ponenumber_val != null) viewHolder.ponenumber_val.setText(getProfileModelList().get(i).getMobile());
-        if(viewHolder.profile_image != null) ImageHelper.loadImage(getProfileModelList().get(i).getProfile_pic(), viewHolder.profile_image);
+        if (viewHolder.exicutive_name != null)
+            viewHolder.exicutive_name.setText(getProfileModelList().get(i).getName());
+        if (viewHolder.visrpresident != null)
+            viewHolder.visrpresident.setText(getProfileModelList().get(i).getProfile());
+        if (viewHolder.ponenumber_val != null)
+            viewHolder.ponenumber_val.setText(getProfileModelList().get(i).getMobile());
+        if (viewHolder.profile_image != null)
+            ImageHelper.loadImage(getProfileModelList().get(i).getProfile_pic(), viewHolder.profile_image);
 
-        if(viewHolder.rowview != null) viewHolder.rowview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ExicutiveMemberDetail.class);
-                intent.putExtra(ExicutiveMemberDetail.PROFILE_INDEX_KEY, String.valueOf(i));
-                context.startActivity(intent);
-            }
-        });
+        if (viewHolder.rowview != null)
+            viewHolder.rowview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ExicutiveMemberDetail.class);
+                    intent.putExtra(ExicutiveMemberDetail.PROFILE_INDEX_KEY, String.valueOf(i));
+                    context.startActivity(intent);
+                }
+            });
 
         viewHolder.phonelayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
+                DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
             }
         });
 
@@ -91,12 +93,11 @@ public class AdapterExicutiveComm extends RecyclerView.Adapter<AdapterExicutiveC
     }
 
     public List<ProfileModel> getProfileModelList() {
-        return (profileModelList == null)? HighCourtApplication.getProfileModels(): profileModelList;
+        return (profileModelList == null) ? HighCourtApplication.getProfileModels() : profileModelList;
     }
 
     public void setProfileModelList(List<ProfileModel> profileModelList) {
         this.profileModelList = profileModelList;
     }
-
 }
 

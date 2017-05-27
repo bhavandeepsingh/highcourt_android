@@ -2,29 +2,24 @@ package com.high.court.layouts;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.DrawableRes;
+import android.location.Location;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.high.court.BuildConfig;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.ExicutiveMemberDetailsEdit;
+import com.high.court.helpers.GPSTracker;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
@@ -34,13 +29,7 @@ import com.high.court.http.models.UserLoginModel;
 import com.high.court.http.models.http_interface.ProfileUpdateInterface;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,18 +40,16 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-import static android.R.attr.id;
-
 /**
  * Created by admin on 4/26/2017.
  */
 
-public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ProfileUpdateInterface {
+public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout implements View.OnClickListener, ProfileUpdateInterface{
 
 
     CircleImageView profilePicShow;
 
-    EditText designation_val, profile_val, barcouncil_val, barassociaation_val, landline_val, mobilenumber_val, residential_val,
+    EditText edit_profile_name, designation_val, profile_val, barcouncil_val, barassociaation_val, landline_val, mobilenumber_val, residential_val,
             courtaddress_val, bloodgroup_val, email_id, landline_no, mobile_no, residential_adress, court_address, blood_group;
 
     TextView save_text_view;
@@ -70,6 +57,12 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     ProfileModel profileModel;
 
     Spinner blood_group_spinner;
+
+    CheckBox set_current_location_as_home;
+
+    GPSTracker gpsTracker;
+
+    Location location;
 
     static int TYPE = 0;
 
@@ -100,7 +93,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         getDesignation_val();
         getProfile_val();
         getBarassociaation_val();
-
+        getEdit_profile_name();
         getBlood_group();
         getBarcouncil_val();
         getBlood_group_spinner();
@@ -110,12 +103,23 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         getMobile_no();
         getResidential_adress();
         getCourt_address();
+        getSet_current_location_as_home();
 
 
     }
 
+    public EditText getEdit_profile_name() {
+        if(edit_profile_name == null) setEdit_profile_name((EditText) findViewById(R.id.edit_profile_name));
+        return edit_profile_name;
+    }
+
+    public void setEdit_profile_name(EditText edit_profile_name) {
+        if(edit_profile_name != null) edit_profile_name.setText(getProfileModel().getName());
+        this.edit_profile_name = edit_profile_name;
+    }
+
     public CircleImageView getProfilePicShow() {
-        if (profilePicShow != null) setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
+        if (profilePicShow == null) setProfilePicShow((CircleImageView) findViewById(R.id.quick_start_cropped_image));
         return profilePicShow;
     }
 
@@ -297,7 +301,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     }
 
     private void onSaveButtonClick(View v) {
-        if (!editTextValidate(getEmail_id())) ToastHelper.showEmailNotFill(getContext());
+        if(!editTextValidate(getEdit_profile_name())) ToastHelper.showProfileName(getContext());
+        else if (!editTextValidate(getEmail_id())) ToastHelper.showEmailNotFill(getContext());
         else if (!editTextValidate(getLandline_no())) ToastHelper.showLanlineNotFill(getContext());
         else if (!editTextValidate(getMobile_no())) ToastHelper.showMoblieNotFill(getContext());
         else if (!editTextValidate(getResidential_adress()))
@@ -335,6 +340,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     private Map<String, RequestBody> makeRequest() {
         Map<String, RequestBody> stringStringMap = new HashMap<>();
+        stringStringMap.put("Profile[name]", RequestBody.create(MediaType.parse("text/plain"), getEdit_profile_name().getText().toString()));
         stringStringMap.put("Profile[public_email]", RequestBody.create(MediaType.parse("text/plain"), getEmail_id().getText().toString()));
         stringStringMap.put("Profile[landline]", RequestBody.create(MediaType.parse("text/plain"), getLandline_no().getText().toString()));
         stringStringMap.put("Profile[mobile]", RequestBody.create(MediaType.parse("text/plain"), getMobile_no().getText().toString()));
@@ -344,6 +350,12 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         if(HighCourtApplication.getBloodGroupsModel() != null) {
             stringStringMap.put("Profile[blood_group]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(HighCourtApplication.getBloodGroupsModel().getBloodGroups().get(getBlood_group_spinner().getSelectedItemPosition()-1).getId())));
         }
+
+        if(getSet_current_location_as_home().isChecked() && getLocation() != null){
+            stringStringMap.put("Profile[lat1]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(getLocation().getLatitude())));
+            stringStringMap.put("Profile[long1]", RequestBody.create(MediaType.parse("text/plain"), String.valueOf(getLocation().getLongitude())));
+        }
+
         return stringStringMap;
     }
 
@@ -408,6 +420,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             blood_group_spinner.setAdapter(dataAdapter);
             blood_group_spinner.setSelection(selected_index);
+
         }
         this.blood_group_spinner = blood_group_spinner;
     }
@@ -417,6 +430,8 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         getHighCourtLoader().stop();
         UserHelper.login(userLoginModel);
         ToastHelper.profileUpdateSuccess(getContext());
+        getHighCourtActivity().startActivity(new Intent(getContext(), ExicutiveMemberDetail.class));
+        getHighCourtActivity().finish();
     }
 
     @Override
@@ -432,9 +447,55 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         else ToastHelper.profileUpdateFail(getContext());
     }
 
-
     public ExicutiveMemberDetailsEdit getExicutiveMemberDetailsEdit(){
         return (ExicutiveMemberDetailsEdit) getContext();
     }
 
+
+    public CheckBox getSet_current_location_as_home() {
+        if(set_current_location_as_home == null) setSet_current_location_as_home((CheckBox) findViewById(R.id.set_current_location_as_home));
+        return set_current_location_as_home;
+    }
+
+    public void setSet_current_location_as_home(CheckBox set_current_location_as_home) {
+        if(set_current_location_as_home != null) {
+            set_current_location_as_home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b){
+                       setLocation(getGpsTracker().getLocation());
+                        if(getLocation() == null){ getSet_current_location_as_home().setChecked(false);}
+                    }else{
+                        Log.d("STATE", "NOT_CHECKED");
+                    }
+                }
+            });
+        }
+        this.set_current_location_as_home = set_current_location_as_home;
+    }
+
+    public GPSTracker getGpsTracker() {
+        if(gpsTracker == null) gpsTracker = new GPSTracker(getContext());
+        return gpsTracker;
+    }
+
+    public void setGpsTracker(GPSTracker gpsTracker) {
+        this.gpsTracker = gpsTracker;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void onGrantPermission(){
+        getSet_current_location_as_home().setChecked(true);
+    }
+
+    public void onPermissionCancel(){
+        getSet_current_location_as_home().setChecked(false);
+    }
 }

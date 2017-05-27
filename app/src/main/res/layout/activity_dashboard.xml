@@ -16,7 +16,6 @@
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true">
@@ -76,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <View style="@style/stl_devider" />
 
                 <LinearLayout
@@ -121,7 +121,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
-
                     android:orientation="horizontal"
                     android:padding="10dp">
 
@@ -223,18 +222,15 @@
                         android:textAllCaps="true"
                         android:textColor="@color/clr_textcolor_dark"
                         android:textStyle="bold" />
-
                 </LinearLayout>
 
                 <View style="@style/stl_devider" />
-
-
             </LinearLayout>
-
 
         </LinearLayout>
 
 
     </android.support.design.widget.NavigationView>
+
 
 </com.high.court.layouts.SideProfileDrawer>

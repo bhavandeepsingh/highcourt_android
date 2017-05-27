@@ -83,8 +83,6 @@ public class AdapterRoster extends RecyclerView.Adapter<AdapterRoster.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-
             roster_sr_no = (TextView) itemView.findViewById(R.id.roster_sr_no);
             roster_bench_name = (TextView) itemView.findViewById(R.id.roster_bench_name);
             roster_judges_name = (TextView) itemView.findViewById(R.id.roster_judges_name);

@@ -19,18 +19,6 @@ public class DisplayBoardActivity extends HighCourtActivity {
 
     LinearLayout caselawlayer,judjelayer;
 
-    public static String[] judgesnamelist = {
-            "Satish Kumar Mittal",
-            "Satish Kumar Mittal",
-
-    };
-    public static String[] courtroomlist = {
-            "75/-",
-            "75/-",
-    };
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

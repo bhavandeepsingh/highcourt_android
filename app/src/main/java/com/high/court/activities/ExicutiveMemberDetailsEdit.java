@@ -6,20 +6,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,18 +26,6 @@ import com.high.court.http.models.ProfileModel;
 import com.high.court.layouts.ExicutiveMemberDetailLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnMapReadyCallback {
 
@@ -70,7 +50,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
     ImageView profile_pic_image_view;
     public static String dirPath;
-   public static String imagedirectry;
+    public static String imagedirectry;
 
     CropImageView cropImageView;
 
@@ -174,6 +154,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
                 //Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
             }
         }
+
     }
 
     @Override
@@ -183,6 +164,9 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
             startCropImageActivity(mCropImageUri);
         } else {
             //Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
+        }
+        if(requestCode == 231 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            exicutiveMemberDetailLayout.onGrantPermission();
         }
     }
 

@@ -1,23 +1,21 @@
 package com.high.court;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.high.court.activities.HighCourtActivity;
-import com.high.court.activities.RosterActivity;
-import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.UILApplication;
+import com.high.court.http.models.AchievementModel;
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
+import com.high.court.http.models.PaymentsModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.RosterModel;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -36,19 +34,17 @@ public class HighCourtApplication extends UILApplication {
     static JudgesModel judgesModel;
     static CaseLawModel caseLawModel;
     static RosterModel rosterModel;
+    static PaymentsModel paymentsModel;
+    static AchievementModel achievementModel;
+
+    static boolean paymentRecreateStatus = false;
 
     @Override
     public void onCreate() {
-//        ImageLoader.getInstance().clearMemoryCache();
-//        ImageLoader.getInstance().clearDiskCache();
         super.onCreate();
         adjustFontScale(getApplicationContext(),getApplicationContext().getResources().getConfiguration());
         highCourtApplication = this;
     }
-
-
-
-
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -145,5 +141,28 @@ public class HighCourtApplication extends UILApplication {
         HighCourtApplication.rosterModel = rosterModel;
     }
 
+    public static PaymentsModel getPaymentsModel() {
+        return paymentsModel;
+    }
+
+    public static void setPaymentsModel(PaymentsModel paymentsModel) {
+        HighCourtApplication.paymentsModel = paymentsModel;
+    }
+
+    public static boolean isPaymentRecreateStatus() {
+        return paymentRecreateStatus;
+    }
+
+    public static void setPaymentRecreateStatus(boolean paymentRecreateSattus) {
+        HighCourtApplication.paymentRecreateStatus = paymentRecreateSattus;
+    }
+
+    public static AchievementModel getAchievementModel() {
+        return achievementModel;
+    }
+
+    public static void setAchievementModel(AchievementModel achievementModel) {
+        HighCourtApplication.achievementModel = achievementModel;
+    }
 }
 

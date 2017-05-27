@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.activities.AchievementActivity;
 import com.high.court.activities.CalenderActivity;
 import com.high.court.activities.CaseLawActivity;
 import com.high.court.activities.ExicutiveCommettieeActivity;
@@ -24,12 +25,14 @@ import com.high.court.activities.WebViewActivity;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.ToastHelper;
+import com.high.court.http.models.AchievementModel;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.JudgesModel;
 import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.RosterModel;
+import com.high.court.http.models.http_interface.AchievementInterface;
 import com.high.court.http.models.http_interface.CaseLawInterface;
 import com.high.court.http.models.http_interface.ExceutiveMemberInterface;
 import com.high.court.http.models.http_interface.HolidayInterface;
@@ -43,7 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface, JudgesModelInterface, CaseLawInterface, RosterInterface {
+public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.ViewHolder> implements ExceutiveMemberInterface, MemberInterface, NotificationInterface, HolidayInterface, JudgesModelInterface, CaseLawInterface, RosterInterface, AchievementInterface {
 
     Context context;
 
@@ -53,14 +56,11 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     HighCourtLoader highCourtLoader;
     String displayboard_url="https://phhc.gov.in/display_board_full_width.php";
-    String judges_url="http://highcourtchd.gov.in/?trs=chief";
-    String roster_url="http://highcourtchd.gov.in/?trs=roster";
 
     public AdapterDashBoard(Context ctx, String[] judgesnamelist, int[] prgmImages) {
         super();
         get_judgesnamelist = judgesnamelist;
         imageId = prgmImages;
-
         this.context = ctx;
     }
 
@@ -106,7 +106,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             }
             if (i == 5) {
                 getHighCourtLoader().start();
-                HolidaysModel.getHolidays(AdapterDashBoard.this);
+                HolidaysModel.getHolidays(AdapterDashBoard.this, null);
             }
             if (i == 6) {
                 getHighCourtLoader().start();
@@ -115,6 +115,9 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             if (i == 7) {
                 getHighCourtLoader().start();
                 CaseLawModel.getCaseLaw(AdapterDashBoard.this, 1);
+            }if (i == 8) {
+                getHighCourtLoader().start();
+                AchievementModel.getAchievement(AdapterDashBoard.this);
             }
             }
         });
@@ -256,6 +259,18 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
 
     @Override
     public void onRosterFailur() {
+        getHighCourtLoader().stop();
+    }
+
+    @Override
+    public void onAchievementSuccess(AchievementModel achievementModel) {
+        getHighCourtLoader().stop();
+        HighCourtApplication.setAchievementModel(achievementModel);
+        context.startActivity(new Intent(context, AchievementActivity.class));
+    }
+
+    @Override
+    public void onAchievementError(Throwable t) {
         getHighCourtLoader().stop();
     }
 
