@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class HighCourtLogin extends HighCourtMainLinearLayout implements View.On
     TextView sign_in;
 
     TextView forgot_password;
+
+
 
     public HighCourtLogin(Context context) {
         super(context);

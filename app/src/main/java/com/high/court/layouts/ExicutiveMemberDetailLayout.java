@@ -14,11 +14,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.activities.ExicutiveMemberDetail;
 import com.high.court.activities.ExicutiveMemberDetailsEdit;
+import com.high.court.helpers.DialerHelper;
 import com.high.court.helpers.GPSTracker;
 import com.high.court.helpers.ImageHelper;
 import com.high.court.helpers.ToastHelper;
@@ -52,7 +54,7 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
     EditText edit_profile_name, designation_val, profile_val, barcouncil_val, barassociaation_val, landline_val, mobilenumber_val, residential_val,
             courtaddress_val, bloodgroup_val, email_id, landline_no, mobile_no, residential_adress, court_address, blood_group;
 
-    TextView save_text_view;
+    TextView save_text_view,landline_text_val,mobilenumber_text_val ;
 
     ProfileModel profileModel;
 
@@ -104,8 +106,38 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         getResidential_adress();
         getCourt_address();
         getSet_current_location_as_home();
+        getLandline_text_val();
+        getMobilenumber_text_val();
 
 
+    }
+
+    public TextView getLandline_text_val() {
+        if(landline_text_val == null) setLandline_text_val((TextView) findViewById(R.id.landline_text_val));
+        return landline_text_val;
+    }
+
+    public void setLandline_text_val(TextView landline_text_val) {
+        if(landline_text_val != null) {
+            landline_text_val.setOnClickListener(this);
+            landline_text_val.setText(getProfileModel().getLandline());
+        }
+        this.landline_text_val = landline_text_val;
+    }
+
+    public TextView getMobilenumber_text_val() {
+        if (mobilenumber_text_val == null){
+            setMobilenumber_text_val((TextView)findViewById(R.id.mobilenumber_text_val));
+        }
+        return mobilenumber_text_val;
+    }
+
+    public void setMobilenumber_text_val(TextView mobilenumber_text_val) {
+        if (mobilenumber_text_val != null){
+            mobilenumber_text_val.setOnClickListener(this);
+            mobilenumber_text_val.setText(getProfileModel().getMobile());
+        }
+        this.mobilenumber_text_val = mobilenumber_text_val;
     }
 
     public EditText getEdit_profile_name() {
@@ -295,12 +327,24 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == getSave_text_view().getId()) {
+        if (getSave_text_view() != null && v.getId() == getSave_text_view().getId()) {
             onSaveButtonClick(v);
         }
+
+        if(getMobilenumber_text_val() != null && v.getId() == getMobilenumber_text_val().getId()){
+            DialerHelper.dial(getContext(), getProfileModel().getMobile());
+        }
+
+        if(getLandline_text_val() != null && v.getId() == getLandline_text_val().getId()){
+            DialerHelper.dial(getContext(), getProfileModel().getLandline());
+        }
+
+
+
     }
 
     private void onSaveButtonClick(View v) {
+
         if(!editTextValidate(getEdit_profile_name())) ToastHelper.showProfileName(getContext());
         else if (!editTextValidate(getEmail_id())) ToastHelper.showEmailNotFill(getContext());
         else if (!editTextValidate(getLandline_no())) ToastHelper.showLanlineNotFill(getContext());
