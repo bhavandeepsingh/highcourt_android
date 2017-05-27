@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -27,7 +25,6 @@ import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.NetworkHelper;
 import com.high.court.helpers.ToastHelper;
 import com.high.court.helpers.UserHelper;
-import com.high.court.http.RestAdapter;
 import com.high.court.http.models.BloodGroupsModel;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.http.models.http_interface.BloodGroupInterface;
@@ -58,16 +55,18 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
     Double lcurrent_atval = 30.873194;
     Double lcurrent_longval = 75.8534603;
 
-    String currentlocation_url= "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
     ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
 
+    ProfileModel profileModel;
+
     boolean edit_status = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exicutive_member_detail);
 
-        ProfileModel profileModel = null;
+        profileModel = null;
 
         if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
@@ -77,10 +76,8 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
             profileModel = ProfileModel.getLoginUserProfile();
         }
 
-         exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
+        exicutiveMemberDetailLayout = (ExicutiveMemberDetailLayout) findViewById(R.id.exicutive_member_layout);
         exicutiveMemberDetailLayout.setProfile(profileModel);
-
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -106,11 +103,13 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
         maplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(currentlocation_url));
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(getMapUrl()));
                 startActivity(intent);
 
             }
         });
+
+        setLatLang();
     }
 
 
@@ -169,9 +168,19 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
         mMap = googleMap;
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
         LatLng sydney = new LatLng(latval, longval);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Punjab and Haryana High Court"));
+        mMap.addMarker(new MarkerOptions().position(sydney));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(lcurrent_atval, lcurrent_longval)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(zoom);
+    }
+
+    private void setLatLang() {
+        if(profileModel != null && profileModel.getLat1() != null && profileModel.getLat1().length() > 0
+            && profileModel.getLong1() != null && profileModel.getLong1().length() > 0){
+            latval = Double.parseDouble(profileModel.getLat1());
+            longval = Double.parseDouble(profileModel.getLong1());
+        }
+        setCurrnetLat();
     }
 
     public HighCourtLoader getHighCourtLoader() {
@@ -195,6 +204,15 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
     public void onBloodGroupFailur(Throwable t) {
         getHighCourtLoader().stop();
         ToastHelper.showToast(t.getMessage(), context);
+    }
+
+    public String getMapUrl(){
+        return "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
+    }
+
+    private void setCurrnetLat() {
+        lcurrent_atval = Double.parseDouble(UserHelper.getAppUserLat01());
+        lcurrent_longval = Double.parseDouble(UserHelper.getAppUserLong01());
     }
 
 
