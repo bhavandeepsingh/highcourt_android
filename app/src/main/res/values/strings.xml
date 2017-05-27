@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">High Court</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">"AIzaSyDBmVl3Rbjfxs4Mn3w1TBNJiVnyPxfTmzg</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">"AIzaSyBJCrT5V0jwhVpJZ80-PCjMVJQsH6UJisk</string>
 
     <string name="str_display">display board</string>
     <string name="str_exicutive">EXICUTIVE COMMITE</string>
