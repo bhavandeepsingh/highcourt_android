@@ -68,11 +68,12 @@ Chandigarh"
                         android:textColor="@color/clr_textcolor_dark"
                         android:textStyle="bold" />
 
-
                 </LinearLayout>
 
 
                 <include layout="@layout/include_recyclerview" />
+
+                <View style="@style/stl_devider" />
 
                 <ImageView
                     android:id="@+id/adimagevieww"
