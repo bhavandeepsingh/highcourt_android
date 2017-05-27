@@ -37,6 +37,7 @@ public class UserHelper {
     static String APP_USER_LONG_02 = "APP_USER_LONG_02";
     static String APP_USER_LOGIN_STATUS = "APP_USER_LOGIN_STATUS";
     static String APP_USER_PROFILE_PIC = "APP_USER_PROFILE_PIC";
+    static String APP_FIRST_RUN = "APP_FIRST_RUN";
 
     public static boolean login(UserLoginModel userLoginModel){
         if(userLoginModel == null) return false;
@@ -314,5 +315,14 @@ public class UserHelper {
     public static SharedPreferences getSharedPreferences(){
         return PreferenceManager.getDefaultSharedPreferences(HighCourtApplication.getHighCourtApplicationContext());
     }
+
+    public static boolean getFirstRun() {
+        return getSharedPreferences().getBoolean(APP_FIRST_RUN, true);
+    }
+
+    public static void setFirstRun(){
+        getSharedPreferences().edit().putBoolean(APP_FIRST_RUN, false).commit();
+    }
+
 
 }

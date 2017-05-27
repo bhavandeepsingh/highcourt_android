@@ -33,17 +33,6 @@
         app:civ_border_width="0dp"
         app:layout_behavior="com.high.court.activities.AvatarImageBehavior" />
 
-    <ImageView
-        android:id="@+id/pickimage"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="-50dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_camera" />
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -141,7 +130,7 @@
                             android:textColor="@color/colorPrimary" />
 
                         <EditText
-                            android:id="@+id/name_val"
+                            android:id="@+id/edit_profile_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -625,17 +614,18 @@
                     android:layout_height="40dp"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/padding">
+
                     <CheckBox
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:padding="3dp"
+                        android:id="@+id/set_current_location_as_home"
                         android:src="@drawable/ic_bloodgroup"
                         android:text=" Set your current location as home address."
                         android:textColor="@color/clr_textcolor_dark"
                         android:theme="@style/MyCheckBox" />
                 </LinearLayout>
-
 
 
                 <RelativeLayout
@@ -704,6 +694,16 @@
 
 
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/pickimage"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="-50dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_camera" />
 
 
 </com.high.court.layouts.ExicutiveMemberDetailLayout>

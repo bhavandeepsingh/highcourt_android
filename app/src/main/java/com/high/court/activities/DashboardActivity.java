@@ -1,8 +1,12 @@
 package com.high.court.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -173,5 +177,14 @@ public class DashboardActivity extends HighCourtActivity implements BannerInterf
     @Override
     public void onBannerError(Throwable t) {
         adimageview.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        if(UserHelper.getFirstRun() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 233);
+            UserHelper.setFirstRun();
+        }
     }
 }

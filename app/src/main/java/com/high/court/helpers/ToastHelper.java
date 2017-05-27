@@ -1,14 +1,7 @@
 package com.high.court.helpers;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.high.court.HighCourtApplication;
-import com.high.court.R;
 
 /**
  * Created by bhavan on 3/10/17.
@@ -122,5 +115,9 @@ public class ToastHelper {
 
     public static void profileUpdateSuccess(Context context) {
         showToast("Profile update successfully!", context);
+    }
+
+    public static void showProfileName(Context context) {
+        showToast("Profile name cannot be blank!", context);
     }
 }
