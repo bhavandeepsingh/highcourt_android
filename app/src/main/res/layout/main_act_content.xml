@@ -77,14 +77,16 @@ Chandigarh"
                 <ImageView
                     android:id="@+id/adimagevieww"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     android:visibility="invisible"
                     android:src="@drawable/image_ad" />
             </LinearLayout>
+
         </android.support.v4.widget.NestedScrollView>
+
     </LinearLayout>
 
 
