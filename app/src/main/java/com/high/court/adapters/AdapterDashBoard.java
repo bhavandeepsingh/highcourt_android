@@ -22,6 +22,7 @@ import com.high.court.activities.MemberDirectoryActivity;
 import com.high.court.activities.NoificationActivity;
 import com.high.court.activities.RosterActivity;
 import com.high.court.activities.WebViewActivity;
+import com.high.court.backround_service.NotificationService;
 import com.high.court.helpers.Globals;
 import com.high.court.helpers.HighCourtLoader;
 import com.high.court.helpers.ToastHelper;
@@ -57,11 +58,15 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     HighCourtLoader highCourtLoader;
     String displayboard_url="https://phhc.gov.in/display_board_full_width.php";
 
+    NotificationService notificationService;
+
+
     public AdapterDashBoard(Context ctx, String[] judgesnamelist, int[] prgmImages) {
         super();
         get_judgesnamelist = judgesnamelist;
         imageId = prgmImages;
         this.context = ctx;
+        notificationService = new NotificationService();
     }
 
     @Override
@@ -75,10 +80,21 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
         viewHolder.titles.setText(get_judgesnamelist[i]);
         Globals.LoadImage("drawable://" + imageId[i], viewHolder.icon);
+
+
+        if(i == 3 && notificationService.getLastCount() > 0){
+            viewHolder.notification_alert_icon.setVisibility(View.VISIBLE);
+            viewHolder.notification_alert_icon.setText(String.valueOf(notificationService.getLastCount()));
+
+        }else if(i == 7){
+            viewHolder.notification_alert_icon.setVisibility(View.VISIBLE);
+        }else{
+            viewHolder.notification_alert_icon.setVisibility(View.INVISIBLE);
+        }
 
         viewHolder.rowview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +114,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             if (i == 3) {
                 getHighCourtLoader().start();
                 NotificationModel.getNotificationList(AdapterDashBoard.this);
+                viewHolder.notification_alert_icon.setVisibility(View.INVISIBLE);
             }
             if (i == 4) {
                 Intent intent = new Intent(context, WebViewActivity.class);
@@ -275,7 +292,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titles;
+        TextView titles, notification_alert_icon;
         ImageView icon;
         RelativeLayout rowview;
 
@@ -285,6 +302,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             titles = (TextView) itemView.findViewById(R.id.titles);
             icon = (ImageView) itemView.findViewById(R.id.icon);
             rowview = (RelativeLayout) itemView.findViewById(R.id.rowview);
+            notification_alert_icon = (TextView) itemView.findViewById(R.id.notification_alert_icon);
 //            title_val = (TextView) itemView.findViewById(R.id.title_val);
 
 

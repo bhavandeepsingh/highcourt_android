@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
+import com.high.court.helpers.UserHelper;
 import com.high.court.http.models.ProfileModel;
 import com.high.court.layouts.ExicutiveMemberDetailLayout;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -45,7 +46,6 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
     String profile_file_uri;
 
-    String currentlocation_url = "http://maps.google.com/maps?saddr=" + lcurrent_atval + "," + lcurrent_longval + "&daddr=" + latval + "," + longval;
     ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
 
     ImageView profile_pic_image_view;
@@ -54,12 +54,12 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
     CropImageView cropImageView;
 
+    ProfileModel profileModel = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exicutive_member_detail_edit);
-
-        ProfileModel profileModel = null;
 
         if (getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
@@ -94,11 +94,13 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         maplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(currentlocation_url));
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(getMapUrl()));
                 startActivity(intent);
 
             }
         });
+
+        setLatLang();
 
     }
 
@@ -117,7 +119,8 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
         mMap = googleMap;
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
         LatLng sydney = new LatLng(latval, longval);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Punjab and Haryana High Court"));
+        mMap.addMarker(new MarkerOptions().position(sydney));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(lcurrent_atval, lcurrent_longval)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(zoom);
     }
@@ -184,5 +187,23 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
 
     public CropImageView getCropImageView() {
         return cropImageView;
+    }
+
+    private void setLatLang() {
+        if(profileModel != null && profileModel.getLat1() != null && profileModel.getLat1().length() > 0
+                && profileModel.getLong1() != null && profileModel.getLong1().length() > 0){
+            latval = Double.parseDouble(profileModel.getLat1());
+            longval = Double.parseDouble(profileModel.getLong1());
+        }
+        setCurrnetLat();
+    }
+
+    private void setCurrnetLat() {
+        lcurrent_atval = Double.parseDouble(UserHelper.getAppUserLat01());
+        lcurrent_longval = Double.parseDouble(UserHelper.getAppUserLong01());
+    }
+
+    public String getMapUrl(){
+        return "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
     }
 }

@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.high.court.R;
 import com.high.court.adapters.AdapterNotification;
+import com.high.court.backround_service.NotificationService;
 import com.high.court.http.models.NotificationModel;
 
 import java.util.HashMap;
@@ -43,8 +44,6 @@ public class NoificationActivity extends HighCourtActivity {
         recyclerView.setAdapter(adapterNotification);
 
         recyclerView.addOnChildAttachStateChangeListener(new ChildAttachListener(llm, this));
-
-
 
     }
 
@@ -138,7 +137,10 @@ public class NoificationActivity extends HighCourtActivity {
                 if(strings[i].toString() != null) stringIntegerMap.put("Notification[notification_id]["+String.valueOf(i)+"]", Integer.parseInt(strings[i].toString()));
             }
 
-            if(stringIntegerMap.size() > 0) NotificationModel.unReadNotification(stringIntegerMap);
+            if(stringIntegerMap.size() > 0){
+                NotificationModel.unReadNotification(stringIntegerMap);
+                NotificationService.updateCount(stringIntegerMap.size());
+            }
         }
     }
 }

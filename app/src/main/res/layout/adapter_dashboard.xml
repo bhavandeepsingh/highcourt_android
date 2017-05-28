@@ -27,6 +27,17 @@
                 android:padding="4dp"
                 android:src="@drawable/ic_calender" />
 
+            <TextView
+                android:layout_height="17dp"
+                android:layout_width="17dp"
+                android:layout_alignEnd="@id/icon"
+                android:textColor="@color/clr_white"
+                android:text="2"
+                android:visibility="invisible"
+                android:textSize="12dp"
+                android:textAlignment="center"
+                android:background="@drawable/notification_alert_icon"
+                android:id="@+id/notification_alert_icon"/>
 
             <TextView
                 android:id="@+id/titles"

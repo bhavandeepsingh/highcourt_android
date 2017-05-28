@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
@@ -332,11 +331,13 @@ public class ExicutiveMemberDetailLayout extends HighCourtMainLinearLayout imple
         }
 
         if(getMobilenumber_text_val() != null && v.getId() == getMobilenumber_text_val().getId()){
-            DialerHelper.dial(getContext(), getProfileModel().getMobile());
+           if(getProfileModel().getMobile() != null && getProfileModel().getMobile().length() > 0)
+               DialerHelper.dial(getContext(), getProfileModel().getMobile());
         }
 
         if(getLandline_text_val() != null && v.getId() == getLandline_text_val().getId()){
-            DialerHelper.dial(getContext(), getProfileModel().getLandline());
+            if(getProfileModel().getLandline() != null && getProfileModel().getLandline().length() > 0)
+                DialerHelper.dial(getContext(), getProfileModel().getLandline());
         }
 
 

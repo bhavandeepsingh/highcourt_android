@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 
 import com.high.court.HighCourtApplication;
@@ -19,6 +20,8 @@ import com.high.court.http.models.HolidaysModel;
 import com.high.court.http.models.http_interface.HolidayInterface;
 import com.high.court.layouts.HighCourtCalender;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
@@ -69,6 +72,19 @@ public class CalenderActivity extends HighCourtActivity implements HolidayInterf
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 getHighCourtLoader().start();
                 HolidaysModel.getHolidays(CalenderActivity.this, makeRequest(date));
+            }
+        });
+
+        highCourtCalender.addDecorator(new DayViewDecorator() {
+            @Override
+            public boolean shouldDecorate(CalendarDay day) {
+                return (day.getCalendar().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
+                        || (day.getCalendar().get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY);
+            }
+
+            @Override
+            public void decorate(DayViewFacade view) {
+                view.addSpan(new ForegroundColorSpan(Color.RED));
             }
         });
 

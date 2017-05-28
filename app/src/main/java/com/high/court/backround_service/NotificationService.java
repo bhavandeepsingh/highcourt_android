@@ -76,4 +76,9 @@ public class NotificationService extends Service {
 
     public String LAST_NOTIFICATION_COUNT = "LAST_NOTIFICATION_COUNT";
 
+    public static void updateCount(int cnt){
+        NotificationService notificationService = new NotificationService();
+        notificationService.setLastCount(notificationService.getLastCount() - cnt);
+    }
+
 }
