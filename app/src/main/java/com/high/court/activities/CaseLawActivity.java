@@ -15,7 +15,10 @@ import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.adapters.AdapterCaseLow;
 import com.high.court.adapters.AdapterNotification;
+import com.high.court.backround_service.CaseLowService;
+import com.high.court.backround_service.NotificationService;
 import com.high.court.http.models.CaseLawModel;
+import com.high.court.http.models.NotificationModel;
 import com.high.court.http.models.http_interface.CaseLawInterface;
 
 import java.util.HashMap;
@@ -143,7 +146,7 @@ public class CaseLawActivity extends HighCourtActivity implements CaseLawInterfa
 
         @Override
         public void onChildViewAttachedToWindow(final View view) {
-            caseLawActivity.addReadNotification(llm.findLastVisibleItemPosition());
+            caseLawActivity.addReadCaseLaw(llm.findLastVisibleItemPosition());
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -169,7 +172,7 @@ public class CaseLawActivity extends HighCourtActivity implements CaseLawInterfa
         }
     }
 
-    public void addReadNotification(int index){
+    public void addReadCaseLaw(int index){
         if(index >= 0){
             if(getAdapterCaseLow().getCaseLawList().get(index).getIsRead() <= 0) {
                 int notification_id = getAdapterNotification().getCaseLawList().get(index).getId();
@@ -185,6 +188,27 @@ public class CaseLawActivity extends HighCourtActivity implements CaseLawInterfa
 
     public Map<String, Integer> getCaseLaw_read() {
         return caselaw_read;
+    }
+
+    private void unreadCaseLaw() {
+        if(getCaseLaw_read() != null && getCaseLaw_read().size() > 0){
+            Map<String, Integer> stringIntegerMap = new HashMap<>();
+            Object[] strings = getCaseLaw_read().values().toArray();
+            for(int i = 0; i < strings.length; i++){
+                if(strings[i].toString() != null) stringIntegerMap.put("Notification[notification_id]["+String.valueOf(i)+"]", Integer.parseInt(strings[i].toString()));
+            }
+
+            if(stringIntegerMap.size() > 0){
+                CaseLawModel.unReadCaseLaw(stringIntegerMap);
+                CaseLowService.updateCount(stringIntegerMap.size());
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        unreadCaseLaw();
+        super.onBackPressed();
     }
 
 

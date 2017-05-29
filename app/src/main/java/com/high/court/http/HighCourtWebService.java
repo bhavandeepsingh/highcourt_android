@@ -54,10 +54,8 @@ public interface HighCourtWebService {
     @POST("user/members")
     Call<ExcecutiveMemberModel> getMembers(@FieldMap Map<String, String> request, @Query("page") int page_no);
 
-
     @GET("user/blood-group-list")
     Call<BloodGroupsModel> getBoodGroupList();
-
 
     @GET("notification/list")
     Call<NotificationModel> getNotificationList();
@@ -74,7 +72,6 @@ public interface HighCourtWebService {
     @POST("judges/list")
     Call<JudgesModel> getJudges(@FieldMap Map<String, String> stringRequestBodyMap, @Query("page") int page_no);
 
-
     @GET("case-law/list")
     Call<CaseLawModel> getCaseLaw(@Query("page") int page_no);
 
@@ -82,13 +79,16 @@ public interface HighCourtWebService {
     @POST("roster/list")
     Call<RosterModel> getRoster(@FieldMap Map<String, String> stringStringMap, @Query("page") int page_no);
 
-
     @FormUrlEncoded
     @POST("notification/read")
     Call<NotificationModel> notificationUnRead(@FieldMap Map<String, Integer> stringStringMap);
 
     @GET("notification/un-read-count")
     Call<NotificationModel> notificationUnReadCount();
+
+    @FormUrlEncoded
+    @POST("case-law/un-read-count")
+    Call<CaseLawModel> caseLawuUnead(@FieldMap Map<String, Integer> stringStringMap);
 
     @GET("payment-log/list")
     Call<PaymentsModel> getPayment();

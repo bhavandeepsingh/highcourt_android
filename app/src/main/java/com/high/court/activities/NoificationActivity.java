@@ -21,7 +21,6 @@ public class NoificationActivity extends HighCourtActivity {
 
     Context context = NoificationActivity.this;
     Map<String, Integer> notification_read = new HashMap<>();
-
     AdapterNotification adapterNotification;
 
     @Override
@@ -60,10 +59,8 @@ public class NoificationActivity extends HighCourtActivity {
     }
 
     private class ChildAttachListener implements RecyclerView.OnChildAttachStateChangeListener {
-
         LinearLayoutManager llm;
         NoificationActivity noificationActivity;
-
         public ChildAttachListener(LinearLayoutManager llm, NoificationActivity noificationActivity) {
             super();
             this.llm = llm;

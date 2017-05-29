@@ -1,11 +1,15 @@
 package com.high.court.http.models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.high.court.backround_service.CaseLowService;
 import com.high.court.http.RestAdapter;
 import com.high.court.http.models.http_interface.CaseLawInterface;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +58,10 @@ public class CaseLawModel extends HighCourtModel {
         @SerializedName("isRead")
         @Expose
         int isRead;
+
+        @SerializedName("un_read_count")
+        @Expose
+        int un_read_count;
 
         public int getId() {
             return id;
@@ -120,5 +128,36 @@ public class CaseLawModel extends HighCourtModel {
         });
 
     }
+
+    public static void getUnReadCount(final CaseLowService caseLowService) {
+        RestAdapter.get().notificationUnReadCount().enqueue(new Callback<NotificationModel>() {
+            @Override
+            public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
+                if(response.body() != null) {
+                    caseLowService.updateBadge(response.body().getUn_read_count());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NotificationModel> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void unReadCaseLaw(Map<String, Integer> stringIntegerMap){
+        RestAdapter.get().caseLawuUnead(stringIntegerMap).enqueue(new Callback<CaseLawModel>() {
+            @Override
+            public void onResponse(Call<CaseLawModel> call, Response<CaseLawModel> response) {
+                Log.d("ASD", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<CaseLawModel> call, Throwable t) {
+                Log.d("ASD", t.getMessage());
+            }
+        });
+    }
+
 
 }
