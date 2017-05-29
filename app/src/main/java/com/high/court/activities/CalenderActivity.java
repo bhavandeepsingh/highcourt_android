@@ -84,7 +84,7 @@ public class CalenderActivity extends HighCourtActivity implements HolidayInterf
 
             @Override
             public void decorate(DayViewFacade view) {
-                view.addSpan(new ForegroundColorSpan(Color.RED));
+                view.addSpan(new ForegroundColorSpan(Color.parseColor("#d9a231")));
             }
         });
 
@@ -105,7 +105,7 @@ public class CalenderActivity extends HighCourtActivity implements HolidayInterf
                     e.printStackTrace();
                 }
             }
-            if(dates.size() > 0) highCourtCalender.addDecorator(new EventDecorator(Color.RED, dates));
+            if(dates.size() > 0) highCourtCalender.addDecorator(new EventDecorator(Color.parseColor("#d9a231"), dates));
         }
 
     }

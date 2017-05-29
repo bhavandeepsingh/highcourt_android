@@ -51,6 +51,10 @@ public class CaseLawModel extends HighCourtModel {
         @Expose
         String updated_at;
 
+        @SerializedName("isRead")
+        @Expose
+        int isRead;
+
         public int getId() {
             return id;
         }
@@ -90,6 +94,14 @@ public class CaseLawModel extends HighCourtModel {
         public void setUpdated_at(String updated_at) {
             this.updated_at = updated_at;
         }
+        public int getIsRead() {
+            return isRead;
+        }
+
+        public void setIsRead(int isRead) {
+            this.isRead = isRead;
+        }
+
     }
 
     public static void getCaseLaw(final CaseLawInterface caseLawInterface, int page_no){

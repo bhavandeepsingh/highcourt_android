@@ -2,6 +2,7 @@ package com.high.court.activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +14,17 @@ import android.widget.RelativeLayout;
 import com.high.court.HighCourtApplication;
 import com.high.court.R;
 import com.high.court.adapters.AdapterCaseLow;
+import com.high.court.adapters.AdapterNotification;
 import com.high.court.http.models.CaseLawModel;
 import com.high.court.http.models.http_interface.CaseLawInterface;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CaseLawActivity extends HighCourtActivity implements CaseLawInterface {
 
     Context context = CaseLawActivity.this;
-
+    Map<String, Integer> caselaw_read = new HashMap<>();
     CaseLawModel caseLawModel;
 
     private int totalItemCount;
@@ -52,6 +57,9 @@ public class CaseLawActivity extends HighCourtActivity implements CaseLawInterfa
         adapterCaseLow = new AdapterCaseLow(context);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapterCaseLow);
+
+        recyclerView.addOnChildAttachStateChangeListener(new CaseLawActivity.ChildAttachListener(llm, this));
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -121,5 +129,66 @@ public class CaseLawActivity extends HighCourtActivity implements CaseLawInterfa
     public void onCaseLawFailur(Throwable t) {
         loader.setVisibility(View.GONE);
     }
+
+    private class ChildAttachListener implements RecyclerView.OnChildAttachStateChangeListener {
+
+        LinearLayoutManager llm;
+        CaseLawActivity caseLawActivity;
+
+        public ChildAttachListener(LinearLayoutManager llm, CaseLawActivity caseLawActivity) {
+            super();
+            this.llm = llm;
+            this.caseLawActivity = caseLawActivity;
+        }
+
+        @Override
+        public void onChildViewAttachedToWindow(final View view) {
+            caseLawActivity.addReadNotification(llm.findLastVisibleItemPosition());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(2000);
+                        caseLawActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(view.findViewById(R.id.caselow_backg) != null) view.findViewById(R.id.caselow_backg).
+                                        setBackgroundColor(ContextCompat.getColor(context, R.color.clr_white));
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+        @Override
+        public void onChildViewDetachedFromWindow(View view) {
+
+        }
+    }
+
+    public void addReadNotification(int index){
+        if(index >= 0){
+            if(getAdapterCaseLow().getCaseLawList().get(index).getIsRead() <= 0) {
+                int notification_id = getAdapterNotification().getCaseLawList().get(index).getId();
+                getCaseLaw_read().put(String.valueOf(index), notification_id);
+                getAdapterNotification().getCaseLawList().get(index).setIsRead(1);
+            }
+        }
+    }
+
+    public AdapterCaseLow getAdapterNotification() {
+        return adapterCaseLow;
+    }
+
+    public Map<String, Integer> getCaseLaw_read() {
+        return caselaw_read;
+    }
+
+
+
+
 
 }

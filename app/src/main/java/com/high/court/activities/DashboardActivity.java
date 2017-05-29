@@ -183,7 +183,8 @@ public class DashboardActivity extends HighCourtActivity implements BannerInterf
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         if(UserHelper.getFirstRun() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 233);
+            ActivityCompat.requestPermissions(this, new String[]
+                    {android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 233);
             UserHelper.setFirstRun();
         }
     }

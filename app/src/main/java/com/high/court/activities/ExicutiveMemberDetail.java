@@ -68,10 +68,9 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
 
         profileModel = null;
 
-        if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
+        if (getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             profileModel = HighCourtApplication.getProfileModels().get(Integer.parseInt(String.valueOf(getIntent().getExtras().get(PROFILE_INDEX_KEY))));
-        }
-        else{
+        } else {
             edit_status = true;
             profileModel = ProfileModel.getLoginUserProfile();
         }
@@ -118,7 +117,7 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                CircleImageView  quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
+                CircleImageView quick_start_cropped_image = (CircleImageView) findViewById(R.id.quick_start_cropped_image);
                 quick_start_cropped_image.setImageResource(0);
                 quick_start_cropped_image.setImageURI(result.getUri());
 
@@ -130,9 +129,9 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       if (UserHelper.getLoginId()==exicutiveMemberDetailLayout.getProfileModel().getUser_id() && edit_status){
-           getMenuInflater().inflate(R.menu.menu_profilee, menu);
-       }
+        if (UserHelper.getLoginId() == exicutiveMemberDetailLayout.getProfileModel().getUser_id() && edit_status) {
+            getMenuInflater().inflate(R.menu.menu_profilee, menu);
+        }
         return true;
     }
 
@@ -142,10 +141,11 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
         int id = item.getItemId();
         if (id == android.R.id.home) {
             onBackPressed();
-        }if (id == R.id.action_edit_profile) {
-            if(!NetworkHelper.state()){
+        }
+        if (id == R.id.action_edit_profile) {
+            if (!NetworkHelper.state()) {
                 ToastHelper.showNoNetwork(context);
-            }else{
+            } else {
                 getHighCourtLoader().start();
                 BloodGroupsModel.getBloodGroupList(this);
             }
@@ -175,16 +175,16 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
     }
 
     private void setLatLang() {
-        if(profileModel != null && profileModel.getLat1() != null && profileModel.getLat1().length() > 0
-            && profileModel.getLong1() != null && profileModel.getLong1().length() > 0){
+        if (profileModel != null && profileModel.getLat1() != null && profileModel.getLat1().length() > 0
+                && profileModel.getLong1() != null && profileModel.getLong1().length() > 0) {
             latval = Double.parseDouble(profileModel.getLat1());
             longval = Double.parseDouble(profileModel.getLong1());
         }
-        setCurrnetLat();
+        if ((UserHelper.getAppUserLat01().length()!=0) && (UserHelper.getAppUserLong01().length()!=0)) {setCurrnetLat();}
     }
 
     public HighCourtLoader getHighCourtLoader() {
-        if(highCourtLoader == null) highCourtLoader = HighCourtLoader.init(context);
+        if (highCourtLoader == null) highCourtLoader = HighCourtLoader.init(context);
         return highCourtLoader;
     }
 
@@ -192,9 +192,9 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
     public void onBloodGroupSuccess(BloodGroupsModel bloodGroupsModel) {
         getHighCourtLoader().stop();
         HighCourtApplication.setBloodGroupsModel(bloodGroupsModel);
-        if(getIntent().hasExtra(PROFILE_INDEX_KEY)) {
+        if (getIntent().hasExtra(PROFILE_INDEX_KEY)) {
             context.startActivity(new Intent(context, ExicutiveMemberDetailsEdit.class).putExtra(PROFILE_INDEX_KEY, getIntent().getExtras().getString(PROFILE_INDEX_KEY)));
-        }else{
+        } else {
             context.startActivity(new Intent(context, ExicutiveMemberDetailsEdit.class));
         }
         finish();
@@ -206,11 +206,12 @@ public class ExicutiveMemberDetail extends HighCourtActivity implements OnMapRea
         ToastHelper.showToast(t.getMessage(), context);
     }
 
-    public String getMapUrl(){
-        return "http://maps.google.com/maps?saddr=" + lcurrent_atval+","+lcurrent_longval+"&daddr="+latval+","+ longval;
+    public String getMapUrl() {
+        return "http://maps.google.com/maps?saddr=" + lcurrent_atval + "," + lcurrent_longval + "&daddr=" + latval + "," + longval;
     }
 
     private void setCurrnetLat() {
+
         lcurrent_atval = Double.parseDouble(UserHelper.getAppUserLat01());
         lcurrent_longval = Double.parseDouble(UserHelper.getAppUserLong01());
     }
