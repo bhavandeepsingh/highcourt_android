@@ -90,7 +90,8 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             viewHolder.notification_alert_icon.setVisibility(View.VISIBLE);
             viewHolder.notification_alert_icon.setText(String.valueOf(notificationService.getLastCount()));
 
-        }else if(i == 7){
+        }else if(i == 7  && NotificationModel.getCaselawCount() > 0){
+            viewHolder.notification_alert_icon.setText(String.valueOf(NotificationModel.getCaselawCount()));
             viewHolder.notification_alert_icon.setVisibility(View.VISIBLE);
         }else{
             viewHolder.notification_alert_icon.setVisibility(View.INVISIBLE);
@@ -132,6 +133,7 @@ public class AdapterDashBoard extends RecyclerView.Adapter<AdapterDashBoard.View
             if (i == 7) {
                 getHighCourtLoader().start();
                 CaseLawModel.getCaseLaw(AdapterDashBoard.this, 1);
+                viewHolder.notification_alert_icon.setVisibility(View.INVISIBLE);
             }if (i == 8) {
                 getHighCourtLoader().start();
                 AchievementModel.getAchievement(AdapterDashBoard.this);

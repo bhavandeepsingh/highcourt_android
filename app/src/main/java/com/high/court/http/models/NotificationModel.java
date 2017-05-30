@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.high.court.backround_service.NotificationService;
+import com.high.court.helpers.UserHelper;
 import com.high.court.http.RestAdapter;
 import com.high.court.http.models.http_interface.NotificationInterface;
 
@@ -27,6 +28,10 @@ public class NotificationModel extends HighCourtModel {
     @Expose
     int un_read_count;
 
+    @SerializedName("case_law_count")
+    @Expose
+    int case_law_count;
+
     @SerializedName("list")
     @Expose
     List<Notifications> notificationses;
@@ -47,11 +52,20 @@ public class NotificationModel extends HighCourtModel {
         this.notificationses = notificationses;
     }
 
+    public int getCase_law_count() {
+        return case_law_count;
+    }
+
+    public void setCase_law_count(int case_law_count) {
+        this.case_law_count = case_law_count;
+    }
+
     public static void getNotificationList(final NotificationInterface notificantionInterface) {
         RestAdapter.get().getNotificationList().enqueue(new Callback<NotificationModel>() {
             @Override
             public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
                 notificantionInterface.onNotificationSuccess(response.body());
+
             }
 
             @Override
@@ -67,6 +81,7 @@ public class NotificationModel extends HighCourtModel {
             public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
                 if(response.body() != null) {
                     notificationService.updateBadge(response.body().getUn_read_count());
+                    setLastCaseLawCount(response.body().getCase_law_count());
                 }
             }
 
@@ -76,6 +91,16 @@ public class NotificationModel extends HighCourtModel {
             }
         });
     }
+
+    public static int getCaselawCount(){
+        return UserHelper.getSharedPreferences().getInt(LAST_CASE_LAW_COUNT, 0);
+    }
+
+    public static void setLastCaseLawCount(int count){
+        UserHelper.getSharedPreferences().edit().putInt(LAST_CASE_LAW_COUNT, count).commit();
+    }
+
+    static String LAST_CASE_LAW_COUNT = "LAST_CASE_LAW_COUNT";
 
     public class Notifications {
         @SerializedName("id")

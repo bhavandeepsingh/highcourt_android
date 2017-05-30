@@ -199,8 +199,12 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     }
 
     private void setCurrnetLat() {
-        lcurrent_atval = Double.parseDouble(UserHelper.getAppUserLat01());
-        lcurrent_longval = Double.parseDouble(UserHelper.getAppUserLong01());
+        try {
+            lcurrent_atval = Double.parseDouble(UserHelper.getAppUserLat01());
+            lcurrent_longval = Double.parseDouble(UserHelper.getAppUserLong01());
+        }catch (Exception e){
+
+        }
     }
 
     public String getMapUrl(){

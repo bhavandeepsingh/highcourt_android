@@ -87,7 +87,7 @@ public interface HighCourtWebService {
     Call<NotificationModel> notificationUnReadCount();
 
     @FormUrlEncoded
-    @POST("case-law/un-read-count")
+    @POST("case-law/read")
     Call<CaseLawModel> caseLawuUnead(@FieldMap Map<String, Integer> stringStringMap);
 
     @GET("payment-log/list")

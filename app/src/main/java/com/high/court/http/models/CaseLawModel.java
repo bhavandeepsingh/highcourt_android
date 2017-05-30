@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.high.court.backround_service.CaseLowService;
 import com.high.court.http.RestAdapter;
 import com.high.court.http.models.http_interface.CaseLawInterface;
 
@@ -55,13 +54,9 @@ public class CaseLawModel extends HighCourtModel {
         @Expose
         String updated_at;
 
-        @SerializedName("isRead")
+        @SerializedName("is_read")
         @Expose
         int isRead;
-
-        @SerializedName("un_read_count")
-        @Expose
-        int un_read_count;
 
         public int getId() {
             return id;
@@ -102,6 +97,7 @@ public class CaseLawModel extends HighCourtModel {
         public void setUpdated_at(String updated_at) {
             this.updated_at = updated_at;
         }
+
         public int getIsRead() {
             return isRead;
         }
@@ -127,22 +123,6 @@ public class CaseLawModel extends HighCourtModel {
             }
         });
 
-    }
-
-    public static void getUnReadCount(final CaseLowService caseLowService) {
-        RestAdapter.get().notificationUnReadCount().enqueue(new Callback<NotificationModel>() {
-            @Override
-            public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
-                if(response.body() != null) {
-                    caseLowService.updateBadge(response.body().getUn_read_count());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NotificationModel> call, Throwable t) {
-
-            }
-        });
     }
 
     public static void unReadCaseLaw(Map<String, Integer> stringIntegerMap){

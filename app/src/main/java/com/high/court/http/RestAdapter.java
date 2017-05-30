@@ -44,14 +44,12 @@ public class RestAdapter {
         addHeaderToken(httpClient);
         httpClient.addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build();
 
-
         if (REST_CLIENT == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(ROOT)
                     .client(httpClient.build())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
-
 
             REST_CLIENT = retrofit.create(HighCourtWebService.class);
         }
