@@ -13,9 +13,8 @@
     <dimen name="dim_subscription_title_paddings">6dp</dimen>
     <dimen name="dim_paynow_martop">38dp</dimen>
     <dimen name="dim_textsize">15sp</dimen>
-
-
-
+    <dimen name="dim_phonenumber">17sp</dimen>
+    
     <!-- dimensions -->
     <dimen name="image_width">120dp</dimen>
     <dimen name="image_final_width">32dp</dimen>

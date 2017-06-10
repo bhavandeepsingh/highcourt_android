@@ -33,7 +33,7 @@ public class NoificationActivity extends HighCourtActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Notification");
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         final LinearLayoutManager llm = new GridLayoutManager(context, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -51,7 +51,7 @@ public class NoificationActivity extends HighCourtActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id==android.R.id.home){
+        if (id == android.R.id.home) {
             onBackPressed();
         }
 
@@ -61,6 +61,7 @@ public class NoificationActivity extends HighCourtActivity {
     private class ChildAttachListener implements RecyclerView.OnChildAttachStateChangeListener {
         LinearLayoutManager llm;
         NoificationActivity noificationActivity;
+
         public ChildAttachListener(LinearLayoutManager llm, NoificationActivity noificationActivity) {
             super();
             this.llm = llm;
@@ -78,7 +79,8 @@ public class NoificationActivity extends HighCourtActivity {
                         noificationActivity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if(view.findViewById(R.id.notif_layer) != null) view.findViewById(R.id.notif_layer).setBackgroundResource(R.drawable.border_subscription);
+                                if (view.findViewById(R.id.notif_layer) != null)
+                                    view.findViewById(R.id.notif_layer).setBackgroundResource(R.drawable.border_subscription);
                             }
                         });
                     } catch (InterruptedException e) {
@@ -94,9 +96,9 @@ public class NoificationActivity extends HighCourtActivity {
         }
     }
 
-    public void addReadNotification(int index){
-        if(index >= 0){
-            if(getAdapterNotification().getNotificationsList().get(index).getIsRead() <= 0) {
+    public void addReadNotification(int index) {
+        if (index >= 0) {
+            if (getAdapterNotification().getNotificationsList().get(index).getIsRead() <= 0) {
                 int notification_id = getAdapterNotification().getNotificationsList().get(index).getId();
                 getNotification_read().put(String.valueOf(index), notification_id);
                 getAdapterNotification().getNotificationsList().get(index).setIsRead(1);
@@ -127,14 +129,15 @@ public class NoificationActivity extends HighCourtActivity {
     }
 
     private void unreadNotification() {
-        if(getNotification_read() != null && getNotification_read().size() > 0){
+        if (getNotification_read() != null && getNotification_read().size() > 0) {
             Map<String, Integer> stringIntegerMap = new HashMap<>();
             Object[] strings = getNotification_read().values().toArray();
-            for(int i = 0; i < strings.length; i++){
-                if(strings[i].toString() != null) stringIntegerMap.put("Notification[notification_id]["+String.valueOf(i)+"]", Integer.parseInt(strings[i].toString()));
+            for (int i = 0; i < strings.length; i++) {
+                if (strings[i].toString() != null)
+                    stringIntegerMap.put("Notification[notification_id][" + String.valueOf(i) + "]", Integer.parseInt(strings[i].toString()));
             }
 
-            if(stringIntegerMap.size() > 0){
+            if (stringIntegerMap.size() > 0) {
                 NotificationModel.unReadNotification(stringIntegerMap);
                 NotificationService.updateCount(stringIntegerMap.size());
             }

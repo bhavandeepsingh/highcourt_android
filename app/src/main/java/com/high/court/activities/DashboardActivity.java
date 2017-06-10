@@ -34,7 +34,7 @@ import java.util.TimerTask;
 public class DashboardActivity extends HighCourtActivity implements BannerInterface{
 
     Context context = DashboardActivity.this;
-    ImageView adimageview;
+    ImageView adimageview,crossicon;
 
     int bannerchangetime=15000;
     BannnerModel bannnerModels;
@@ -98,6 +98,15 @@ public class DashboardActivity extends HighCourtActivity implements BannerInterf
         recyclerView.setAdapter(adapter);
 
         adimageview = (ImageView) findViewById(R.id.adimagevieww);
+        crossicon = (ImageView) findViewById(R.id.crossicon);
+
+        crossicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.crossicon).setVisibility(View.GONE);
+                findViewById(R.id.adimagevieww).setVisibility(View.GONE);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -49,11 +49,7 @@ public class ExicutiveMemberDetailsEdit extends HighCourtActivity implements OnM
     ExicutiveMemberDetailLayout exicutiveMemberDetailLayout;
 
     ImageView profile_pic_image_view;
-    public static String dirPath;
-    public static String imagedirectry;
-
     CropImageView cropImageView;
-
     ProfileModel profileModel = null;
 
     @Override

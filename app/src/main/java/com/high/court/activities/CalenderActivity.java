@@ -105,7 +105,7 @@ public class CalenderActivity extends HighCourtActivity implements HolidayInterf
                     e.printStackTrace();
                 }
             }
-            if(dates.size() > 0) highCourtCalender.addDecorator(new EventDecorator(Color.parseColor("#d9a231"), dates));
+            if(dates.size() > 0) highCourtCalender.addDecorator(new EventDecorator(Color.parseColor("#ff0000"), dates));
         }
 
     }

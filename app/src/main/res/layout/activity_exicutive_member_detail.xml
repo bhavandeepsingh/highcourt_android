@@ -398,6 +398,7 @@
                             android:background="@color/clr_blank"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
+                            android:textSize="@dimen/dim_phonenumber"
                             android:paddingTop="3dp"
                             android:textColor="@color/clr_textcolor_dark" />
 
@@ -445,6 +446,7 @@
                             android:inputType="phone"
                             android:background="@color/clr_blank"
                             android:paddingBottom="2dp"
+                            android:textSize="@dimen/dim_phonenumber"
                             android:paddingLeft="6dp"
                             android:paddingRight="5dp"
                             android:paddingTop="3dp"

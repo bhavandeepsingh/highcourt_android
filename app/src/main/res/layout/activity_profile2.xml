@@ -149,6 +149,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
+                                android:textSize="@dimen/dim_phonenumber"
                                 android:text="94177-59300, 94177-59300"
                                 android:textAllCaps="true"
                                 android:textColor="@color/clr_textcolor_dark" />
@@ -194,7 +195,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="0dp"
-                                android:text="2651417"
+                                android:text=""
+                                android:textSize="@dimen/dim_phonenumber"
                                 android:textAllCaps="true"
                                 android:textColor="@color/clr_textcolor_dark" />
 

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,9 @@ public class AdapterDirectoryMember extends RecyclerView.Adapter<AdapterDirector
             viewHolder.mobile_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
+                    if (getProfileModelList().get(i).getMobile()!=null){
+                        DialerHelper.dial(context, getProfileModelList().get(i).getMobile());
+                    }
                 }
             });
         }
@@ -61,7 +64,9 @@ public class AdapterDirectoryMember extends RecyclerView.Adapter<AdapterDirector
             viewHolder.landline_no.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialerHelper.dial(context, getProfileModelList().get(i).getLandline());
+                    if (getProfileModelList().get(i).getLandline()!=null){
+                        DialerHelper.dial(context, getProfileModelList().get(i).getLandline());
+                    }
                 }
             });
         }

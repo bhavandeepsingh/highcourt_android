@@ -20,16 +20,18 @@
             app:theme="@style/myCustomToolbarTheme" />
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/maincontent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/scroll"
+            android:layout_above="@+id/addviewlayout"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,20 +77,39 @@ Chandigarh"
 
                 <View style="@style/stl_devider" />
 
-                <ImageView
-                    android:id="@+id/adimagevieww"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:visibility="invisible"
-                    android:src="@drawable/image_ad" />
+
+
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
+        <RelativeLayout
+            android:id="@+id/addviewlayout"
+            android:layout_width="match_parent"
+android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/adimagevieww"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:visibility="invisible"
+                android:src="@drawable/image_ad" />
+            <ImageView
+                android:id="@+id/crossicon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="end"
+                android:layout_margin="4dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_cross" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
 </LinearLayout>
